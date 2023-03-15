@@ -1,12 +1,12 @@
 package kr.pe.afterschool.domain.user.exception;
 
+import kr.pe.afterschool.domain.user.error.UserExceptionCode;
 import kr.pe.afterschool.global.error.exception.AfterSchoolException;
-import kr.pe.afterschool.global.error.exception.GlobalExceptionCode;
 
 public class UsernameNotFoundException extends AfterSchoolException {
 
     private UsernameNotFoundException() {
-        super(GlobalExceptionCode.INVALID_TOKEN);
+        super(UserExceptionCode.USER_NAME_NOT_FOUND);
     }
 
     public static final AfterSchoolException EXCEPTION = new UsernameNotFoundException();

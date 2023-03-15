@@ -10,6 +10,7 @@ import lombok.Getter;
 public enum UserExceptionCode implements ErrorProperty {
 
     USER_NAME_NOT_FOUND(404, "Username Not found"),
+    USER_NOT_FOUND(404, "해당 유저는 존재하지 않습니다")
     ;
 
     private final int status;
