@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 public class AfterSchoolExceptionHandler {
 
     @ExceptionHandler(AfterSchoolException.class)
-    protected ResponseEntity<ResponseError> handleBindException(AfterSchoolException e) {
+    protected ResponseEntity<ResponseError> handleAfterSchoolException(AfterSchoolException e) {
         final ResponseError responseError = ResponseError.builder()
                 .status(HttpStatus.valueOf(e.getErrorProperty().getStatus()))
                 .message(e.getErrorProperty().getMessage())
@@ -19,7 +19,7 @@ public class AfterSchoolExceptionHandler {
     }
 
     @ExceptionHandler(Exception.class)
-    protected ResponseEntity<ResponseError> handleBindException(Exception e) {
+    protected ResponseEntity<ResponseError> handleAllLeftExceptions(Exception e) {
         final ResponseError responseError = ResponseError.builder()
                 .status(HttpStatus.INTERNAL_SERVER_ERROR)
                 .message(e.getMessage())

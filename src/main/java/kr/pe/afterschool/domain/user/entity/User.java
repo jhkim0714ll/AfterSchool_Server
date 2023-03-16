@@ -1,5 +1,6 @@
 package kr.pe.afterschool.domain.user.entity;
 
+import kr.pe.afterschool.global.enums.UserRole;
 import lombok.Getter;
 
 import javax.persistence.Entity;
@@ -25,4 +26,6 @@ public class User {
     private int room;
 
     private int number;
+
+    private UserRole role;
 }
