@@ -5,6 +5,7 @@ import kr.pe.afterschool.domain.user.presentation.dto.response.UserResponse;
 import kr.pe.afterschool.domain.user.service.GetMyUserService;
 import kr.pe.afterschool.domain.user.service.GetUserByEmailService;
 import kr.pe.afterschool.domain.user.service.ModifyUserService;
+import kr.pe.afterschool.domain.user.service.QuitUserService;
 import kr.pe.afterschool.global.response.Response;
 import kr.pe.afterschool.global.response.ResponseData;
 import lombok.RequiredArgsConstructor;
@@ -19,6 +20,7 @@ public class UserController {
     private final GetUserByEmailService getUserByEmailService;
     private final GetMyUserService getMyUserService;
     private final ModifyUserService modifyUserService;
+    private final QuitUserService quitUserService;
 
     @GetMapping("/{email}")
     public ResponseData<UserResponse> getUserByEmail(
@@ -50,6 +52,15 @@ public class UserController {
         return new Response(
                 HttpStatus.OK,
                 "유저 정보 수정 성공"
+        );
+    }
+
+    @DeleteMapping("/quit")
+    public Response quitUser() {
+        quitUserService.execute();
+        return new Response(
+                HttpStatus.OK,
+                "회원 탈퇴 성공"
         );
     }
 }
