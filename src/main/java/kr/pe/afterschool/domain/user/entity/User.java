@@ -6,6 +6,7 @@ import lombok.Getter;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import java.time.LocalDate;
 
 @Getter
 @Entity
@@ -28,4 +29,6 @@ public class User {
     private int number;
 
     private UserRole role;
+
+    private LocalDate joinDate;
 }
