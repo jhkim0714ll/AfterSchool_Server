@@ -1,5 +1,6 @@
 package kr.pe.afterschool.global.security;
 
+import kr.pe.afterschool.global.filter.FilterConfig;
 import kr.pe.afterschool.global.security.jwt.JwtTokenParser;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
@@ -28,6 +29,8 @@ public class SecurityConfiguration {
         http
                 .authorizeRequests()
                 .antMatchers("*").permitAll();
+        http
+                .apply(new FilterConfig(jwtTokenParser));
         return http.build();
     }
 
