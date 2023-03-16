@@ -47,6 +47,15 @@ public class User {
     @Column(nullable = false)
     private LocalDate joinDate;
 
+    public void modifyUserData(String name, String phone, int grade, int room, int number, String profileImageUrl) {
+        this.name = name;
+        this.phone = phone;
+        this.grade = grade;
+        this.room = room;
+        this.number = number;
+        this.profileImageUrl = profileImageUrl;
+    }
+
     @Builder
     public User(String email, String pw, String name, String phone, int grade, int room, int number, UserRole role, String profileImageUrl) {
         this.email = email;

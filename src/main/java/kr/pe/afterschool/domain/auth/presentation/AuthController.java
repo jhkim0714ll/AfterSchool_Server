@@ -22,7 +22,7 @@ import javax.validation.Valid;
 public class AuthController {
 
     private final LoginService loginService;
-    private RegisterService registerService;
+    private final RegisterService registerService;
 
     @PostMapping
     public ResponseData<LoginResponse> login(@RequestBody @Valid LoginRequest request) {
