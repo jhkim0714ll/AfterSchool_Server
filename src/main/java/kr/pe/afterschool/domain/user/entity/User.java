@@ -7,10 +7,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.CreatedDate;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.time.LocalDate;
 
 @Getter
@@ -37,10 +34,10 @@ public class User {
 
     private int number;
 
+    @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private UserRole role;
 
-    @Column(nullable = false)
     private String profileImageUrl;
 
     @CreatedDate
@@ -67,5 +64,6 @@ public class User {
         this.number = number;
         this.role = role;
         this.profileImageUrl = profileImageUrl;
+        this.joinDate = LocalDate.now();
     }
 }
