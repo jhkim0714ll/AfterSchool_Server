@@ -6,6 +6,7 @@ import kr.pe.afterschool.domain.user.facade.UserFacade;
 import kr.pe.afterschool.domain.user.presentation.dto.request.ModifyUserRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
@@ -14,6 +15,7 @@ public class ModifyUserService {
     private final UserRepository userRepository;
     private final UserFacade userFacade;
 
+    @Transactional
     public void execute(ModifyUserRequest request) {
         User user = userFacade.getCurrentUser();
         user.modifyUserData(

@@ -2,6 +2,7 @@ package kr.pe.afterschool.domain.user.presentation;
 
 import kr.pe.afterschool.domain.user.presentation.dto.request.ModifyUserRequest;
 import kr.pe.afterschool.domain.user.presentation.dto.response.UserResponse;
+import kr.pe.afterschool.domain.user.service.GetMyUserService;
 import kr.pe.afterschool.domain.user.service.GetUserByEmailService;
 import kr.pe.afterschool.domain.user.service.ModifyUserService;
 import kr.pe.afterschool.global.response.Response;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 public class UserController {
 
     private final GetUserByEmailService getUserByEmailService;
+    private final GetMyUserService getMyUserService;
     private final ModifyUserService modifyUserService;
 
     @GetMapping("/{email}")
@@ -26,6 +28,16 @@ public class UserController {
         return new ResponseData<>(
                 HttpStatus.OK,
                 "유저 단일 조회 성공",
+                response
+        );
+    }
+
+    @GetMapping("/my")
+    public ResponseData<UserResponse> getMyData() {
+        UserResponse response = getMyUserService.execute();
+        return new ResponseData<>(
+                HttpStatus.OK,
+                "내 유저 정보 조회 성공",
                 response
         );
     }
