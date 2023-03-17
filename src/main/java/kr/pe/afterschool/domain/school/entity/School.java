@@ -1,5 +1,7 @@
 package kr.pe.afterschool.domain.school.entity;
 
+import kr.pe.afterschool.domain.city.entity.City;
+import kr.pe.afterschool.domain.country.entity.Country;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

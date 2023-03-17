@@ -1,4 +1,4 @@
-package kr.pe.afterschool.domain.school.entity;
+package kr.pe.afterschool.domain.city.entity;
 
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -8,13 +8,13 @@ import javax.persistence.*;
 
 @Getter
 @Entity
-@Table(name = "country")
+@Table(name = "city")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Country {
+public class City {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "country_id")
+    @Column(name = "city_id")
     private Long id;
 
     private String name;

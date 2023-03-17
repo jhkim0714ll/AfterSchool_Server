@@ -1,13 +1,12 @@
 package kr.pe.afterschool.domain.school.service;
 
-import kr.pe.afterschool.domain.school.entity.City;
-import kr.pe.afterschool.domain.school.entity.Country;
-import kr.pe.afterschool.domain.school.entity.School;
-import kr.pe.afterschool.domain.school.entity.repository.CityRepository;
-import kr.pe.afterschool.domain.school.entity.repository.CountryRepository;
+import kr.pe.afterschool.domain.city.entity.City;
+import kr.pe.afterschool.domain.country.entity.Country;
+import kr.pe.afterschool.domain.city.entity.repository.CityRepository;
+import kr.pe.afterschool.domain.country.entity.repository.CountryRepository;
 import kr.pe.afterschool.domain.school.entity.repository.SchoolRepository;
-import kr.pe.afterschool.domain.school.exception.CityNotFoundException;
-import kr.pe.afterschool.domain.school.exception.CountryNotFoundException;
+import kr.pe.afterschool.domain.city.exception.CityNotFoundException;
+import kr.pe.afterschool.domain.country.exception.CountryNotFoundException;
 import kr.pe.afterschool.domain.school.presentation.dto.response.SchoolResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

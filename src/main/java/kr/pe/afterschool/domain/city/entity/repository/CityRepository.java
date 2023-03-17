@@ -1,6 +1,6 @@
-package kr.pe.afterschool.domain.school.entity.repository;
+package kr.pe.afterschool.domain.city.entity.repository;
 
-import kr.pe.afterschool.domain.school.entity.City;
+import kr.pe.afterschool.domain.city.entity.City;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
