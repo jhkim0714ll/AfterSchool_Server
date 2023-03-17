@@ -9,6 +9,7 @@ import lombok.Getter;
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 public enum CityExceptionCode implements ErrorProperty {
 
+    CITY_ALREADY_EXIST(403, "이미 존재하는 도시입니다"),
     CITY_NOT_FOUND(404, "해당 도시는 존재하지 않습니다"),
     ;
 

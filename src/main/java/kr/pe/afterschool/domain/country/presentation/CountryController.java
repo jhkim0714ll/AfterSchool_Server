@@ -37,7 +37,9 @@ public class CountryController {
     }
 
     @PostMapping
-    public Response createCountry(@RequestBody @Valid CountryCreateRequest request) {
+    public Response createCountry(
+            @RequestBody @Valid CountryCreateRequest request
+    ) {
         countryCreateService.execute(request);
         return new Response(
                 HttpStatus.OK,
@@ -58,7 +60,9 @@ public class CountryController {
     }
 
     @DeleteMapping("/{countryId}")
-    public Response deleteCountry(@PathVariable Long countryId) {
+    public Response deleteCountry(
+            @PathVariable Long countryId
+    ) {
         countryRemoveService.execute(countryId);
         return new Response(
                 HttpStatus.OK,
