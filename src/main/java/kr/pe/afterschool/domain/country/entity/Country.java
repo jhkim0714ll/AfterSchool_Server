@@ -1,6 +1,7 @@
 package kr.pe.afterschool.domain.country.entity;
 
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -18,4 +19,13 @@ public class Country {
     private Long id;
 
     private String name;
+
+    public void editCountry(String name) {
+        this.name = name;
+    }
+
+    @Builder
+    public Country(String name) {
+        this.name = name;
+    }
 }
