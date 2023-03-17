@@ -17,5 +17,9 @@ public class City {
     @Column(name = "city_id")
     private Long id;
 
-    private String name;
+    private String city;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "fk_country_id")
+    private Country country;
 }

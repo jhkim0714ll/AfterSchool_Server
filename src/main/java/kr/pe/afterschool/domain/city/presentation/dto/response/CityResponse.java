@@ -10,11 +10,13 @@ import lombok.NoArgsConstructor;
 public class CityResponse {
 
     private Long cityId;
-    private String name;
+    private String city;
+    private String country;
 
 
     public CityResponse(City city) {
         this.cityId = city.getId();
-        this.name = city.getName();
+        this.city = city.getCity();
+        this.country = city.getCountry().getName();
     }
 }
