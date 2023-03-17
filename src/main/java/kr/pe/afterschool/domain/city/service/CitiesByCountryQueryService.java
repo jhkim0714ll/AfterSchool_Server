@@ -1,12 +1,13 @@
 package kr.pe.afterschool.domain.city.service;
 
-import kr.pe.afterschool.domain.city.entity.Country;
+import kr.pe.afterschool.domain.country.entity.Country;
 import kr.pe.afterschool.domain.city.entity.repository.CityRepository;
-import kr.pe.afterschool.domain.city.entity.repository.CountryRepository;
-import kr.pe.afterschool.domain.city.exception.CountryNotFoundException;
+import kr.pe.afterschool.domain.country.entity.repository.CountryRepository;
+import kr.pe.afterschool.domain.country.exception.CountryNotFoundException;
 import kr.pe.afterschool.domain.city.presentation.dto.response.CityResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -18,6 +19,7 @@ public class CitiesByCountryQueryService {
     private final CityRepository cityRepository;
     private final CountryRepository countryRepository;
 
+    @Transactional(readOnly = true)
     public List<CityResponse> execute(Long countryId) {
         Country country = countryRepository.findById(countryId)
                 .orElseThrow(() -> CountryNotFoundException.EXCEPTION);

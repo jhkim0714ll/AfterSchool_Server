@@ -1,4 +1,4 @@
-package kr.pe.afterschool.domain.city.entity;
+package kr.pe.afterschool.domain.country.entity;
 
 import lombok.AccessLevel;
 import lombok.Getter;

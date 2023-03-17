@@ -32,10 +32,9 @@ public class SchoolController {
 
     @GetMapping("/city")
     public ResponseData<List<SchoolResponse>> getSchoolByCity(
-            @RequestParam(name = "cityName") String cityName,
-            @RequestParam(name = "countryName") String countryName
+            @RequestParam(name = "cityName") String cityName
     ) {
-        List<SchoolResponse> response = schoolByCityQueryService.execute(cityName, countryName);
+        List<SchoolResponse> response = schoolByCityQueryService.execute(cityName);
         return new ResponseData<>(
                 HttpStatus.OK,
                 "해당 도시의 학교 조회 성공",

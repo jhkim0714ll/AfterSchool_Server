@@ -13,7 +13,6 @@ public class CityResponse {
     private String city;
     private String country;
 
-
     public CityResponse(City city) {
         this.cityId = city.getId();
         this.city = city.getName();

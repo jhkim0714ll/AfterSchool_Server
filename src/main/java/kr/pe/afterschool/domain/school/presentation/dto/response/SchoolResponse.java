@@ -18,8 +18,8 @@ public class SchoolResponse {
     public SchoolResponse(School school) {
         this.schoolId = school.getId();
         this.name = school.getName();
-        this.city = school.getCity().getCity();
-        this.country = school.getCountry().getName();
+        this.city = school.getCity().getName();
+        this.country = school.getCity().getCountry().getName();
         this.address = school.getAddress();
     }
 }

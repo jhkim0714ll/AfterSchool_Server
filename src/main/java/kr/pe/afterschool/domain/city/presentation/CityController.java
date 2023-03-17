@@ -1,7 +1,6 @@
 package kr.pe.afterschool.domain.city.presentation;
 
 import kr.pe.afterschool.domain.city.presentation.dto.response.CityResponse;
-import kr.pe.afterschool.domain.city.presentation.dto.response.CountryResponse;
 import kr.pe.afterschool.domain.city.service.CitiesByCountryQueryService;
 import kr.pe.afterschool.domain.city.service.CitiesQueryService;
 import kr.pe.afterschool.global.response.ResponseData;
