@@ -11,6 +11,7 @@ public enum SchoolExceptionCode implements ErrorProperty {
 
     SCHOOL_NOT_FOUNT(404, "해당 학교는 존재하지 않습니다"),
     CITY_NOT_FOUND(404, "해당 도시는 존재하지 않습니다"),
+    COUNTRY_NOT_FOUND(404, "해당 행정 구역는 존재하지 않습니다"),
     ;
 
     private final int status;
