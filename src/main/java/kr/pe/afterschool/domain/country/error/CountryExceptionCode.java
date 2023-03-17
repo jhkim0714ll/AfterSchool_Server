@@ -9,6 +9,7 @@ import lombok.Getter;
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 public enum CountryExceptionCode implements ErrorProperty {
 
+    COUNTRY_ALREADY_EXIST(403, "이미 같은 이름을 가진 행정구역이 있습니다"),
     COUNTRY_NOT_FOUND(404, "해당 행정 구역는 존재하지 않습니다"),
     ;
 
