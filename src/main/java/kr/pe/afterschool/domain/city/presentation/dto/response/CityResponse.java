@@ -16,7 +16,7 @@ public class CityResponse {
 
     public CityResponse(City city) {
         this.cityId = city.getId();
-        this.city = city.getCity();
+        this.city = city.getName();
         this.country = city.getCountry().getName();
     }
 }
