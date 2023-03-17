@@ -1,8 +1,8 @@
 package kr.pe.afterschool.domain.school.presentation;
 
 import kr.pe.afterschool.domain.school.presentation.dto.response.SchoolResponse;
-import kr.pe.afterschool.domain.school.service.GetSchoolByCityService;
-import kr.pe.afterschool.domain.school.service.GetSchoolByIdService;
+import kr.pe.afterschool.domain.school.service.SchoolsByCityQueryService;
+import kr.pe.afterschool.domain.school.service.SchoolQueryService;
 import kr.pe.afterschool.global.response.ResponseData;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -15,14 +15,14 @@ import java.util.List;
 @RequiredArgsConstructor
 public class SchoolController {
 
-    private final GetSchoolByIdService getSchoolByIdService;
-    private final GetSchoolByCityService getSchoolByCityService;
+    private final SchoolQueryService schoolQueryService;
+    private final SchoolsByCityQueryService schoolsByCityQueryService;
 
     @GetMapping("/{schoolId}")
     public ResponseData<SchoolResponse> getSchoolById(
             @PathVariable Long schoolId
     ) {
-        SchoolResponse response = getSchoolByIdService.execute(schoolId);
+        SchoolResponse response = schoolQueryService.execute(schoolId);
         return new ResponseData<>(
                 HttpStatus.OK,
                 "해당 아이디의 학교 조회 성공",
@@ -34,7 +34,7 @@ public class SchoolController {
     public ResponseData<List<SchoolResponse>> getSchoolByCity(
             @RequestParam(name = "cityName") String cityName
     ) {
-        List<SchoolResponse> response = getSchoolByCityService.execute(cityName);
+        List<SchoolResponse> response = schoolsByCityQueryService.execute(cityName);
         return new ResponseData<>(
                 HttpStatus.OK,
                 "해당 도시의 학교 조회 성공",

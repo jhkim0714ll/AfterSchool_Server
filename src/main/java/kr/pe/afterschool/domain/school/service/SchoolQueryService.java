@@ -9,7 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
-public class GetSchoolByIdService {
+public class SchoolQueryService {
 
     private final SchoolRepository schoolRepository;
 
