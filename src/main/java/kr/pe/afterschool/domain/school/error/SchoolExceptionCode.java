@@ -9,7 +9,8 @@ import lombok.Getter;
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 public enum SchoolExceptionCode implements ErrorProperty {
 
-    SCHOOL_NOT_FOUNT(404, "해당 학교는 존재하지 않습니다")
+    SCHOOL_NOT_FOUNT(404, "해당 학교는 존재하지 않습니다"),
+    CITY_NOT_FOUND(404, "해당 도시는 존재하지 않습니다"),
     ;
 
     private final int status;

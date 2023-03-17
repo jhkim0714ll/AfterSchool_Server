@@ -13,11 +13,13 @@ public class SchoolResponse {
     private String name;
     private String city;
     private String country;
+    private String address;
 
     public SchoolResponse(School school) {
         this.schoolId = school.getId();
         this.name = school.getName();
         this.city = school.getCity().getName();
         this.country = school.getCountry().getName();
+        this.address = school.getAddress();
     }
 }
