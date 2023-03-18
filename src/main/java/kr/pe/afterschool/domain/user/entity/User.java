@@ -1,5 +1,6 @@
 package kr.pe.afterschool.domain.user.entity;
 
+import kr.pe.afterschool.domain.school.entity.School;
 import kr.pe.afterschool.global.enums.UserRole;
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -43,6 +44,10 @@ public class User {
     @CreatedDate
     @Column(nullable = false)
     private LocalDate joinDate;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "fk_school_id")
+    private School school;
 
     public void modifyUserData(String name, String phone, int grade, int room, int number, String profileImageUrl) {
         this.name = name;

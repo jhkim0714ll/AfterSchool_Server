@@ -1,7 +1,5 @@
 package kr.pe.afterschool.domain.school.entity;
 
-import kr.pe.afterschool.domain.city.entity.City;
-import kr.pe.afterschool.domain.country.entity.Country;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -25,7 +23,10 @@ public class School {
     @Column(nullable = false)
     private String address;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "fk_city_id")
-    private City city;
+    @Column(nullable = false)
+    private String homePage;
+
+    @Column(nullable = false)
+    private String phone;
+
 }

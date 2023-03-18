@@ -11,15 +11,15 @@ public class SchoolResponse {
 
     private Long schoolId;
     private String name;
-    private String city;
-    private String country;
     private String address;
+    private String homePage;
+    private String phone;
 
     public SchoolResponse(School school) {
         this.schoolId = school.getId();
         this.name = school.getName();
-        this.city = school.getCity().getName();
-        this.country = school.getCity().getCountry().getName();
         this.address = school.getAddress();
+        this.homePage = school.getHomePage();
+        this.phone = school.getPhone();
     }
 }
