@@ -11,7 +11,7 @@ import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
-public class SchoolByCityQueryService {
+public class SchoolByAddressQueryService {
 
     private final SchoolRepository schoolRepository;
 

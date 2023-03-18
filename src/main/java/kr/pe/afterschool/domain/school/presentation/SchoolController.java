@@ -1,7 +1,7 @@
 package kr.pe.afterschool.domain.school.presentation;
 
 import kr.pe.afterschool.domain.school.presentation.dto.response.SchoolResponse;
-import kr.pe.afterschool.domain.school.service.SchoolByCityQueryService;
+import kr.pe.afterschool.domain.school.service.SchoolByAddressQueryService;
 import kr.pe.afterschool.domain.school.service.SchoolQueryService;
 import kr.pe.afterschool.global.response.ResponseData;
 import lombok.RequiredArgsConstructor;
@@ -16,7 +16,7 @@ import java.util.List;
 public class SchoolController {
 
     private final SchoolQueryService schoolQueryService;
-    private final SchoolByCityQueryService schoolByCityQueryService;
+    private final SchoolByAddressQueryService schoolByAddressQueryService;
 
     @GetMapping("/{schoolId}")
     public ResponseData<SchoolResponse> getSchoolById(
@@ -34,7 +34,7 @@ public class SchoolController {
     public ResponseData<List<SchoolResponse>> getSchoolByCity(
             @RequestParam(name = "address") String address
     ) {
-        List<SchoolResponse> response = schoolByCityQueryService.execute(address);
+        List<SchoolResponse> response = schoolByAddressQueryService.execute(address);
         return new ResponseData<>(
                 HttpStatus.OK,
                 "해당 도시의 학교 조회 성공",
