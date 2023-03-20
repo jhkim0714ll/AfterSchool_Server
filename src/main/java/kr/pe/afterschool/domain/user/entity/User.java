@@ -49,7 +49,7 @@ public class User {
     @JoinColumn(name = "fk_school_id")
     private School school;
 
-    public void modifyUserData(String name, String phone, int grade, int room, int number, String profileImageUrl) {
+    public void editUserData(String name, String phone, int grade, int room, int number, String profileImageUrl) {
         this.name = name;
         this.phone = phone;
         this.grade = grade;

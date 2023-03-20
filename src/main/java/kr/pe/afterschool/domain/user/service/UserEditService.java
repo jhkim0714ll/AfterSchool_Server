@@ -18,7 +18,7 @@ public class UserEditService {
     @Transactional
     public void execute(ModifyUserRequest request) {
         User user = userFacade.getCurrentUser();
-        user.modifyUserData(
+        user.editUserData(
                 request.getName(),
                 request.getPhone(),
                 request.getGrade(),

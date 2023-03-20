@@ -1,6 +1,7 @@
 package kr.pe.afterschool.domain.school.presentation;
 
 import kr.pe.afterschool.domain.school.presentation.dto.request.SchoolCreateRequest;
+import kr.pe.afterschool.domain.school.presentation.dto.request.SchoolEditRequest;
 import kr.pe.afterschool.domain.school.presentation.dto.response.SchoolResponse;
 import kr.pe.afterschool.domain.school.service.SchoolByAddressQueryService;
 import kr.pe.afterschool.domain.school.service.SchoolCreateService;
@@ -55,6 +56,18 @@ public class SchoolController {
         return new Response(
                 HttpStatus.OK,
                 "학교 생성 성공"
+        );
+    }
+
+    @PatchMapping("/{schoolId}")
+    public Response editSchool(
+            @PathVariable Long schoolId,
+            @RequestBody SchoolEditRequest request
+    ) {
+
+        return new Response(
+                HttpStatus.OK,
+                "학교 정보 수정 성공"
         );
     }
 }
