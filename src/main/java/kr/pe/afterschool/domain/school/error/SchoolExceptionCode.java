@@ -10,6 +10,7 @@ import lombok.Getter;
 public enum SchoolExceptionCode implements ErrorProperty {
 
     SCHOOL_NOT_FOUNT(404, "해당 학교는 존재하지 않습니다"),
+    SCHOOL_ALREADY_EXIST(403, "이미 같은 학교가 존재합니다"),
     ;
 
     private final int status;

@@ -1,6 +1,7 @@
 package kr.pe.afterschool.domain.school.entity;
 
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -29,4 +30,11 @@ public class School {
     @Column(nullable = false)
     private String phone;
 
+    @Builder
+    public School(String name, String address, String homePage, String phone) {
+        this.name = name;
+        this.address = address;
+        this.homePage = homePage;
+        this.phone = phone;
+    }
 }
