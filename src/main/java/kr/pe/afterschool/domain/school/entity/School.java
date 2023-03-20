@@ -36,6 +36,7 @@ public class School {
         this.homePage = homePage;
         this.phone = phone;
     }
+
     @Builder
     public School(String name, String address, String homePage, String phone) {
         this.name = name;
