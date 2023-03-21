@@ -10,7 +10,7 @@ import lombok.Getter;
 public enum GlobalExceptionCode implements ErrorProperty {
 
     INVALID_TOKEN(401, "Invalid Token"),
-
+    NO_AUTHENTICATION(403, "권한이 없습니다"),
     INTERNAL_SERVER_ERROR(500, "Internal Server Error")
     ;
 

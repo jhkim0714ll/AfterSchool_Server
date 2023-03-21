@@ -1,5 +1,6 @@
 package kr.pe.afterschool.domain.school.entity;
 
+import kr.pe.afterschool.domain.user.entity.User;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
@@ -30,6 +31,10 @@ public class School {
     @Column(nullable = false)
     private String phone;
 
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "fk_manager_id")
+    private User manager;
+
     public void editSchoolData(String name, String address, String homePage, String phone) {
         this.name = name;
         this.address = address;
@@ -38,10 +43,11 @@ public class School {
     }
 
     @Builder
-    public School(String name, String address, String homePage, String phone) {
+    public School(String name, String address, String homePage, String phone, User manager) {
         this.name = name;
         this.address = address;
         this.homePage = homePage;
         this.phone = phone;
+        this.manager = manager;
     }
 }

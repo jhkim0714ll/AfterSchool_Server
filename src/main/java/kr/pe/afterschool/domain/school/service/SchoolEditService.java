@@ -2,8 +2,10 @@ package kr.pe.afterschool.domain.school.service;
 
 import kr.pe.afterschool.domain.school.entity.School;
 import kr.pe.afterschool.domain.school.entity.repository.SchoolRepository;
-import kr.pe.afterschool.domain.school.exception.SchoolNotFoundException;
+import kr.pe.afterschool.domain.school.exception.*;
 import kr.pe.afterschool.domain.school.presentation.dto.request.SchoolEditRequest;
+import kr.pe.afterschool.domain.user.entity.User;
+import kr.pe.afterschool.domain.user.facade.UserFacade;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -13,11 +15,16 @@ import org.springframework.transaction.annotation.Transactional;
 public class SchoolEditService {
 
     private final SchoolRepository schoolRepository;
+    private final UserFacade userFacade;
 
     @Transactional
     public void execute(Long schoolId, SchoolEditRequest request) {
+        User user = userFacade.getCurrentUser();
         School school = schoolRepository.findById(schoolId)
                 .orElseThrow(() -> SchoolNotFoundException.EXCEPTION);
+        if (!(user == school.getManager())) {
+            throw SchoolCannotException.EXCEPTION;
+        }
         school.editSchoolData(
                 request.getName(),
                 request.getAddress(),
