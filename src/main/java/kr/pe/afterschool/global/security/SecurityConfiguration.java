@@ -28,7 +28,8 @@ public class SecurityConfiguration {
 
         http
                 .authorizeRequests()
-                .antMatchers("*").permitAll();
+                .antMatchers("/school*").hasAnyRole("ADMIN", "TEACHER")
+                .antMatchers("/auth/*").permitAll();
         http
                 .apply(new FilterConfig(jwtTokenParser));
         return http.build();

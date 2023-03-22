@@ -4,6 +4,8 @@ import kr.pe.afterschool.domain.school.presentation.dto.request.SchoolCreateRequ
 import kr.pe.afterschool.domain.school.presentation.dto.request.SchoolEditRequest;
 import kr.pe.afterschool.domain.school.presentation.dto.response.SchoolResponse;
 import kr.pe.afterschool.domain.school.service.*;
+import kr.pe.afterschool.global.annotation.CheckAuthorization;
+import kr.pe.afterschool.global.enums.UserRole;
 import kr.pe.afterschool.global.response.Response;
 import kr.pe.afterschool.global.response.ResponseData;
 import lombok.RequiredArgsConstructor;
