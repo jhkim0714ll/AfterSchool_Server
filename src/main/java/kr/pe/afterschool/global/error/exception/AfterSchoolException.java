@@ -1,6 +1,5 @@
 package kr.pe.afterschool.global.error.exception;
 
-import kr.pe.afterschool.global.error.ErrorProperty;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 

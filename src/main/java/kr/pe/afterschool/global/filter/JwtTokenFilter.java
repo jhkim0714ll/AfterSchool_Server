@@ -1,11 +1,12 @@
 package kr.pe.afterschool.global.filter;
 
+import io.jsonwebtoken.ExpiredJwtException;
 import kr.pe.afterschool.global.security.jwt.JwtTokenParser;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.MediaType;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.filter.OncePerRequestFilter;
-import org.springframework.web.method.HandlerMethod;
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
@@ -24,11 +25,17 @@ public class JwtTokenFilter extends OncePerRequestFilter {
             HttpServletResponse response,
             FilterChain filterChain
     ) throws ServletException, IOException {
-        String bearer = jwtTokenParser.resolveToken(request);
+        try {
+            String bearer = jwtTokenParser.resolveToken(request);
 
-        if (bearer != null) {
-            Authentication authentication = jwtTokenParser.authentication(bearer);
-            SecurityContextHolder.getContext().setAuthentication(authentication);
+            if (bearer != null) {
+                Authentication authentication = jwtTokenParser.authentication(bearer);
+                SecurityContextHolder.getContext().setAuthentication(authentication);
+            }
+        } catch (IllegalArgumentException ex){
+            logger.error("Unable to get JWT token", ex);
+        } catch (ExpiredJwtException ex){
+            logger.error("JWT Token has expired", ex);
         }
 
         filterChain.doFilter(request, response);

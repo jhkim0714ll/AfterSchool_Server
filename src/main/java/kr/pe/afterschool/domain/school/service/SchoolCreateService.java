@@ -6,8 +6,6 @@ import kr.pe.afterschool.domain.school.exception.SchoolAlreadyExistException;
 import kr.pe.afterschool.domain.school.presentation.dto.request.SchoolCreateRequest;
 import kr.pe.afterschool.domain.user.entity.User;
 import kr.pe.afterschool.domain.user.facade.UserFacade;
-import kr.pe.afterschool.global.enums.UserRole;
-import kr.pe.afterschool.global.error.exception.NoAuthenticationException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

@@ -1,5 +1,6 @@
 package kr.pe.afterschool.global.security;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import kr.pe.afterschool.global.filter.FilterConfig;
 import kr.pe.afterschool.global.security.jwt.JwtTokenParser;
 import lombok.RequiredArgsConstructor;
@@ -16,6 +17,7 @@ import org.springframework.security.web.SecurityFilterChain;
 public class SecurityConfiguration {
 
     private final JwtTokenParser jwtTokenParser;
+    private final ObjectMapper objectMapper;
 
     @Bean
     protected SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
@@ -31,7 +33,7 @@ public class SecurityConfiguration {
                 .antMatchers("/school/*").hasAnyRole("ADMIN", "TEACHER")
                 .antMatchers("/auth/*").permitAll();
         http
-                .apply(new FilterConfig(jwtTokenParser));
+                .apply(new FilterConfig(jwtTokenParser, objectMapper));
         return http.build();
     }
 
