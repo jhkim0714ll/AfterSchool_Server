@@ -1,7 +1,9 @@
 package kr.pe.afterschool.global.security;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import kr.pe.afterschool.global.filter.FilterConfig;
+import kr.pe.afterschool.global.lib.ErrorToJson;
+import kr.pe.afterschool.global.security.handler.CustomAccessDeniedHandler;
+import kr.pe.afterschool.global.security.handler.CustomAuthenticationEntryPoint;
 import kr.pe.afterschool.global.security.jwt.JwtTokenParser;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
@@ -17,7 +19,9 @@ import org.springframework.security.web.SecurityFilterChain;
 public class SecurityConfiguration {
 
     private final JwtTokenParser jwtTokenParser;
-    private final ObjectMapper objectMapper;
+    private final ErrorToJson errorToJson;
+    private final CustomAuthenticationEntryPoint customAuthenticationEntryPoint;
+    private final CustomAccessDeniedHandler customAccessDeniedHandler;
 
     @Bean
     protected SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
@@ -33,7 +37,11 @@ public class SecurityConfiguration {
                 .antMatchers("/school/*").hasAnyRole("ADMIN", "TEACHER")
                 .antMatchers("/auth/*").permitAll();
         http
-                .apply(new FilterConfig(jwtTokenParser, objectMapper));
+                .apply(new FilterConfig(jwtTokenParser, errorToJson));
+        http
+                .exceptionHandling()
+                .authenticationEntryPoint(customAuthenticationEntryPoint)
+                .accessDeniedHandler(customAccessDeniedHandler);
         return http.build();
     }
 

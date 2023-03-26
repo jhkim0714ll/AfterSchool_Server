@@ -8,9 +8,9 @@ import lombok.Getter;
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 public enum GlobalExceptionCode implements ErrorProperty {
 
-    EXPIRED_TOKEN(401, "토큰 만료"),
-    INVALID_TOKEN(401, "토큰이 유효하지 않습니다"),
-    NO_AUTHENTICATION(403, "권한이 없습니다"),
+    EXPIRED_TOKEN(401, "Token Expired"),
+    INVALID_TOKEN(401, "Token Invalid"),
+    NO_AUTHENTICATION(403, "No Authenticate"),
     INTERNAL_SERVER_ERROR(500, "Internal Server Error")
     ;
 

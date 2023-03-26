@@ -1,15 +1,13 @@
 package kr.pe.afterschool.global.filter;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import io.jsonwebtoken.ExpiredJwtException;
-import kr.pe.afterschool.global.error.exception.ErrorProperty;
 import kr.pe.afterschool.global.error.exception.AfterSchoolException;
 import kr.pe.afterschool.global.error.exception.InternalServerException;
-import kr.pe.afterschool.global.response.ResponseError;
+import kr.pe.afterschool.global.lib.ErrorToJson;
 import kr.pe.afterschool.global.security.jwt.exception.ExpiredTokenException;
+import kr.pe.afterschool.global.security.jwt.exception.InvalidTokenException;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import javax.servlet.FilterChain;
@@ -20,7 +18,7 @@ import java.io.IOException;
 @RequiredArgsConstructor
 public class ExceptionFilter extends OncePerRequestFilter {
 
-    private final ObjectMapper objectMapper;
+    private final ErrorToJson errorToJson;
 
     @Override
     protected void doFilterInternal(
@@ -31,18 +29,13 @@ public class ExceptionFilter extends OncePerRequestFilter {
         try {
             filterChain.doFilter(request, response);
         } catch (ExpiredJwtException e) {
-            errorToJson(ExpiredTokenException.EXCEPTION.getErrorProperty(), response);
+            errorToJson.errorToJson(ExpiredTokenException.EXCEPTION.getErrorProperty(), response);
         } catch (AfterSchoolException e) {
-            errorToJson(e.getErrorProperty(), response);
+            errorToJson.errorToJson(e.getErrorProperty(), response);
+        } catch (AccessDeniedException e) {
+            errorToJson.errorToJson(InvalidTokenException.EXCEPTION.getErrorProperty(), response);
         } catch (Exception e) {
-            errorToJson(InternalServerException.EXCEPTION.getErrorProperty(), response);
+            errorToJson.errorToJson(InternalServerException.EXCEPTION.getErrorProperty(), response);
         }
-    }
-
-    private void errorToJson(ErrorProperty errorProperty, HttpServletResponse response) throws IOException {
-        response.setStatus(errorProperty.getStatus());
-        response.setContentType(MediaType.APPLICATION_JSON_VALUE);
-        ResponseError responseError = new ResponseError(HttpStatus.valueOf(errorProperty.getStatus()), errorProperty.getMessage());
-        response.getWriter().write(objectMapper.writeValueAsString(responseError));
     }
 }

@@ -5,7 +5,7 @@ import kr.pe.afterschool.global.error.exception.GlobalExceptionCode;
 
 public class InvalidTokenException extends AfterSchoolException {
 
-    private InvalidTokenException() {
+    InvalidTokenException() {
         super(GlobalExceptionCode.INVALID_TOKEN);
     }
 
