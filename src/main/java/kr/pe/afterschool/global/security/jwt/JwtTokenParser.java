@@ -1,12 +1,8 @@
 package kr.pe.afterschool.global.security.jwt;
 
 import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureException;
 import kr.pe.afterschool.global.config.properties.JwtProperties;
-import kr.pe.afterschool.global.security.jwt.exception.ExpiredTokenException;
-import kr.pe.afterschool.global.security.jwt.exception.InvalidTokenException;
 import kr.pe.afterschool.global.security.principle.AuthDetailsService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;

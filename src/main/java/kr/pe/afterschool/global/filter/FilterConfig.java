@@ -1,6 +1,5 @@
 package kr.pe.afterschool.global.filter;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import kr.pe.afterschool.global.lib.ErrorToJson;
 import kr.pe.afterschool.global.security.jwt.JwtTokenParser;
 import lombok.RequiredArgsConstructor;
