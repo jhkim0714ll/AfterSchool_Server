@@ -30,15 +30,22 @@ public class Classroom {
     @ManyToOne(fetch = FetchType.LAZY)
     private School school;
 
+    private LocalDate startDate;
+    private LocalDate endDate;
+    private int limit;
+
     @CreatedDate
     @Column(nullable = false)
     private LocalDate createdAt;
 
     @Builder
-    public Classroom(String teacherName, String name, School school) {
+    public Classroom(String teacherName, String name, School school, LocalDate startDate, LocalDate endDate, int limit) {
         this.teacherName = teacherName;
         this.name = name;
         this.school = school;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.limit = limit;
         this.createdAt = LocalDate.now();
     }
 }
