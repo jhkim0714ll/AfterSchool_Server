@@ -26,10 +26,10 @@ public class SchoolEditService {
             throw SchoolCannotException.EXCEPTION;
         }
         school.editSchoolData(
-                request.getName(),
-                request.getAddress(),
-                request.getHomePage(),
-                request.getPhone());
+                request.getName() == null ? school.getName() : request.getName(),
+                request.getAddress() == null ? school.getAddress() : request.getAddress(),
+                request.getHomePage() == null ? school.getHomePage() : request.getHomePage(),
+                request.getPhone() == null ? school.getPhone() : request.getPhone());
         schoolRepository.save(school);
     }
 }
