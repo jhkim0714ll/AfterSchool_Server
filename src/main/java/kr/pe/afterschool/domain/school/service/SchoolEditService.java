@@ -15,16 +15,11 @@ import org.springframework.transaction.annotation.Transactional;
 public class SchoolEditService {
 
     private final SchoolRepository schoolRepository;
-    private final UserFacade userFacade;
 
     @Transactional
     public void execute(Long schoolId, SchoolEditRequest request) {
-        User user = userFacade.getCurrentUser();
         School school = schoolRepository.findById(schoolId)
                 .orElseThrow(() -> SchoolNotFoundException.EXCEPTION);
-        if (!(user == school.getManager())) {
-            throw SchoolCannotException.EXCEPTION;
-        }
         school.editSchoolData(
                 request.getName() == null ? school.getName() : request.getName(),
                 request.getAddress() == null ? school.getAddress() : request.getAddress(),
