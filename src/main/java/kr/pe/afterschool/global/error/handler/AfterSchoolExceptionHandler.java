@@ -1,5 +1,7 @@
-package kr.pe.afterschool.global.error.exception;
+package kr.pe.afterschool.global.error.handler;
 
+import io.jsonwebtoken.ExpiredJwtException;
+import kr.pe.afterschool.global.error.exception.AfterSchoolException;
 import kr.pe.afterschool.global.response.ResponseError;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

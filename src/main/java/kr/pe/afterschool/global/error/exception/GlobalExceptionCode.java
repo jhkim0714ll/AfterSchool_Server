@@ -1,6 +1,5 @@
 package kr.pe.afterschool.global.error.exception;
 
-import kr.pe.afterschool.global.error.ErrorProperty;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -9,8 +8,9 @@ import lombok.Getter;
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 public enum GlobalExceptionCode implements ErrorProperty {
 
-    INVALID_TOKEN(401, "Invalid Token"),
-
+    EXPIRED_TOKEN(401, "Token Expired"),
+    INVALID_TOKEN(401, "Token Invalid"),
+    NO_AUTHENTICATION(403, "No Authenticate"),
     INTERNAL_SERVER_ERROR(500, "Internal Server Error")
     ;
 

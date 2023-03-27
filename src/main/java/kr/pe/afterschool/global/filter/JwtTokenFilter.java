@@ -2,6 +2,7 @@ package kr.pe.afterschool.global.filter;
 
 import kr.pe.afterschool.global.security.jwt.JwtTokenParser;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.filter.OncePerRequestFilter;
@@ -12,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+@Slf4j
 @RequiredArgsConstructor
 public class JwtTokenFilter extends OncePerRequestFilter {
 
@@ -23,11 +25,15 @@ public class JwtTokenFilter extends OncePerRequestFilter {
             HttpServletResponse response,
             FilterChain filterChain
     ) throws ServletException, IOException {
-        String bearer = jwtTokenParser.resolveToken(request);
+        try {
+            String bearer = jwtTokenParser.resolveToken(request);
 
-        if (bearer != null) {
-            Authentication authentication = jwtTokenParser.authentication(bearer);
-            SecurityContextHolder.getContext().setAuthentication(authentication);
+            if (bearer != null) {
+                Authentication authentication = jwtTokenParser.authentication(bearer);
+                SecurityContextHolder.getContext().setAuthentication(authentication);
+            }
+        } catch (IllegalArgumentException ex){
+            logger.error("Unable to get JWT token", ex);
         }
 
         filterChain.doFilter(request, response);

@@ -2,9 +2,7 @@ package kr.pe.afterschool.global.security.jwt;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureException;
 import kr.pe.afterschool.global.config.properties.JwtProperties;
-import kr.pe.afterschool.global.security.jwt.exception.InvalidTokenException;
 import kr.pe.afterschool.global.security.principle.AuthDetailsService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -39,11 +37,7 @@ public class JwtTokenParser {
     }
 
     private Claims getTokenBody(String token) {
-        try {
-            return Jwts.parser().setSigningKey(jwtProperties.getSecretKey())
-                    .parseClaimsJws(token).getBody();
-        } catch (SignatureException e) {
-            throw InvalidTokenException.EXCEPTION;
-        }
+        return Jwts.parser().setSigningKey(jwtProperties.getSecretKey())
+                .parseClaimsJws(token).getBody();
     }
 }

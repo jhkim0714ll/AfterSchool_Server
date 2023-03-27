@@ -10,7 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
-public class ModifyUserService {
+public class UserEditService {
 
     private final UserRepository userRepository;
     private final UserFacade userFacade;
@@ -18,7 +18,7 @@ public class ModifyUserService {
     @Transactional
     public void execute(ModifyUserRequest request) {
         User user = userFacade.getCurrentUser();
-        user.modifyUserData(
+        user.editUserData(
                 request.getName(),
                 request.getPhone(),
                 request.getGrade(),
