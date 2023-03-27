@@ -7,14 +7,9 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.CreatedDate;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
 
 @Getter
 @Entity
@@ -53,12 +48,6 @@ public class User {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "fk_school_id")
     private School school;
-
-    public Collection<? extends GrantedAuthority> Authorities() {
-        Collection<GrantedAuthority> authorities = new ArrayList<>();
-        authorities.add(new SimpleGrantedAuthority(role.name()));
-        return authorities;
-    }
 
     public void editUserData(String name, String phone, int grade, int room, int number, String profileImageUrl) {
         this.name = name;

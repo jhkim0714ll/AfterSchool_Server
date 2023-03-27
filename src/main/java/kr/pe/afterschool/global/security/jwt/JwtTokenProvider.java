@@ -23,7 +23,7 @@ public class JwtTokenProvider {
                 .signWith(SignatureAlgorithm.HS256, jwtProperties.getSecretKey())
                 .setSubject(email)
                 .setIssuedAt(new Date())
-                .setExpiration(new Date(System.currentTimeMillis() + exp * 1000))
+                .setExpiration(new Date(System.currentTimeMillis() + exp * 10000))
                 .compact();
     }
 }

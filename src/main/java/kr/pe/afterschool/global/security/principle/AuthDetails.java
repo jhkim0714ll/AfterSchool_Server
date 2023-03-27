@@ -3,8 +3,10 @@ package kr.pe.afterschool.global.security.principle;
 import kr.pe.afterschool.domain.user.entity.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 @RequiredArgsConstructor
@@ -14,7 +16,9 @@ public class AuthDetails implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return user.Authorities();
+        Collection<GrantedAuthority> authorities = new ArrayList<>();
+        authorities.add(new SimpleGrantedAuthority(user.getRole().name()));
+        return authorities;
     }
 
     @Override

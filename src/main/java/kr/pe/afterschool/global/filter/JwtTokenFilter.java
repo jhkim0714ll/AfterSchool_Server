@@ -29,9 +29,7 @@ public class JwtTokenFilter extends OncePerRequestFilter {
             if (bearer != null) {
                 Authentication authentication = jwtTokenParser.authentication(bearer);
                 SecurityContextHolder.getContext().setAuthentication(authentication);
-                return;
             }
-//            errorToJson.errorToJson(InvalidTokenException.EXCEPTION.getErrorProperty(), response);
         } catch (IllegalArgumentException ex){
             logger.error("Unable to get JWT token", ex);
         }
