@@ -5,6 +5,7 @@ import kr.pe.afterschool.domain.classroom.presentation.dto.request.ClassroomEdit
 import kr.pe.afterschool.domain.classroom.presentation.dto.response.ClassroomResponse;
 import kr.pe.afterschool.domain.classroom.service.ClassroomByIdQueryService;
 import kr.pe.afterschool.domain.classroom.service.ClassroomCreateService;
+import kr.pe.afterschool.domain.classroom.service.ClassroomDeleteService;
 import kr.pe.afterschool.domain.classroom.service.ClassroomEditService;
 import kr.pe.afterschool.global.response.Response;
 import kr.pe.afterschool.global.response.ResponseData;
@@ -22,6 +23,7 @@ public class ClassroomController {
     private final ClassroomByIdQueryService classroomByIdQueryService;
     private final ClassroomCreateService classroomCreateService;
     private final ClassroomEditService classroomEditService;
+    private final ClassroomDeleteService classroomDeleteService;
 
     @GetMapping("/{id}")
     public ResponseData<ClassroomResponse> getClassroomById(
@@ -56,6 +58,17 @@ public class ClassroomController {
         return new Response(
                 HttpStatus.OK,
                 "방과후 정보 수정"
+        );
+    }
+
+    @DeleteMapping("/{classroomId}")
+    public Response deleteClassroom(
+            @PathVariable Long classroomId
+    ) {
+        classroomDeleteService.execute(classroomId);
+        return new Response(
+                HttpStatus.OK,
+                "방과후 삭제 성공"
         );
     }
 }
