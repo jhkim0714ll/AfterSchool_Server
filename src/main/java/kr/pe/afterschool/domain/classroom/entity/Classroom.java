@@ -42,6 +42,15 @@ public class Classroom {
     @Column(nullable = false)
     private LocalDate createdAt;
 
+    public void editClassroomData(String teacherName, String name, DayOfWeek week, LocalDate startDate, LocalDate endDate, int peopleLimit) {
+        this.teacherName = teacherName;
+        this.name = name;
+        this.week = week;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.peopleLimit = peopleLimit;
+    }
+
     @Builder
     public Classroom(String teacherName, String name, DayOfWeek week, School school, LocalDate startDate, LocalDate endDate, int peopleLimit) {
         this.teacherName = teacherName;

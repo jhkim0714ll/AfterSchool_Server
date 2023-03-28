@@ -9,7 +9,9 @@ import lombok.Getter;
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 public enum ClassroomExceptionCode implements ErrorProperty {
 
-    CLASSROOM_NOT_FOUND(404, "해당 방과후가 존재하지 않음");
+    CLASSROOM_CANNOT_MANAGE(403, "방과후를 관리할 수 없음"),
+    CLASSROOM_NOT_FOUND(404, "해당 방과후가 존재하지 않음")
+    ;
 
     private final int status;
     private final String message;
