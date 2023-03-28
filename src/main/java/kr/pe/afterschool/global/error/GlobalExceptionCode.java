@@ -1,4 +1,4 @@
-package kr.pe.afterschool.global.error.exception;
+package kr.pe.afterschool.global.error;
 
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -8,6 +8,7 @@ import lombok.Getter;
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 public enum GlobalExceptionCode implements ErrorProperty {
 
+    DATE_PARSER(400, "잘못된 날짜 형식"),
     EXPIRED_TOKEN(401, "Token Expired"),
     INVALID_TOKEN(401, "Token Invalid"),
     NO_AUTHENTICATION(403, "No Authenticate"),

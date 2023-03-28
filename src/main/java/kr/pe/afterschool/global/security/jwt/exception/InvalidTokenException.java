@@ -1,7 +1,7 @@
 package kr.pe.afterschool.global.security.jwt.exception;
 
-import kr.pe.afterschool.global.error.exception.AfterSchoolException;
-import kr.pe.afterschool.global.error.exception.GlobalExceptionCode;
+import kr.pe.afterschool.global.error.AfterSchoolException;
+import kr.pe.afterschool.global.error.GlobalExceptionCode;
 
 public class InvalidTokenException extends AfterSchoolException {
 

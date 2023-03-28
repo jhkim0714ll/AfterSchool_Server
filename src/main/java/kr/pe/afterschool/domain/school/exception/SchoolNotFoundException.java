@@ -1,7 +1,7 @@
 package kr.pe.afterschool.domain.school.exception;
 
 import kr.pe.afterschool.domain.school.error.SchoolExceptionCode;
-import kr.pe.afterschool.global.error.exception.AfterSchoolException;
+import kr.pe.afterschool.global.error.AfterSchoolException;
 
 public class SchoolNotFoundException extends AfterSchoolException {
 

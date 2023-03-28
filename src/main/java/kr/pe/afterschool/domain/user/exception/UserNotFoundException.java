@@ -1,7 +1,7 @@
 package kr.pe.afterschool.domain.user.exception;
 
 import kr.pe.afterschool.domain.user.error.UserExceptionCode;
-import kr.pe.afterschool.global.error.exception.AfterSchoolException;
+import kr.pe.afterschool.global.error.AfterSchoolException;
 
 public class UserNotFoundException  extends AfterSchoolException {
 

@@ -1,9 +1,9 @@
 package kr.pe.afterschool.global.filter;
 
 import io.jsonwebtoken.ExpiredJwtException;
-import kr.pe.afterschool.global.error.exception.AfterSchoolException;
+import kr.pe.afterschool.global.error.AfterSchoolException;
 import kr.pe.afterschool.global.error.exception.InternalServerException;
-import kr.pe.afterschool.global.lib.ErrorToJson;
+import kr.pe.afterschool.global.security.lib.ErrorToJson;
 import kr.pe.afterschool.global.security.jwt.exception.ExpiredTokenException;
 import kr.pe.afterschool.global.security.jwt.exception.InvalidTokenException;
 import lombok.RequiredArgsConstructor;

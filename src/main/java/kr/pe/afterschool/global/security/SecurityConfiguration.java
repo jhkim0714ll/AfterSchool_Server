@@ -2,7 +2,7 @@ package kr.pe.afterschool.global.security;
 
 import kr.pe.afterschool.global.filter.FilterConfig;
 import kr.pe.afterschool.global.filter.JwtTokenFilter;
-import kr.pe.afterschool.global.lib.ErrorToJson;
+import kr.pe.afterschool.global.security.lib.ErrorToJson;
 import kr.pe.afterschool.global.security.handler.CustomAccessDeniedHandler;
 import kr.pe.afterschool.global.security.handler.CustomAuthenticationEntryPoint;
 import kr.pe.afterschool.global.security.jwt.JwtTokenParser;
@@ -34,15 +34,15 @@ public class SecurityConfiguration {
                 .csrf().disable()
                 .cors().disable()
                 .sessionManagement()
-                .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-                .and()
+                .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+        http
                 .authorizeRequests()
                 .antMatchers(HttpMethod.GET).hasAnyRole("TEACHER", "ADMIN", "STUDENT")
-                .antMatchers("/school/**").hasAnyRole("TEACHER", "ADMIN")
-                .antMatchers("/auth/**").permitAll()
-                .and()
-//                .apply(new FilterConfig(jwtTokenParser, errorToJson))
-//                .and()
+                .antMatchers("/school/**", "/classroom/**").hasAnyRole("TEACHER", "ADMIN")
+                .antMatchers("/auth/**").permitAll();
+        http
+                .apply(new FilterConfig(jwtTokenParser, errorToJson));
+        http
                 .addFilterBefore(new JwtTokenFilter(jwtTokenParser), UsernamePasswordAuthenticationFilter.class)
                 .exceptionHandling()
                 .authenticationEntryPoint(customAuthenticationEntryPoint)
