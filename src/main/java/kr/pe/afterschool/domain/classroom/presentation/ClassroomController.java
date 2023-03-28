@@ -3,10 +3,7 @@ package kr.pe.afterschool.domain.classroom.presentation;
 import kr.pe.afterschool.domain.classroom.presentation.dto.request.ClassroomCreateRequest;
 import kr.pe.afterschool.domain.classroom.presentation.dto.request.ClassroomEditRequest;
 import kr.pe.afterschool.domain.classroom.presentation.dto.response.ClassroomResponse;
-import kr.pe.afterschool.domain.classroom.service.ClassroomByIdQueryService;
-import kr.pe.afterschool.domain.classroom.service.ClassroomCreateService;
-import kr.pe.afterschool.domain.classroom.service.ClassroomDeleteService;
-import kr.pe.afterschool.domain.classroom.service.ClassroomEditService;
+import kr.pe.afterschool.domain.classroom.service.*;
 import kr.pe.afterschool.global.response.Response;
 import kr.pe.afterschool.global.response.ResponseData;
 import lombok.RequiredArgsConstructor;
@@ -14,6 +11,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @RestController
 @RequestMapping("/classroom")
@@ -21,6 +19,7 @@ import javax.validation.Valid;
 public class ClassroomController {
 
     private final ClassroomByIdQueryService classroomByIdQueryService;
+    private final ClassroomByDateQueryService classroomByDateQueryService;
     private final ClassroomCreateService classroomCreateService;
     private final ClassroomEditService classroomEditService;
     private final ClassroomDeleteService classroomDeleteService;
@@ -33,6 +32,18 @@ public class ClassroomController {
         return new ResponseData<>(
                 HttpStatus.OK,
                 "해당 아이디의 방과후 조회 성공",
+                response
+        );
+    }
+
+    @GetMapping("/date")
+    public ResponseData<List<ClassroomResponse>> getClassroomByDate(
+            @RequestParam("date") String date
+    ) {
+        List<ClassroomResponse> response = classroomByDateQueryService.execute(date);
+        return new ResponseData<>(
+                HttpStatus.OK,
+                "해당 날짜 방과후 조회 성공",
                 response
         );
     }
