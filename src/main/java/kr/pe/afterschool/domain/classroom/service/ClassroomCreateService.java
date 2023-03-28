@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.DayOfWeek;
+import java.time.LocalDate;
 
 @Service
 @RequiredArgsConstructor
@@ -30,7 +31,7 @@ public class ClassroomCreateService {
                 .startDate(dateParser.parseStringToDate(request.getStartDate()))
                 .endDate(dateParser.parseStringToDate(request.getEndDate()))
                 .school(user.getSchool())
-                .peopleLimit(request.getPeopleLimit())
+                .peopleLimit(request.getPeopleLimit() == 0 ? 10000 : request.getPeopleLimit())
                 .build();
         classroomRepository.save(classroom);
     }

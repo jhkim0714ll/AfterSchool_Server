@@ -5,6 +5,7 @@ import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.ColumnDefault;
 import org.springframework.data.annotation.CreatedDate;
 
 import javax.persistence.*;
@@ -27,11 +28,12 @@ public class Classroom {
 
     @Column(nullable = false)
     private String name;
-
+    @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private DayOfWeek week;
 
     @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "fk_school_id")
     private School school;
 
     private LocalDate startDate;

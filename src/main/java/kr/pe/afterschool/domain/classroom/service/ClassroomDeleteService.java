@@ -23,7 +23,7 @@ public class ClassroomDeleteService {
         User user = userFacade.getCurrentUser();
         Classroom classroom = classroomRepository.findById(classroomId)
                         .orElseThrow(() -> ClassroomNotFoundException.EXCEPTION);
-        if (user.getSchool() != classroom.getSchool() || user.getRole().equals(UserRole.TEACHER)) {
+        if (user.getSchool() != classroom.getSchool()) {
             throw ClassroomCannotManageException.EXCEPTION;
         }
         classroomRepository.deleteById(classroomId);

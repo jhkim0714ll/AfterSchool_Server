@@ -57,7 +57,7 @@ public class ClassroomController {
         classroomEditService.execute(classroomId, request);
         return new Response(
                 HttpStatus.OK,
-                "방과후 정보 수정"
+                "방과후 정보 수정 성공"
         );
     }
 
