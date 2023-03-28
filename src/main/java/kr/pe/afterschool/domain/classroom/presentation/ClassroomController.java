@@ -1,5 +1,6 @@
 package kr.pe.afterschool.domain.classroom.presentation;
 
+import kr.pe.afterschool.domain.classroom.presentation.dto.request.ClassroomApplyRequest;
 import kr.pe.afterschool.domain.classroom.presentation.dto.request.ClassroomCreateRequest;
 import kr.pe.afterschool.domain.classroom.presentation.dto.request.ClassroomEditRequest;
 import kr.pe.afterschool.domain.classroom.presentation.dto.response.ClassroomResponse;
@@ -23,6 +24,7 @@ public class ClassroomController {
     private final ClassroomCreateService classroomCreateService;
     private final ClassroomEditService classroomEditService;
     private final ClassroomDeleteService classroomDeleteService;
+    private final ClassroomApplyService classroomApplyService;
 
     @GetMapping("/{id}")
     public ResponseData<ClassroomResponse> getClassroomById(
@@ -80,6 +82,17 @@ public class ClassroomController {
         return new Response(
                 HttpStatus.OK,
                 "방과후 삭제 성공"
+        );
+    }
+
+    @PostMapping("/apply")
+    public Response applyClassroom(
+            @RequestBody @Valid ClassroomApplyRequest request
+    ) {
+        classroomApplyService.execute(request);
+        return new Response(
+                HttpStatus.CREATED,
+                "방과후 신청 성공"
         );
     }
 }

@@ -32,8 +32,8 @@ public class School {
     private String phone;
 
     @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "fk_manager_id")
-    private User manager;
+    @JoinColumn(name = "fk_teacher_id")
+    private User teacher;
 
     public void editSchoolData(String name, String address, String homePage, String phone) {
         this.name = name;
@@ -43,11 +43,11 @@ public class School {
     }
 
     @Builder
-    public School(String name, String address, String homePage, String phone, User manager) {
+    public School(String name, String address, String homePage, String phone, User teacher) {
         this.name = name;
         this.address = address;
         this.homePage = homePage;
         this.phone = phone;
-        this.manager = manager;
+        this.teacher = teacher;
     }
 }

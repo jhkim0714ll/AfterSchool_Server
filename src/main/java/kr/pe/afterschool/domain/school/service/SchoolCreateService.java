@@ -28,7 +28,7 @@ public class SchoolCreateService {
                 .address(request.getAddress())
                 .homePage(request.getHomePage())
                 .phone(request.getPhone())
-                .manager(user)
+                .teacher(user)
                 .build();
         schoolRepository.save(school);
     }
