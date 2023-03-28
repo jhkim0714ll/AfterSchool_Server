@@ -1,4 +1,4 @@
-package kr.pe.afterschool.global.error.exception;
+package kr.pe.afterschool.global.error;
 
 public interface ErrorProperty {
     int getStatus();

@@ -1,6 +1,6 @@
 package kr.pe.afterschool.global.filter;
 
-import kr.pe.afterschool.global.lib.ErrorToJson;
+import kr.pe.afterschool.global.security.lib.ErrorToJson;
 import kr.pe.afterschool.global.security.jwt.JwtTokenParser;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.config.annotation.SecurityConfigurerAdapter;

@@ -1,7 +1,7 @@
 package kr.pe.afterschool.global.security.handler;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import kr.pe.afterschool.global.error.exception.AfterSchoolException;
+import kr.pe.afterschool.global.error.AfterSchoolException;
 import kr.pe.afterschool.global.error.exception.InternalServerException;
 import kr.pe.afterschool.global.response.ResponseError;
 import kr.pe.afterschool.global.security.jwt.exception.InvalidTokenException;

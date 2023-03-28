@@ -1,7 +1,7 @@
-package kr.pe.afterschool.global.lib;
+package kr.pe.afterschool.global.security.lib;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import kr.pe.afterschool.global.error.exception.ErrorProperty;
+import kr.pe.afterschool.global.error.ErrorProperty;
 import kr.pe.afterschool.global.response.ResponseError;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;

@@ -1,4 +1,4 @@
-package kr.pe.afterschool.global.error.exception;
+package kr.pe.afterschool.global.error;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;

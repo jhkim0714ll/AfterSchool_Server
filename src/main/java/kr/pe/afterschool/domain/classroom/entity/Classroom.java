@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.CreatedDate;
 
 import javax.persistence.*;
+import java.time.DayOfWeek;
 import java.time.LocalDate;
 
 @Getter
@@ -27,25 +28,29 @@ public class Classroom {
     @Column(nullable = false)
     private String name;
 
+    @Column(nullable = false)
+    private DayOfWeek week;
+
     @ManyToOne(fetch = FetchType.LAZY)
     private School school;
 
     private LocalDate startDate;
     private LocalDate endDate;
-    private int limit;
+    private int peopleLimit;
 
     @CreatedDate
     @Column(nullable = false)
     private LocalDate createdAt;
 
     @Builder
-    public Classroom(String teacherName, String name, School school, LocalDate startDate, LocalDate endDate, int limit) {
+    public Classroom(String teacherName, String name, DayOfWeek week, School school, LocalDate startDate, LocalDate endDate, int peopleLimit) {
         this.teacherName = teacherName;
         this.name = name;
+        this.week = week;
         this.school = school;
         this.startDate = startDate;
         this.endDate = endDate;
-        this.limit = limit;
+        this.peopleLimit = peopleLimit;
         this.createdAt = LocalDate.now();
     }
 }

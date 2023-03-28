@@ -22,7 +22,7 @@ public class ClassroomResponse {
     private LocalDate startDate;
     @JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDate endDate;
-    private int limit;
+    private int peopleLimit;
 
     public ClassroomResponse(Classroom classroom) {
         this.classroomId = classroom.getId();
@@ -31,6 +31,6 @@ public class ClassroomResponse {
         this.school = new SchoolResponse(classroom.getSchool());
         this.startDate = classroom.getStartDate();
         this.endDate = classroom.getEndDate();
-        this.limit = classroom.getLimit();
+        this.peopleLimit = classroom.getPeopleLimit();
     }
 }
