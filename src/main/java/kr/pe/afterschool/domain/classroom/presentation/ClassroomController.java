@@ -26,6 +26,7 @@ public class ClassroomController {
     private final ClassroomCreateService classroomCreateService;
     private final ClassroomEditService classroomEditService;
     private final ClassroomDeleteService classroomDeleteService;
+    private final ClassroomApplyMyQueryService classroomApplyMyQueryService;
     private final ClassroomApplyQueryService classroomApplyQueryService;
     private final ClassroomApplyService classroomApplyService;
     private final ClassroomAppliedDeleteService classroomAppliedDeleteService;
@@ -89,6 +90,16 @@ public class ClassroomController {
         );
     }
 
+    @GetMapping("/apply/my")
+    public ResponseData<List<ClassroomApplyResponse>> getMyClassroomApply() {
+        List<ClassroomApplyResponse> response = classroomApplyMyQueryService.execute();
+        return new ResponseData<>(
+                HttpStatus.OK,
+                "내 방과후 신청 내역 조회 성공",
+                response
+        );
+    }
+
     @GetMapping("/apply")
     public ResponseData<List<ClassroomApplyResponse>> getClassroomUserByStatus(
             @RequestParam("classroomId") Long classroomId,
@@ -120,7 +131,7 @@ public class ClassroomController {
         classroomAppliedDeleteService.execute(classroomUserId);
         return new Response(
                 HttpStatus.OK,
-                "방과후 신청 내역 삭제"
+                "방과후 신청 내역 삭제 성공"
         );
     }
 }

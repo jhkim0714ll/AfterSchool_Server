@@ -9,6 +9,7 @@ import lombok.Getter;
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 public enum ClassroomExceptionCode implements ErrorProperty {
 
+    CLASSROOM_PEOPLE_OVER(403, "인원이 초과되어 방과후를 신청할 수 없음"),
     CLASSROOM_CANNOT_MANAGE(403, "방과후를 관리할 수 없음"),
     CLASSROOM_NOT_FOUND(404, "해당 방과후가 존재하지 않음"),
     CLASSROOM_APPLY_NOT_FOUND(404, "해당 방과후 신청 내역이 존재하지 않음")
