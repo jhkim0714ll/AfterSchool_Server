@@ -4,7 +4,7 @@ import kr.pe.afterschool.domain.classroom.presentation.dto.request.ClassroomAppl
 import kr.pe.afterschool.domain.classroom.presentation.dto.request.ClassroomCreateRequest;
 import kr.pe.afterschool.domain.classroom.presentation.dto.request.ClassroomEditRequest;
 import kr.pe.afterschool.domain.classroom.presentation.dto.response.ClassroomResponse;
-import kr.pe.afterschool.domain.classroom.presentation.dto.response.ClassroomUserResponse;
+import kr.pe.afterschool.domain.classroom.presentation.dto.response.ClassroomApplyResponse;
 import kr.pe.afterschool.domain.classroom.service.*;
 import kr.pe.afterschool.global.enums.ClassroomUserStatus;
 import kr.pe.afterschool.global.response.Response;
@@ -28,6 +28,7 @@ public class ClassroomController {
     private final ClassroomDeleteService classroomDeleteService;
     private final ClassroomUserQueryService classroomUserQueryService;
     private final ClassroomApplyService classroomApplyService;
+    private final ClassroomUserDeleteService classroomUserDeleteService;
 
     @GetMapping("/{id}")
     public ResponseData<ClassroomResponse> getClassroomById(
@@ -89,11 +90,11 @@ public class ClassroomController {
     }
 
     @GetMapping("/apply")
-    public ResponseData<List<ClassroomUserResponse>> getClassroomUserByStatus(
+    public ResponseData<List<ClassroomApplyResponse>> getClassroomUserByStatus(
             @RequestParam("classroomId") Long classroomId,
             @RequestParam("status") ClassroomUserStatus status
     ) {
-        List<ClassroomUserResponse> response = classroomUserQueryService.execute(classroomId, status);
+        List<ClassroomApplyResponse> response = classroomUserQueryService.execute(classroomId, status);
         return new ResponseData<>(
                 HttpStatus.OK,
                 "타입 값의 방과후 신청 유저 조회 성공",
@@ -109,6 +110,17 @@ public class ClassroomController {
         return new Response(
                 HttpStatus.CREATED,
                 "방과후 신청 성공"
+        );
+    }
+
+    @DeleteMapping("/apply/{classroomUserId}")
+    public Response deleteAppliedClassroom(
+            @PathVariable Long classroomUserId
+    ) {
+        classroomUserDeleteService.execute(classroomUserId);
+        return new Response(
+                HttpStatus.OK,
+                "방과후 신청 내역 삭제"
         );
     }
 }

@@ -11,9 +11,9 @@ import javax.persistence.*;
 
 @Getter
 @Entity
-@Table(name = "classroom_user")
+@Table(name = "classroom_apply")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class ClassroomUser {
+public class ClassroomApply {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -32,7 +32,7 @@ public class ClassroomUser {
     private ClassroomUserStatus status;
 
     @Builder
-    public ClassroomUser(Classroom classroom, User student) {
+    public ClassroomApply(Classroom classroom, User student) {
         this.classroom = classroom;
         this.student = student;
         this.status = ClassroomUserStatus.PENDING;
