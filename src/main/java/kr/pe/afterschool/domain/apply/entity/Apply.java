@@ -2,7 +2,7 @@ package kr.pe.afterschool.domain.apply.entity;
 
 import kr.pe.afterschool.domain.classroom.entity.Classroom;
 import kr.pe.afterschool.domain.user.entity.User;
-import kr.pe.afterschool.global.enums.ClassroomApplyStatus;
+import kr.pe.afterschool.global.enums.ApplyStatus;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
@@ -18,6 +18,7 @@ public class Apply {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "apply_id")
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -30,9 +31,9 @@ public class Apply {
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private ClassroomApplyStatus status;
+    private ApplyStatus status;
 
-    public void editStatus(ClassroomApplyStatus status) {
+    public void editStatus(ApplyStatus status) {
         this.status = status;
     }
 
@@ -40,6 +41,6 @@ public class Apply {
     public Apply(Classroom classroom, User student) {
         this.classroom = classroom;
         this.student = student;
-        this.status = ClassroomApplyStatus.PENDING;
+        this.status = ApplyStatus.PENDING;
     }
 }
