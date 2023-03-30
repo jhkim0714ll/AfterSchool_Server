@@ -4,7 +4,9 @@ import kr.pe.afterschool.domain.classroom.presentation.dto.request.ClassroomAppl
 import kr.pe.afterschool.domain.classroom.presentation.dto.request.ClassroomCreateRequest;
 import kr.pe.afterschool.domain.classroom.presentation.dto.request.ClassroomEditRequest;
 import kr.pe.afterschool.domain.classroom.presentation.dto.response.ClassroomResponse;
+import kr.pe.afterschool.domain.classroom.presentation.dto.response.ClassroomUserResponse;
 import kr.pe.afterschool.domain.classroom.service.*;
+import kr.pe.afterschool.global.enums.ClassroomUserStatus;
 import kr.pe.afterschool.global.response.Response;
 import kr.pe.afterschool.global.response.ResponseData;
 import lombok.RequiredArgsConstructor;
@@ -24,6 +26,7 @@ public class ClassroomController {
     private final ClassroomCreateService classroomCreateService;
     private final ClassroomEditService classroomEditService;
     private final ClassroomDeleteService classroomDeleteService;
+    private final ClassroomUserQueryService classroomUserQueryService;
     private final ClassroomApplyService classroomApplyService;
 
     @GetMapping("/{id}")
@@ -82,6 +85,19 @@ public class ClassroomController {
         return new Response(
                 HttpStatus.OK,
                 "방과후 삭제 성공"
+        );
+    }
+
+    @GetMapping("/apply")
+    public ResponseData<List<ClassroomUserResponse>> getClassroomUserByStatus(
+            @RequestParam("classroomId") Long classroomId,
+            @RequestParam("status") ClassroomUserStatus status
+    ) {
+        List<ClassroomUserResponse> response = classroomUserQueryService.execute(classroomId, status);
+        return new ResponseData<>(
+                HttpStatus.OK,
+                "타입 값의 방과후 신청 유저 조회 성공",
+                response
         );
     }
 

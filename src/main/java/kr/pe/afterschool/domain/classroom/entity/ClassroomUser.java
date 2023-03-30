@@ -1,6 +1,7 @@
 package kr.pe.afterschool.domain.classroom.entity;
 
 import kr.pe.afterschool.domain.user.entity.User;
+import kr.pe.afterschool.global.enums.ClassroomUserStatus;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
@@ -26,9 +27,14 @@ public class ClassroomUser {
     @JoinColumn(name = "fk_student_id")
     private User student;
 
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private ClassroomUserStatus status;
+
     @Builder
     public ClassroomUser(Classroom classroom, User student) {
         this.classroom = classroom;
         this.student = student;
+        this.status = ClassroomUserStatus.PENDING;
     }
 }
