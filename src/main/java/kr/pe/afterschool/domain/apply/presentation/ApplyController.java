@@ -1,13 +1,9 @@
 package kr.pe.afterschool.domain.apply.presentation;
 
-import kr.pe.afterschool.domain.apply.service.AppyDeleteService;
-import kr.pe.afterschool.domain.apply.service.MyApplyQueryService;
-import kr.pe.afterschool.domain.apply.service.ApplyStatusQueryService;
-import kr.pe.afterschool.domain.apply.service.ApplyCreateService;
+import kr.pe.afterschool.domain.apply.service.*;
 import kr.pe.afterschool.domain.apply.presentation.dto.request.ApplyCreateRequest;
 import kr.pe.afterschool.domain.apply.presentation.dto.request.ApplyDecisionRequest;
 import kr.pe.afterschool.domain.apply.presentation.dto.response.ApplyResponse;
-import kr.pe.afterschool.domain.apply.service.ApplyRandomDecisionService;
 import kr.pe.afterschool.global.enums.ApplyStatus;
 import kr.pe.afterschool.global.response.Response;
 import kr.pe.afterschool.global.response.ResponseData;
@@ -27,6 +23,7 @@ public class ApplyController {
     private final ApplyStatusQueryService applyStatusQueryService;
     private final ApplyCreateService applyCreateService;
     private final AppyDeleteService appyDeleteService;
+    private final ApplyDecisionService applyDecisionService;
     private final ApplyRandomDecisionService applyRandomDecisionService;
 
     @GetMapping("/my")
@@ -80,7 +77,7 @@ public class ApplyController {
     public Response decideApply(
             @PathVariable Long classroomId
     ) {
-
+        applyDecisionService.execute(classroomId);
         return new Response(
                 HttpStatus.CREATED,
                 "방과후 신청 인원 결정 성공"
