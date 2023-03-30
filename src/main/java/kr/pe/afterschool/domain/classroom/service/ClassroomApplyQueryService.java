@@ -5,7 +5,7 @@ import kr.pe.afterschool.domain.classroom.entity.repository.ClassroomRepository;
 import kr.pe.afterschool.domain.classroom.entity.repository.ClassroomApplyRepository;
 import kr.pe.afterschool.domain.classroom.exception.ClassroomNotFoundException;
 import kr.pe.afterschool.domain.classroom.presentation.dto.response.ClassroomApplyResponse;
-import kr.pe.afterschool.global.enums.ClassroomUserStatus;
+import kr.pe.afterschool.global.enums.ClassroomApplyStatus;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -21,7 +21,7 @@ public class ClassroomApplyQueryService {
     private final ClassroomApplyRepository classroomApplyRepository;
 
     @Transactional(readOnly = true)
-    public List<ClassroomApplyResponse> execute(Long classroomId, ClassroomUserStatus status) {
+    public List<ClassroomApplyResponse> execute(Long classroomId, ClassroomApplyStatus status) {
         Classroom classroom = classroomRepository.findById(classroomId)
                 .orElseThrow(() -> ClassroomNotFoundException.EXCEPTION);
         return classroomApplyRepository.findByClassroomAndStatus(classroom, status)

@@ -1,4 +1,4 @@
-package kr.pe.afterschool.global.security.lib;
+package kr.pe.afterschool.global.lib;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import kr.pe.afterschool.global.error.ErrorProperty;

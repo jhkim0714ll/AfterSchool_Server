@@ -12,11 +12,11 @@ public class ClassroomApplyResponse {
 
     private Long classroomUserId;
     private UserResponse student;
-    private ClassroomResponse classroomResponse;
+    private ClassroomResponse classroom;
 
     public ClassroomApplyResponse(ClassroomApply classroomApply) {
         this.classroomUserId = classroomApply.getId();
         this.student = new UserResponse(classroomApply.getStudent());
-        this.classroomResponse = new ClassroomResponse(classroomApply.getClassroom());
+        this.classroom = new ClassroomResponse(classroomApply.getClassroom());
     }
 }

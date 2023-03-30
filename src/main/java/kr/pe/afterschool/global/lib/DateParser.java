@@ -1,4 +1,4 @@
-package kr.pe.afterschool.global.security.lib;
+package kr.pe.afterschool.global.lib;
 
 import kr.pe.afterschool.global.error.exception.DateParserException;
 import org.springframework.stereotype.Component;

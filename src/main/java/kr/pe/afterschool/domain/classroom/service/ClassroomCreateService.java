@@ -5,7 +5,7 @@ import kr.pe.afterschool.domain.classroom.entity.repository.ClassroomRepository;
 import kr.pe.afterschool.domain.classroom.presentation.dto.request.ClassroomCreateRequest;
 import kr.pe.afterschool.domain.user.entity.User;
 import kr.pe.afterschool.domain.user.facade.UserFacade;
-import kr.pe.afterschool.global.security.lib.DateParser;
+import kr.pe.afterschool.global.lib.DateParser;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

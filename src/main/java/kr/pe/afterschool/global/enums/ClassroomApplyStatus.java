@@ -1,5 +1,5 @@
 package kr.pe.afterschool.global.enums;
 
-public enum ClassroomUserStatus {
+public enum ClassroomApplyStatus {
     ALLOWED, PENDING, DENIED
 }

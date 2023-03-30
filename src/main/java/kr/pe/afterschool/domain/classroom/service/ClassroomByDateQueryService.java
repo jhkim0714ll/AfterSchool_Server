@@ -2,7 +2,7 @@ package kr.pe.afterschool.domain.classroom.service;
 
 import kr.pe.afterschool.domain.classroom.entity.repository.ClassroomRepository;
 import kr.pe.afterschool.domain.classroom.presentation.dto.response.ClassroomResponse;
-import kr.pe.afterschool.global.security.lib.DateParser;
+import kr.pe.afterschool.global.lib.DateParser;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
