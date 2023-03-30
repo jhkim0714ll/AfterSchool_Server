@@ -2,7 +2,6 @@ package kr.pe.afterschool.domain.classroom.presentation.dto.response;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import kr.pe.afterschool.domain.classroom.entity.Classroom;
-import kr.pe.afterschool.domain.school.entity.School;
 import kr.pe.afterschool.domain.school.presentation.dto.response.SchoolResponse;
 import lombok.AccessLevel;
 import lombok.Getter;
