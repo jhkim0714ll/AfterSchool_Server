@@ -1,5 +1,6 @@
-package kr.pe.afterschool.domain.classroom.entity;
+package kr.pe.afterschool.domain.apply.entity;
 
+import kr.pe.afterschool.domain.classroom.entity.Classroom;
 import kr.pe.afterschool.domain.user.entity.User;
 import kr.pe.afterschool.global.enums.ClassroomApplyStatus;
 import lombok.AccessLevel;
@@ -11,9 +12,9 @@ import javax.persistence.*;
 
 @Getter
 @Entity
-@Table(name = "classroom_apply")
+@Table(name = "apply")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class ClassroomApply {
+public class Apply {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -36,7 +37,7 @@ public class ClassroomApply {
     }
 
     @Builder
-    public ClassroomApply(Classroom classroom, User student) {
+    public Apply(Classroom classroom, User student) {
         this.classroom = classroom;
         this.student = student;
         this.status = ClassroomApplyStatus.PENDING;

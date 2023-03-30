@@ -13,7 +13,7 @@ import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
-public class ClassroomByDateQueryService {
+public class ClassroomDateQueryService {
 
     private final ClassroomRepository classroomRepository;
     private final DateParser dateParser;

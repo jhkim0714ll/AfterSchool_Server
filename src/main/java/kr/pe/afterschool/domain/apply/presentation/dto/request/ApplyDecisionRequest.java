@@ -1,4 +1,4 @@
-package kr.pe.afterschool.domain.classroom.presentation.dto.request;
+package kr.pe.afterschool.domain.apply.presentation.dto.request;
 
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -8,7 +8,7 @@ import javax.validation.constraints.NotNull;
 
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class ClassroomDecisionRequest {
+public class ApplyDecisionRequest {
 
     @NotNull(message = "classroomId must not null")
     private Long classroomId;
