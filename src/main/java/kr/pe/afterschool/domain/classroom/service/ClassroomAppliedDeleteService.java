@@ -12,7 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
-public class ClassroomUserDeleteService {
+public class ClassroomAppliedDeleteService {
 
     private final ClassroomApplyRepository classroomApplyRepository;
     private final UserFacade userFacade;

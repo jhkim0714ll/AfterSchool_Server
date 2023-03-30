@@ -26,9 +26,9 @@ public class ClassroomController {
     private final ClassroomCreateService classroomCreateService;
     private final ClassroomEditService classroomEditService;
     private final ClassroomDeleteService classroomDeleteService;
-    private final ClassroomUserQueryService classroomUserQueryService;
+    private final ClassroomApplyQueryService classroomApplyQueryService;
     private final ClassroomApplyService classroomApplyService;
-    private final ClassroomUserDeleteService classroomUserDeleteService;
+    private final ClassroomAppliedDeleteService classroomAppliedDeleteService;
 
     @GetMapping("/{id}")
     public ResponseData<ClassroomResponse> getClassroomById(
@@ -94,7 +94,7 @@ public class ClassroomController {
             @RequestParam("classroomId") Long classroomId,
             @RequestParam("status") ClassroomUserStatus status
     ) {
-        List<ClassroomApplyResponse> response = classroomUserQueryService.execute(classroomId, status);
+        List<ClassroomApplyResponse> response = classroomApplyQueryService.execute(classroomId, status);
         return new ResponseData<>(
                 HttpStatus.OK,
                 "타입 값의 방과후 신청 유저 조회 성공",
@@ -117,7 +117,7 @@ public class ClassroomController {
     public Response deleteAppliedClassroom(
             @PathVariable Long classroomUserId
     ) {
-        classroomUserDeleteService.execute(classroomUserId);
+        classroomAppliedDeleteService.execute(classroomUserId);
         return new Response(
                 HttpStatus.OK,
                 "방과후 신청 내역 삭제"

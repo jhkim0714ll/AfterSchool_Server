@@ -15,7 +15,7 @@ import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
-public class ClassroomUserQueryService {
+public class ClassroomApplyQueryService {
 
     private final ClassroomRepository classroomRepository;
     private final ClassroomApplyRepository classroomApplyRepository;
