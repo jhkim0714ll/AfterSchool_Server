@@ -13,7 +13,7 @@ import java.io.IOException;
 
 @Component
 @RequiredArgsConstructor
-public class ErrorToJson {
+public class JsonParser {
     private final ObjectMapper objectMapper;
 
     public void errorToJson(ErrorProperty errorProperty, HttpServletResponse response) throws IOException {

@@ -9,7 +9,7 @@ import java.util.Random;
 @Component
 public class RandomNumber {
 
-    public int[] a(int size, int range) {
+    public int[] getArrayNumber(int size, int range) {
         Random random = new Random();
 
         int[] integerList = new int[size];
