@@ -2,7 +2,7 @@ package kr.pe.afterschool.global.security;
 
 import kr.pe.afterschool.global.filter.FilterConfig;
 import kr.pe.afterschool.global.filter.JwtTokenFilter;
-import kr.pe.afterschool.global.security.lib.ErrorToJson;
+import kr.pe.afterschool.global.lib.ErrorToJson;
 import kr.pe.afterschool.global.security.handler.CustomAccessDeniedHandler;
 import kr.pe.afterschool.global.security.handler.CustomAuthenticationEntryPoint;
 import kr.pe.afterschool.global.security.jwt.JwtTokenParser;
@@ -37,7 +37,7 @@ public class SecurityConfiguration {
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
         http
                 .authorizeRequests()
-                .antMatchers(HttpMethod.GET).hasAnyRole("TEACHER", "ADMIN", "STUDENT")
+//                .antMatchers(HttpMethod.GET).hasAnyRole("TEACHER", "ADMIN", "STUDENT")
                 .antMatchers("/school/**", "/classroom/**").hasAnyRole("TEACHER", "ADMIN")
                 .antMatchers("/auth/**").permitAll();
         http

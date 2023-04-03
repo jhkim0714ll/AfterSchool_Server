@@ -18,8 +18,8 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ClassroomController {
 
-    private final ClassroomByIdQueryService classroomByIdQueryService;
-    private final ClassroomByDateQueryService classroomByDateQueryService;
+    private final ClassroomIdQueryService classroomIdQueryService;
+    private final ClassroomDateQueryService classroomDateQueryService;
     private final ClassroomCreateService classroomCreateService;
     private final ClassroomEditService classroomEditService;
     private final ClassroomDeleteService classroomDeleteService;
@@ -28,7 +28,7 @@ public class ClassroomController {
     public ResponseData<ClassroomResponse> getClassroomById(
             @PathVariable Long id
     ) {
-        ClassroomResponse response = classroomByIdQueryService.execute(id);
+        ClassroomResponse response = classroomIdQueryService.execute(id);
         return new ResponseData<>(
                 HttpStatus.OK,
                 "해당 아이디의 방과후 조회 성공",
@@ -40,7 +40,7 @@ public class ClassroomController {
     public ResponseData<List<ClassroomResponse>> getClassroomByDate(
             @RequestParam("date") String date
     ) {
-        List<ClassroomResponse> response = classroomByDateQueryService.execute(date);
+        List<ClassroomResponse> response = classroomDateQueryService.execute(date);
         return new ResponseData<>(
                 HttpStatus.OK,
                 "해당 날짜 방과후 조회 성공",

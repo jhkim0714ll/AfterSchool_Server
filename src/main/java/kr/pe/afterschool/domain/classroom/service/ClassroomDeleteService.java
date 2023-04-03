@@ -6,7 +6,6 @@ import kr.pe.afterschool.domain.classroom.exception.ClassroomCannotManageExcepti
 import kr.pe.afterschool.domain.classroom.exception.ClassroomNotFoundException;
 import kr.pe.afterschool.domain.user.entity.User;
 import kr.pe.afterschool.domain.user.facade.UserFacade;
-import kr.pe.afterschool.global.enums.UserRole;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

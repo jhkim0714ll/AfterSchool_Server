@@ -18,6 +18,7 @@ import java.time.LocalDate;
 public class User {
 
     @Id
+    @Column(name = "user_id")
     private String email;
 
     @Column(nullable = false)
