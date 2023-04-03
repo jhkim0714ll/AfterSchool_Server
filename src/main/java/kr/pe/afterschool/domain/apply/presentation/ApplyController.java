@@ -5,7 +5,6 @@ import kr.pe.afterschool.domain.apply.presentation.dto.request.ApplyCreateReques
 import kr.pe.afterschool.domain.apply.presentation.dto.request.ApplyDecisionRequest;
 import kr.pe.afterschool.domain.apply.presentation.dto.response.ApplyResponse;
 import kr.pe.afterschool.global.enums.ApplyStatus;
-import kr.pe.afterschool.global.lib.ExcelDownload;
 import kr.pe.afterschool.global.response.Response;
 import kr.pe.afterschool.global.response.ResponseData;
 import lombok.RequiredArgsConstructor;
