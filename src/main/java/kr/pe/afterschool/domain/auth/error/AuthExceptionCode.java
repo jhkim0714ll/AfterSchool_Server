@@ -10,7 +10,7 @@ import lombok.Getter;
 public enum AuthExceptionCode implements ErrorProperty {
     PASSWORD_NOT_MATCH(400, "비밀번호가 틀렸습니다"),
     ALREADY_JOIN(403, "이미 가입된 아이디입니다"),
-    DO_NOT_JOIN(404, "가입하지 않았습니다"),
+    DO_NOT_JOIN(404, "가입하지 않은 아이디입니다"),
     ;
 
     private final int status;

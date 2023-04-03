@@ -37,8 +37,8 @@ public class SecurityConfiguration {
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
         http
                 .authorizeRequests()
-                .antMatchers(HttpMethod.GET).hasAnyRole("TEACHER", "ADMIN", "STUDENT")
-                .antMatchers("/school/**", "/classroom/**", "apply/decision/**").hasAnyRole("TEACHER", "ADMIN")
+//                .antMatchers(HttpMethod.GET).hasAnyRole("TEACHER", "ADMIN", "STUDENT")
+                .antMatchers("/school/**", "/classroom/**").hasAnyRole("TEACHER", "ADMIN")
                 .antMatchers("/auth/**").permitAll();
         http
                 .apply(new FilterConfig(jwtTokenParser, errorToJson));

@@ -5,6 +5,7 @@ import kr.pe.afterschool.domain.apply.presentation.dto.request.ApplyCreateReques
 import kr.pe.afterschool.domain.apply.presentation.dto.request.ApplyDecisionRequest;
 import kr.pe.afterschool.domain.apply.presentation.dto.response.ApplyResponse;
 import kr.pe.afterschool.global.enums.ApplyStatus;
+import kr.pe.afterschool.global.lib.ExcelDownload;
 import kr.pe.afterschool.global.response.Response;
 import kr.pe.afterschool.global.response.ResponseData;
 import lombok.RequiredArgsConstructor;
@@ -25,6 +26,7 @@ public class ApplyController {
     private final AppyDeleteService appyDeleteService;
     private final ApplyDecisionService applyDecisionService;
     private final ApplyRandomDecisionService applyRandomDecisionService;
+    private final ApplyExcelQueryService applyExcelQueryService;
 
     @GetMapping("/my")
     public ResponseData<List<ApplyResponse>> getMyApply() {
@@ -94,5 +96,12 @@ public class ApplyController {
                 HttpStatus.CREATED,
                 "방과후 신청 인원 추첨으로 결정 성공"
         );
+    }
+
+    @GetMapping("/excel/{schoolId}")
+    public void getApplierByExcel(
+            @PathVariable Long schoolId
+    ) {
+        applyExcelQueryService.execute(schoolId);
     }
 }
