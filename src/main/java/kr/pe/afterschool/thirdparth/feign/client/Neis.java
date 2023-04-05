@@ -1,21 +1,31 @@
 package kr.pe.afterschool.thirdparth.feign.client;
 
-import kr.pe.afterschool.domain.meal.presentation.dto.response.MealResponse;
-import org.springframework.cloud.openfeign.FeignClient;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import kr.pe.afterschool.thirdparth.feign.exception.OtherServerErrorException;
+import org.springframework.stereotype.Component;
 
-@FeignClient(value = "kaKaoAuth", url = "https://kauth.kakao.com")
-public interface Neis {
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.net.URL;
+import java.net.URLConnection;
 
-    @GetMapping
-    MealResponse getMeal(
-            @RequestParam("KEY") String key,
-            @RequestParam("Type") String type,
-            @RequestParam("pIndex") int pIndex,
-            @RequestParam("pSize") int pSize,
-            @RequestParam("ATPT_OFCDC_SC_CODE") String cityCode,
-            @RequestParam("SD_SCHUL_CODE") String schoolCode,
-            @RequestParam("MLSV_YMD") String ymdStr
-    );
+@Component
+public class Neis {
+
+    public String getMeal(String key, String type, int pIndex, int pSize, String cityCode, String schoolCode, String ymStr) {
+        String url = String.format(
+                "https://open.neis.go.kr/hub/mealServiceDietInfo?" +
+                "KEY=%s&Type=%s&pIndex=%d&pSize=%d&" +
+                "ATPT_OFCDC_SC_CODE=%s&SD_SCHUL_CODE=%s&MLSV_YMD=%s",
+                key, type, pIndex, pSize, cityCode, schoolCode, ymStr);
+        try {
+            URL uri = new URL(url);
+            URLConnection conn = uri.openConnection();
+
+            BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream(), "UTF-8"));
+
+            return br.readLine();
+        } catch (Exception e) {
+            throw OtherServerErrorException.EXCEPTION;
+        }
+    }
 }
