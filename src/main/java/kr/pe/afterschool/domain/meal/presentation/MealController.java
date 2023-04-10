@@ -1,11 +1,9 @@
 package kr.pe.afterschool.domain.meal.presentation;
 
 import kr.pe.afterschool.domain.meal.presentation.dto.response.MealResponse;
-import kr.pe.afterschool.domain.meal.presentation.dto.response.NeisMealServiceDietInfoResponse;
 import kr.pe.afterschool.domain.meal.service.MealBySchoolQueryService;
 import kr.pe.afterschool.global.response.ResponseData;
 import lombok.RequiredArgsConstructor;
-import org.springframework.boot.configurationprocessor.json.JSONObject;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -22,10 +20,10 @@ public class MealController {
     private final MealBySchoolQueryService mealBySchoolQueryService;
 
     @GetMapping("/{schoolId}")
-    public ResponseData<String> getMealBySchool(
+    public ResponseData<List<MealResponse> > getMealBySchool(
             @PathVariable Long schoolId
     ) {
-        String response = mealBySchoolQueryService.execute(schoolId);
+        List<MealResponse> response = mealBySchoolQueryService.execute(schoolId);
         return new ResponseData<>(
                 HttpStatus.OK,
                 "해당 학교 급식 조회 성공",

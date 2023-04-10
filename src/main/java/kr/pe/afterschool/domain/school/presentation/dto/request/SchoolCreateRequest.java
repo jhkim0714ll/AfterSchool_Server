@@ -14,6 +14,8 @@ public class SchoolCreateRequest {
     private String name;
     @NotEmpty(message = "address must not empty")
     private String address;
+    @NotEmpty(message = "educationOffice must not empty")
+    private String educationOffice;
     @NotEmpty(message = "home page must not empty")
     private String homePage;
     @NotEmpty(message = "phone must not empty")

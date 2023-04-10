@@ -16,7 +16,6 @@ import java.net.URLConnection;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 
-@Slf4j
 @Component
 @RequiredArgsConstructor
 public class Neis {
