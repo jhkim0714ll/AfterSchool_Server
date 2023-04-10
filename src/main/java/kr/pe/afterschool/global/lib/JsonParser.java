@@ -5,6 +5,7 @@ import kr.pe.afterschool.global.error.ErrorProperty;
 import kr.pe.afterschool.global.error.exception.InternalServerException;
 import kr.pe.afterschool.global.response.ResponseError;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.configurationprocessor.json.JSONArray;
 import org.springframework.boot.configurationprocessor.json.JSONObject;
 import org.springframework.http.HttpStatus;
@@ -14,6 +15,7 @@ import org.springframework.stereotype.Component;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+@Slf4j
 @Component
 @RequiredArgsConstructor
 public class JsonParser {

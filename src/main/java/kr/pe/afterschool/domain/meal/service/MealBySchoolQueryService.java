@@ -53,6 +53,10 @@ public class MealBySchoolQueryService {
 
                 if (school.getName().equals(schoolResponse.getSCHUL_NM()) && school.getEducationOffice().equals(schoolResponse.getATPT_OFCDC_SC_NM())) {
                     String mealInfo = neis.getMealInfo(schoolResponse.getATPT_OFCDC_SC_CODE(), schoolResponse.getSD_SCHUL_CODE(), yearStr + monthStr);
+                    if (mealInfo.contains("INFO-200")) {
+                        return new ArrayList<>();
+                    }
+
                     mealRow = jsonParser.StringToJSONArrayOfRow(mealInfo, "mealServiceDietInfo");
                 }
             }
@@ -64,8 +68,7 @@ public class MealBySchoolQueryService {
 
             List<MealResponse> mealResponse = new ArrayList<>();
 
-            LocalDate date = LocalDate.now();
-            YearMonth month = YearMonth.from(date);
+            YearMonth month = YearMonth.from(now);
             LocalDate lastDate = month.atEndOfMonth();
 
             for (int i = 0; i < lastDate.getDayOfMonth(); i++) {
