@@ -23,6 +23,7 @@ public class SchoolEditService {
         school.editSchoolData(
                 request.getName() == null ? school.getName() : request.getName(),
                 request.getAddress() == null ? school.getAddress() : request.getAddress(),
+                request.getEducationOffice() == null ? school.getEducationOffice() : request.getEducationOffice(),
                 request.getHomePage() == null ? school.getHomePage() : request.getHomePage(),
                 request.getPhone() == null ? school.getPhone() : request.getPhone());
         schoolRepository.save(school);

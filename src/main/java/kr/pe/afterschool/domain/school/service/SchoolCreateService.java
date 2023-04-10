@@ -26,6 +26,7 @@ public class SchoolCreateService {
         School school = School.builder()
                 .name(request.getName())
                 .address(request.getAddress())
+                .educationOffice(request.getEducationOffice())
                 .homePage(request.getHomePage())
                 .phone(request.getPhone())
                 .teacher(user)

@@ -12,6 +12,7 @@ public enum GlobalExceptionCode implements ErrorProperty {
     EXPIRED_TOKEN(401, "Token Expired"),
     INVALID_TOKEN(401, "Token Invalid"),
     NO_AUTHENTICATION(403, "No Authenticate"),
+    ENCODE_FAILED(500, "인코딩 실패"),
     INTERNAL_SERVER_ERROR(500, "Internal Server Error")
     ;
 

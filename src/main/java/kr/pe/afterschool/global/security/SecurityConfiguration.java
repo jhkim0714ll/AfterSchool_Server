@@ -2,14 +2,13 @@ package kr.pe.afterschool.global.security;
 
 import kr.pe.afterschool.global.filter.FilterConfig;
 import kr.pe.afterschool.global.filter.JwtTokenFilter;
-import kr.pe.afterschool.global.lib.ErrorToJson;
+import kr.pe.afterschool.global.lib.JsonParser;
 import kr.pe.afterschool.global.security.handler.CustomAccessDeniedHandler;
 import kr.pe.afterschool.global.security.handler.CustomAuthenticationEntryPoint;
 import kr.pe.afterschool.global.security.jwt.JwtTokenParser;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
@@ -24,7 +23,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 public class SecurityConfiguration {
 
     private final JwtTokenParser jwtTokenParser;
-    private final ErrorToJson errorToJson;
+    private final JsonParser jsonParser;
     private final CustomAuthenticationEntryPoint customAuthenticationEntryPoint;
     private final CustomAccessDeniedHandler customAccessDeniedHandler;
 
@@ -41,7 +40,7 @@ public class SecurityConfiguration {
                 .antMatchers("/school/**", "/classroom/**").hasAnyRole("TEACHER", "ADMIN")
                 .antMatchers("/auth/**").permitAll();
         http
-                .apply(new FilterConfig(jwtTokenParser, errorToJson));
+                .apply(new FilterConfig(jwtTokenParser, jsonParser));
         http
                 .addFilterBefore(new JwtTokenFilter(jwtTokenParser), UsernamePasswordAuthenticationFilter.class)
                 .exceptionHandling()

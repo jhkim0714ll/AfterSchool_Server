@@ -10,6 +10,7 @@ public class SchoolEditRequest {
 
     private String name;
     private String address;
+    private String educationOffice;
     private String homePage;
     private String phone;
 }

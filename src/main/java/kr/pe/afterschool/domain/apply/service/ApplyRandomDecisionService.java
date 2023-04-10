@@ -34,7 +34,7 @@ public class ApplyRandomDecisionService {
 
         int peopleLimit = applyList.size() < request.getPeopleLimit() ? applyList.size() : request.getPeopleLimit();
 
-        int[] applyNumberList = randomNumber.a(peopleLimit, applyList.size());
+        int[] applyNumberList = randomNumber.getArrayNumber(peopleLimit, applyList.size());
         for (int i : applyNumberList) {
             applyList.get(i).editStatus(ApplyStatus.ALLOWED);
         }

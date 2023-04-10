@@ -26,6 +26,9 @@ public class School {
     private String address;
 
     @Column(nullable = false)
+    private String educationOffice;
+
+    @Column(nullable = false)
     private String homePage;
 
     @Column(nullable = false)
@@ -35,17 +38,19 @@ public class School {
     @JoinColumn(name = "fk_teacher_id")
     private User teacher;
 
-    public void editSchoolData(String name, String address, String homePage, String phone) {
+    public void editSchoolData(String name, String address, String educationOffice, String homePage, String phone) {
         this.name = name;
         this.address = address;
+        this.educationOffice = educationOffice;
         this.homePage = homePage;
         this.phone = phone;
     }
 
     @Builder
-    public School(String name, String address, String homePage, String phone, User teacher) {
+    public School(String name, String address, String educationOffice,String homePage, String phone, User teacher) {
         this.name = name;
         this.address = address;
+        this.educationOffice = educationOffice;
         this.homePage = homePage;
         this.phone = phone;
         this.teacher = teacher;

@@ -18,6 +18,15 @@ public class DateParser {
         }
     }
 
+    public LocalDate parseStringToDate(String yearStr, String monthStr, String dayStr) {
+        try {
+            return LocalDate.parse(yearStr + "-" + monthStr + "-" + dayStr, DateTimeFormatter.ISO_DATE);
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw DateParserException.EXCEPTION;
+        }
+    }
+
     public String parseWeekToKoreanWeek(DayOfWeek week) {
         switch (week) {
             case MONDAY:
