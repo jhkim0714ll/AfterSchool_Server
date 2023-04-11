@@ -1,8 +1,9 @@
 package kr.pe.afterschool.domain.survey.presentation;
 
-import kr.pe.afterschool.domain.survey.presentation.dto.request.SurveyCreateRequest;
-import kr.pe.afterschool.domain.survey.presentation.dto.request.SurveyEditRequest;
-import kr.pe.afterschool.domain.survey.presentation.dto.response.SurveyResponse;
+import kr.pe.afterschool.domain.survey.presentation.dto.request.AnswerCreateRequest;
+import kr.pe.afterschool.domain.survey.presentation.dto.request.AnswerEditRequest;
+import kr.pe.afterschool.domain.survey.presentation.dto.request.QuestionCreateRequest;
+import kr.pe.afterschool.domain.survey.presentation.dto.response.AnswerResponse;
 import kr.pe.afterschool.domain.survey.service.*;
 import kr.pe.afterschool.global.response.Response;
 import kr.pe.afterschool.global.response.ResponseData;
@@ -21,15 +22,16 @@ public class SurveyController {
     private final SurveyByClassroomQueryService surveyByClassroomQueryService;
     private final SurveyQueryService surveyQueryService;
     private final MySurveyQueryService mySurveyQueryService;
-    private final SurveyCreateService surveyCreateService;
-    private final SurveyEditService surveyEditService;
-    private final SurveyExcelQueryService surveyExcelQueryService;
+    private final SurveyQuestionCreateService surveyQuestionCreateService;
+    private final SurveyAnswerCreateService surveyAnswerCreateService;
+    private final SurveyAnswerEditService surveyAnswerEditService;
+    private final SurveyAnswerExcelQueryService surveyAnswerExcelQueryService;
 
     @GetMapping
-    public ResponseData<List<SurveyResponse>> getSurveyByClassroom(
+    public ResponseData<List<AnswerResponse>> getSurveyByClassroom(
             @RequestParam("classroomId") Long classroomId
     ) {
-        List<SurveyResponse> response = surveyByClassroomQueryService.execute(classroomId);
+        List<AnswerResponse> response = surveyByClassroomQueryService.execute(classroomId);
         return new ResponseData<>(
                 HttpStatus.OK,
                 "방과후 별 설문조사 조회 성공",
@@ -38,10 +40,10 @@ public class SurveyController {
     }
 
     @GetMapping("/{surveyId}")
-    public ResponseData<SurveyResponse> getSurveyById(
+    public ResponseData<AnswerResponse> getSurveyById(
             @PathVariable Long surveyId
     ) {
-        SurveyResponse response = surveyQueryService.execute(surveyId);
+        AnswerResponse response = surveyQueryService.execute(surveyId);
         return new ResponseData<>(
                 HttpStatus.OK,
                 "방과후 별 설문조사 조회 성공",
@@ -50,8 +52,8 @@ public class SurveyController {
     }
 
     @GetMapping("/my")
-    public ResponseData<List<SurveyResponse>> getMySurvey() {
-        List<SurveyResponse> response = mySurveyQueryService.execute();
+    public ResponseData<List<AnswerResponse>> getMySurvey() {
+        List<AnswerResponse> response = mySurveyQueryService.execute();
         return new ResponseData<>(
                 HttpStatus.OK,
                 "방과후 별 설문조사 조회 성공",
@@ -61,25 +63,37 @@ public class SurveyController {
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
-    public Response createSurvey(
-            @RequestBody @Valid SurveyCreateRequest request
+    public Response createSurveyQuestion(
+            @RequestBody @Valid QuestionCreateRequest request
     ) {
-        surveyCreateService.execute(request);
+        surveyQuestionCreateService.execute(request);
         return new Response(
                 HttpStatus.CREATED,
                 "설문조사 생성 성공"
         );
     }
 
-    @PatchMapping("/{surveyId}")
-    public Response editSurvey(
-            @PathVariable Long surveyId,
-            @RequestBody SurveyEditRequest request
+    @ResponseStatus(HttpStatus.CREATED)
+    @PostMapping
+    public Response createSurveyAnswer(
+            @RequestBody @Valid AnswerCreateRequest request
     ) {
-        surveyEditService.execute(surveyId, request);
+        surveyAnswerCreateService.execute(request);
         return new Response(
                 HttpStatus.CREATED,
-                "설문조사 생성 성공"
+                "설문조사의 대답 생성 성공"
+        );
+    }
+
+    @PatchMapping("/{surveyId}")
+    public Response editSurveyAnswer(
+            @PathVariable Long surveyId,
+            @RequestBody AnswerEditRequest request
+    ) {
+        surveyAnswerEditService.execute(surveyId, request);
+        return new Response(
+                HttpStatus.OK,
+                "설문조사의 대답 수정 성공"
         );
     }
 
@@ -88,6 +102,6 @@ public class SurveyController {
             @RequestParam(value = "schoolId", required = false) Long schoolId,
             @RequestParam(value = "classroomId", required = false) Long classroomId
     ) {
-        surveyExcelQueryService.execute(schoolId, classroomId);
+        surveyAnswerExcelQueryService.execute(schoolId, classroomId);
     }
 }

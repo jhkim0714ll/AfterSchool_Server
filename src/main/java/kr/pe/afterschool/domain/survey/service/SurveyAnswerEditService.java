@@ -1,10 +1,10 @@
 package kr.pe.afterschool.domain.survey.service;
 
-import kr.pe.afterschool.domain.survey.entity.Survey;
-import kr.pe.afterschool.domain.survey.entity.repository.SurveyRepository;
+import kr.pe.afterschool.domain.survey.entity.Answer;
+import kr.pe.afterschool.domain.survey.entity.repository.AnswerRepository;
 import kr.pe.afterschool.domain.survey.exception.SurveyCannotManageException;
 import kr.pe.afterschool.domain.survey.exception.SurveyNotFoundException;
-import kr.pe.afterschool.domain.survey.presentation.dto.request.SurveyEditRequest;
+import kr.pe.afterschool.domain.survey.presentation.dto.request.AnswerEditRequest;
 import kr.pe.afterschool.domain.user.entity.User;
 import kr.pe.afterschool.domain.user.facade.UserFacade;
 import lombok.RequiredArgsConstructor;
@@ -15,23 +15,23 @@ import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
-public class SurveyEditService {
+public class SurveyAnswerEditService {
 
-    private final SurveyRepository surveyRepository;
+    private final AnswerRepository answerRepository;
     private final UserFacade userFacade;
 
     @Transactional
-    public void execute(Long surveyId, SurveyEditRequest request) {
+    public void execute(Long surveyId, AnswerEditRequest request) {
         User user = userFacade.getCurrentUser();
-        Survey survey = surveyRepository.findById(surveyId)
+        Answer answer = answerRepository.findById(surveyId)
                 .orElseThrow(() -> SurveyNotFoundException.EXCEPTION);
-        if (user != survey.getStudent()) {
+        if (user != answer.getStudent()) {
             throw SurveyCannotManageException.EXCEPTION;
         }
 
         String contents = request.getContent()
                 .stream().map(String::valueOf).collect(Collectors.joining("::"));
-        survey.editSurvey(contents);
-        surveyRepository.save(survey);
+        answer.editSurvey(contents);
+        answerRepository.save(answer);
     }
 }

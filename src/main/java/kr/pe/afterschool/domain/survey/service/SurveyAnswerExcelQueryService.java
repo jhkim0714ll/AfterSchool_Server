@@ -6,8 +6,8 @@ import kr.pe.afterschool.domain.classroom.exception.ClassroomNotFoundException;
 import kr.pe.afterschool.domain.school.entity.School;
 import kr.pe.afterschool.domain.school.entity.repository.SchoolRepository;
 import kr.pe.afterschool.domain.school.exception.SchoolNotFoundException;
-import kr.pe.afterschool.domain.survey.entity.Survey;
-import kr.pe.afterschool.domain.survey.entity.repository.SurveyRepository;
+import kr.pe.afterschool.domain.survey.entity.Answer;
+import kr.pe.afterschool.domain.survey.entity.repository.AnswerRepository;
 import kr.pe.afterschool.domain.survey.exception.SurveyNotFoundException;
 import kr.pe.afterschool.global.lib.DateParser;
 import kr.pe.afterschool.global.lib.ExcelDownload;
@@ -26,9 +26,9 @@ import java.util.List;
 @Slf4j
 @Service
 @RequiredArgsConstructor
-public class SurveyExcelQueryService {
+public class SurveyAnswerExcelQueryService {
 
-    private final SurveyRepository surveyRepository;
+    private final AnswerRepository answerRepository;
     private final SchoolRepository schoolRepository;
     private final ClassroomRepository classroomRepository;
     private final ExcelDownload excelDownload;
@@ -84,14 +84,14 @@ public class SurveyExcelQueryService {
         row = classroomSheet.createRow(schoolSheetRowNum++);
 
         excelDownload.createCell(row, classroomSheetTitle);
-        List<Survey> surveyList = surveyRepository.findByClassroom(classroom);
-        for (Survey survey : surveyList) {
-            String[] surveyContent = survey.getContent().split("::");
+        List<Answer> answerList = answerRepository.findByClassroom(classroom);
+        for (Answer answer : answerList) {
+            String[] surveyContent = answer.getAnswer().split("::");
             List<Object> surveyListCell = new ArrayList<>(Arrays.asList(
-                    survey.getStudent().getGrade(),
-                    survey.getStudent().getRoom(),
-                    survey.getStudent().getNumber(),
-                    survey.getStudent().getName(),
+                    answer.getStudent().getGrade(),
+                    answer.getStudent().getRoom(),
+                    answer.getStudent().getNumber(),
+                    answer.getStudent().getName(),
                     surveyContent[0],
                     surveyContent[1],
                     surveyContent[2],

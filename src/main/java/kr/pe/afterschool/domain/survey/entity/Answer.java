@@ -13,9 +13,9 @@ import java.time.LocalDate;
 
 @Getter
 @Entity
-@Table(name = "survey")
+@Table(name = "answer")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Survey {
+public class Answer {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,7 +23,7 @@ public class Survey {
     private Long id;
 
     @Column(nullable = false)
-    private String content;
+    private String answer;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "fk_student_id")
@@ -38,12 +38,12 @@ public class Survey {
     private LocalDate createdDate;
 
     public void editSurvey(String content) {
-        this.content = content;
+        this.answer = content;
     }
 
     @Builder
-    public Survey(String content, User student, Classroom classroom) {
-        this.content = content;
+    public Answer(String answer, User student, Classroom classroom) {
+        this.answer = answer;
         this.student = student;
         this.classroom = classroom;
         this.createdDate = LocalDate.now();
