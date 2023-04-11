@@ -37,6 +37,10 @@ public class Survey {
     @Column(nullable = false)
     private LocalDate createdDate;
 
+    public void editSurvey(String content) {
+        this.content = content;
+    }
+
     @Builder
     public Survey(String content, User student, Classroom classroom) {
         this.content = content;
