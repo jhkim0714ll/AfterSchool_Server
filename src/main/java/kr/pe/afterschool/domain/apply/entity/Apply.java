@@ -7,8 +7,10 @@ import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.springframework.data.annotation.CreatedDate;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 
 @Getter
 @Entity
@@ -33,6 +35,10 @@ public class Apply {
     @Column(nullable = false)
     private ApplyStatus status;
 
+    @CreatedDate
+    @Column(nullable = false)
+    private LocalDate createdDate;
+
     public void editStatus(ApplyStatus status) {
         this.status = status;
     }
@@ -42,5 +48,6 @@ public class Apply {
         this.classroom = classroom;
         this.student = student;
         this.status = ApplyStatus.PENDING;
+        this.createdDate = LocalDate.now();
     }
 }
