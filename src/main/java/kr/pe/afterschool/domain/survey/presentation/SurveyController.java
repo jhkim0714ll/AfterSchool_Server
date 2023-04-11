@@ -2,10 +2,7 @@ package kr.pe.afterschool.domain.survey.presentation;
 
 import kr.pe.afterschool.domain.survey.presentation.dto.request.SurveyCreateRequest;
 import kr.pe.afterschool.domain.survey.presentation.dto.response.SurveyResponse;
-import kr.pe.afterschool.domain.survey.service.MySurveyQueryService;
-import kr.pe.afterschool.domain.survey.service.SurveyByClassroomQueryService;
-import kr.pe.afterschool.domain.survey.service.SurveyCreateService;
-import kr.pe.afterschool.domain.survey.service.SurveyQueryService;
+import kr.pe.afterschool.domain.survey.service.*;
 import kr.pe.afterschool.global.response.Response;
 import kr.pe.afterschool.global.response.ResponseData;
 import lombok.RequiredArgsConstructor;
@@ -23,6 +20,7 @@ public class SurveyController {
     private final SurveyQueryService surveyQueryService;
     private final MySurveyQueryService mySurveyQueryService;
     private final SurveyCreateService surveyCreateService;
+    private final SurveyExcelQueryService surveyExcelQueryService;
 
     @GetMapping
     public ResponseData<List<SurveyResponse>> getSurveyByClassroom(
@@ -67,5 +65,13 @@ public class SurveyController {
                 HttpStatus.CREATED,
                 "설문조사 생성 성공"
         );
+    }
+
+    @GetMapping("/excel")
+    public void getSurveyByExcel(
+            @RequestParam(value = "schoolId", required = false) Long schoolId,
+            @RequestParam(value = "classroomId", required = false) Long classroomId
+    ) {
+        surveyExcelQueryService.execute(schoolId, classroomId);
     }
 }

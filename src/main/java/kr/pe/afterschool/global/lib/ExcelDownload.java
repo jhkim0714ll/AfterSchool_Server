@@ -15,9 +15,8 @@ public class ExcelDownload {
 
     private final HttpServletResponse response;
 
-    public void outStream(Workbook workbook, String schoolName) {
+    public void outStream(Workbook workbook, String fileName) {
         try {
-            String fileName = schoolName+ "학교 방과후 신청자.xlsx";
             String outputFileName = new String(fileName.getBytes("KSC5601"), "8859_1");
             response.setHeader("Content-Disposition", "attachment; fileName=\"" + outputFileName + "\"");
 
