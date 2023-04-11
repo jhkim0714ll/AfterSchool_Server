@@ -37,7 +37,7 @@ public class SecurityConfiguration {
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
         http
                 .authorizeRequests()
-//                .antMatchers("/survey/**").hasAnyRole("STUDENT", "TEACHER", "ADMIN")
+                .antMatchers("/survey/**").hasAnyRole("STUDENT", "TEACHER", "ADMIN")
                 .antMatchers(HttpMethod.GET, "/apply/**").hasAnyRole("STUDENT", "TEACHER", "ADMIN")
                 .antMatchers(HttpMethod.POST, "/school/**", "/classroom/**").hasAnyRole("TEACHER", "ADMIN")
                 .antMatchers(HttpMethod.PATCH, "/school/**", "/classroom/**").hasAnyRole("TEACHER", "ADMIN")
