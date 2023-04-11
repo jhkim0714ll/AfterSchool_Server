@@ -2,10 +2,12 @@ package kr.pe.afterschool.domain.apply.service;
 
 import kr.pe.afterschool.domain.apply.entity.Apply;
 import kr.pe.afterschool.domain.apply.entity.repository.ApplyRepository;
+import kr.pe.afterschool.domain.apply.exception.AlreadyDecisionException;
 import kr.pe.afterschool.domain.apply.exception.ApplyNotFoundException;
 import kr.pe.afterschool.domain.classroom.exception.ClassroomCannotManageException;
 import kr.pe.afterschool.domain.user.entity.User;
 import kr.pe.afterschool.domain.user.facade.UserFacade;
+import kr.pe.afterschool.global.enums.ApplyStatus;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -24,6 +26,9 @@ public class AppyDeleteService {
                 .orElseThrow(() -> ApplyNotFoundException.EXCEPTION);
         if (user != apply.getStudent()) {
             throw ClassroomCannotManageException.EXCEPTION;
+        }
+        if (apply.getStatus().equals(ApplyStatus.ALLOWED)) {
+            throw AlreadyDecisionException.EXCEPTION;
         }
         applyRepository.delete(apply);
     }

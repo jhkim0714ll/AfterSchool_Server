@@ -15,9 +15,8 @@ public class ExcelDownload {
 
     private final HttpServletResponse response;
 
-    public void outStream(Workbook workbook, String schoolName) {
+    public void outStream(Workbook workbook, String fileName) {
         try {
-            String fileName = schoolName+ "학교 방과후 신청자.xlsx";
             String outputFileName = new String(fileName.getBytes("KSC5601"), "8859_1");
             response.setHeader("Content-Disposition", "attachment; fileName=\"" + outputFileName + "\"");
 
@@ -32,13 +31,11 @@ public class ExcelDownload {
         return new XSSFWorkbook();
     }
 
-    public Sheet createSheet(Workbook workbook, String sheetName) {
+    public Sheet createSheet(Workbook workbook, String sheetName, int columnIndex) {
         Sheet sheet =  workbook.createSheet(sheetName);
-        sheet.setColumnWidth(0, (short) 6000);
-        sheet.setColumnWidth(1, (short) 6000);
-        sheet.setColumnWidth(2, (short) 6000);
-        sheet.setColumnWidth(3, (short) 6000);
-        sheet.setColumnWidth(4, (short) 6000);
+        for (int i = 0; i < columnIndex; i++) {
+            sheet.setColumnWidth(i, (short) 6000);
+        }
         return sheet;
     }
 

@@ -1,5 +1,6 @@
 package kr.pe.afterschool.domain.apply.service;
 
+import kr.pe.afterschool.domain.apply.exception.TimeOverException;
 import kr.pe.afterschool.domain.classroom.entity.Classroom;
 import kr.pe.afterschool.domain.apply.entity.Apply;
 import kr.pe.afterschool.domain.classroom.entity.repository.ClassroomRepository;
@@ -12,6 +13,8 @@ import kr.pe.afterschool.domain.user.facade.UserFacade;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.time.LocalDate;
 
 @Service
 @RequiredArgsConstructor
@@ -26,6 +29,10 @@ public class ApplyCreateService {
         User user = userFacade.getCurrentUser();
         Classroom classroom = classroomRepository.findById(request.getClassroomId())
                 .orElseThrow(() -> ClassroomNotFoundException.EXCEPTION);
+
+        if (classroom.getEndDate().isAfter(LocalDate.now())) {
+            throw TimeOverException.EXCEPTION;
+        }
 
         int applyNumber = applyRepository.findByClassroom(classroom).size();
         if (classroom.getPeopleLimit() <= applyNumber) {
