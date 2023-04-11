@@ -14,7 +14,7 @@ import java.time.LocalDate;
 
 @Getter
 @Entity
-@Table(name = "classroom")
+@Table(name = "post")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Post {
 

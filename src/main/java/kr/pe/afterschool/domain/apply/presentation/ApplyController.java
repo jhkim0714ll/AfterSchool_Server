@@ -9,6 +9,7 @@ import kr.pe.afterschool.global.response.Response;
 import kr.pe.afterschool.global.response.ResponseData;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -23,8 +24,9 @@ public class ApplyController {
     private final ApplyStatusQueryService applyStatusQueryService;
     private final ApplyCreateService applyCreateService;
     private final AppyDeleteService appyDeleteService;
-    private final ApplyDecisionService applyDecisionService;
+    private final ApplyClassroomDecisionService applyClassroomDecisionService;
     private final ApplyRandomDecisionService applyRandomDecisionService;
+    private final ApplyByIdDecisionService applyByIdDecisionService;
     private final ApplyExcelQueryService applyExcelQueryService;
 
     @GetMapping("/my")
@@ -74,11 +76,11 @@ public class ApplyController {
     }
 
     @ResponseStatus(HttpStatus.CREATED)
-    @PostMapping("/decision/{classroomId}")
+    @PostMapping("/decision/classroom/{classroomId}")
     public Response decideApply(
             @PathVariable Long classroomId
     ) {
-        applyDecisionService.execute(classroomId);
+        applyClassroomDecisionService.execute(classroomId);
         return new Response(
                 HttpStatus.CREATED,
                 "방과후 신청 인원 결정 성공"
@@ -94,6 +96,18 @@ public class ApplyController {
         return new Response(
                 HttpStatus.CREATED,
                 "방과후 신청 인원 추첨으로 결정 성공"
+        );
+    }
+
+    @PatchMapping("/decision")
+    public Response decideApplyById(
+            @RequestParam("applyId") Long applyId,
+            @RequestParam("status") ApplyStatus status
+    ) {
+        applyByIdDecisionService.execute(applyId, status);
+        return new Response(
+                HttpStatus.OK,
+                "해당 아이디의 방과후 신청으로 결정 성공"
         );
     }
 

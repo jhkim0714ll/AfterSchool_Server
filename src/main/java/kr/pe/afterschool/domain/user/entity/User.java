@@ -30,10 +30,13 @@ public class User {
     @Column(nullable = false)
     private String phone;
 
+    @Column(nullable = true)
     private int grade;
 
+    @Column(nullable = true)
     private int room;
 
+    @Column(nullable = true)
     private int number;
 
     @Enumerated(EnumType.STRING)
