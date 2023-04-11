@@ -15,6 +15,7 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -30,14 +31,15 @@ public class ApplyExcelQueryService {
     private final ExcelDownload excelDownload;
     private final DateParser dateParser;
 
+    @Transactional(readOnly = true)
     public void execute(Long schoolId) {
         Row row;
         int sheetRowNum = 0;
-        int classroomSheetRowNum = 0;
+        int classroomSheetRowNum;
         Workbook workbook = excelDownload.createWorkbook();
 
         //전체 방과후 시트
-        Sheet sheet = excelDownload.createSheet(workbook, "전체 방과후 내역");
+        Sheet sheet = excelDownload.createSheet(workbook, "전체 방과후 내역", 5);
         List<Object> sheetTitle = new ArrayList<>(Arrays.asList("고유 번호", "방과후 이름", "담당 선생님", "요일", "신청인원"));
 
         row = sheet.createRow(sheetRowNum++);
@@ -61,7 +63,7 @@ public class ApplyExcelQueryService {
 
             //방과후 신청자 시트
             classroomSheetRowNum = 0;
-            Sheet classroomSheet = excelDownload.createSheet(workbook, classroom.getName() + " 방과후 신청자 내역");
+            Sheet classroomSheet = excelDownload.createSheet(workbook, classroom.getName() + " 방과후 신청자 내역", 5);
             List<Object> classroomSheetTitle = new ArrayList<>(Arrays.asList("고유 번호", "학년", "반", "번호", "이름"));
 
             row = classroomSheet.createRow(classroomSheetRowNum++);
@@ -77,13 +79,13 @@ public class ApplyExcelQueryService {
                 row = classroomSheet.createRow(classroomSheetRowNum++);
                 excelDownload.createCell(row, contentOfApplierList); //방과후 신청자 시트의 모든 신청자 셀을 만듬
 
-                List<Object> applyListSize = new ArrayList<>(Arrays.asList(
+                List<Object> applyListCell = new ArrayList<>(Arrays.asList(
                         "총 인원" ,
                         applyList.size()));
                 row = classroomSheet.createRow(classroomSheetRowNum+=2);
-                excelDownload.createCell(row, applyListSize);
+                excelDownload.createCell(row, applyListCell);
             }
         }
-        excelDownload.outStream(workbook, school.getName());
+        excelDownload.outStream(workbook, school.getName() + "학교 방과후 신청자 리스트.xlsx");
     }
 }

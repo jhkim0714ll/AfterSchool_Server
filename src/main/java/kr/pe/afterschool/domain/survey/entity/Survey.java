@@ -1,8 +1,7 @@
-package kr.pe.afterschool.domain.apply.entity;
+package kr.pe.afterschool.domain.survey.entity;
 
 import kr.pe.afterschool.domain.classroom.entity.Classroom;
 import kr.pe.afterschool.domain.user.entity.User;
-import kr.pe.afterschool.global.enums.ApplyStatus;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
@@ -14,40 +13,39 @@ import java.time.LocalDate;
 
 @Getter
 @Entity
-@Table(name = "apply")
+@Table(name = "survey")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Apply {
+public class Survey {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "apply_id")
+    @Column(name = "survey_id")
     private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "fk_classroom_id")
-    private Classroom classroom;
+    @Column(nullable = false)
+    private String content;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "fk_student_id")
     private User student;
 
-    @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
-    private ApplyStatus status;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "fk_classroom_id")
+    private Classroom classroom;
 
     @CreatedDate
     @Column(nullable = false)
     private LocalDate createdDate;
 
-    public void editStatus(ApplyStatus status) {
-        this.status = status;
+    public void editSurvey(String content) {
+        this.content = content;
     }
 
     @Builder
-    public Apply(Classroom classroom, User student) {
-        this.classroom = classroom;
+    public Survey(String content, User student, Classroom classroom) {
+        this.content = content;
         this.student = student;
-        this.status = ApplyStatus.PENDING;
+        this.classroom = classroom;
         this.createdDate = LocalDate.now();
     }
 }
