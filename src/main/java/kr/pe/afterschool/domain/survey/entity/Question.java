@@ -24,16 +24,16 @@ public class Question {
     private String questions;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "fk_school_id")
-    private School school;
+    @JoinColumn(name = "fk_classroom_id")
+    private Classroom classroom;
 
     public void editQuestion(String questions) {
         this.questions = questions;
     }
 
     @Builder
-    public Question(String questions, School school) {
+    public Question(String questions, Classroom classroom) {
         this.questions = questions;
-        this.school = school;
+        this.classroom = classroom;
     }
 }

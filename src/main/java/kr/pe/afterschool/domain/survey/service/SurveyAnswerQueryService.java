@@ -9,14 +9,14 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
-public class SurveyQueryService {
+public class SurveyAnswerQueryService {
 
     private final AnswerRepository answerRepository;
 
     @Transactional(readOnly = true)
-    public AnswerResponse execute(Long surveyId) {
+    public AnswerResponse execute(Long answerId) {
         return new AnswerResponse(
-                answerRepository.findById(surveyId)
+                answerRepository.findById(answerId)
                 .orElseThrow(() -> AnswerNotFoundException.EXCEPTION)
         );
     }

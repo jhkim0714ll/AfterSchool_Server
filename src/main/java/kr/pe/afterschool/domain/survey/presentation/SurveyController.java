@@ -5,6 +5,7 @@ import kr.pe.afterschool.domain.survey.presentation.dto.request.AnswerEditReques
 import kr.pe.afterschool.domain.survey.presentation.dto.request.QuestionCreateRequest;
 import kr.pe.afterschool.domain.survey.presentation.dto.request.QuestionEditRequest;
 import kr.pe.afterschool.domain.survey.presentation.dto.response.AnswerResponse;
+import kr.pe.afterschool.domain.survey.presentation.dto.response.QuestionResponse;
 import kr.pe.afterschool.domain.survey.service.*;
 import kr.pe.afterschool.global.response.Response;
 import kr.pe.afterschool.global.response.ResponseData;
@@ -20,48 +21,28 @@ import java.util.List;
 @RequiredArgsConstructor
 public class SurveyController {
 
-    private final SurveyByClassroomQueryService surveyByClassroomQueryService;
-    private final SurveyQueryService surveyQueryService;
-    private final MySurveyQueryService mySurveyQueryService;
+    private final SurveyQuestionQueryService surveyQuestionQueryService;
     private final SurveyQuestionCreateService surveyQuestionCreateService;
     private final SurveyQuestionEditService surveyQuestionEditService;
+    private final SurveyAnswerByClassroomQueryService surveyAnswerByClassroomQueryService;
+    private final SurveyAnswerQueryService surveyAnswerQueryService;
+    private final MySurveyAnswerQueryService mySurveyAnswerQueryService;
     private final SurveyAnswerCreateService surveyAnswerCreateService;
     private final SurveyAnswerEditService surveyAnswerEditService;
     private final SurveyAnswerExcelQueryService surveyAnswerExcelQueryService;
 
-    @GetMapping
-    public ResponseData<List<AnswerResponse>> getSurveyByClassroom(
-            @RequestParam("classroomId") Long classroomId
+    @GetMapping("/question/{classroomId}")
+    public ResponseData<List<QuestionResponse>> getQuestionByClassroom(
+            @PathVariable Long classroomId
     ) {
-        List<AnswerResponse> response = surveyByClassroomQueryService.execute(classroomId);
+        List<QuestionResponse> response = surveyQuestionQueryService.execute(classroomId);
         return new ResponseData<>(
                 HttpStatus.OK,
-                "방과후 별 설문조사 조회 성공",
+                "해당 설문조사의 질문 조회 성공",
                 response
         );
     }
 
-    @GetMapping("/{surveyId}")
-    public ResponseData<AnswerResponse> getSurveyById(
-            @PathVariable Long surveyId
-    ) {
-        AnswerResponse response = surveyQueryService.execute(surveyId);
-        return new ResponseData<>(
-                HttpStatus.OK,
-                "방과후 별 설문조사 조회 성공",
-                response
-        );
-    }
-
-    @GetMapping("/my")
-    public ResponseData<List<AnswerResponse>> getMySurvey() {
-        List<AnswerResponse> response = mySurveyQueryService.execute();
-        return new ResponseData<>(
-                HttpStatus.OK,
-                "방과후 별 설문조사 조회 성공",
-                response
-        );
-    }
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping("/question")
@@ -84,6 +65,40 @@ public class SurveyController {
         return new Response(
                 HttpStatus.OK,
                 "설문조사의 질문 수정 성공"
+        );
+    }
+
+    @GetMapping
+    public ResponseData<List<AnswerResponse>> getAnswerByClassroom(
+            @RequestParam("classroomId") Long classroomId
+    ) {
+        List<AnswerResponse> response = surveyAnswerByClassroomQueryService.execute(classroomId);
+        return new ResponseData<>(
+                HttpStatus.OK,
+                "방과후 별 설문조사 조회 성공",
+                response
+        );
+    }
+
+    @GetMapping("/{answerId}")
+    public ResponseData<AnswerResponse> getAnswerById(
+            @PathVariable Long answerId
+    ) {
+        AnswerResponse response = surveyAnswerQueryService.execute(answerId);
+        return new ResponseData<>(
+                HttpStatus.OK,
+                "방과후 별 설문조사 조회 성공",
+                response
+        );
+    }
+
+    @GetMapping("/my")
+    public ResponseData<List<AnswerResponse>> getMySurveyAnswer() {
+        List<AnswerResponse> response = mySurveyAnswerQueryService.execute();
+        return new ResponseData<>(
+                HttpStatus.OK,
+                "방과후 별 설문조사 조회 성공",
+                response
         );
     }
 

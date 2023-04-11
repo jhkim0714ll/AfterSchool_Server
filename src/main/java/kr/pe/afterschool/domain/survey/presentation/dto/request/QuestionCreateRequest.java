@@ -13,4 +13,6 @@ public class QuestionCreateRequest {
 
     @NotNull(message = "questions must not null")
     private List<String> questions;
+    @NotNull(message = "classroomId must not null")
+    private Long classroomId;
 }

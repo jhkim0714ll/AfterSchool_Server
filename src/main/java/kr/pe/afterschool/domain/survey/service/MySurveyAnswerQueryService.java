@@ -1,10 +1,9 @@
 package kr.pe.afterschool.domain.survey.service;
 
-import kr.pe.afterschool.domain.classroom.entity.Classroom;
-import kr.pe.afterschool.domain.classroom.entity.repository.ClassroomRepository;
-import kr.pe.afterschool.domain.classroom.exception.ClassroomNotFoundException;
 import kr.pe.afterschool.domain.survey.entity.repository.AnswerRepository;
 import kr.pe.afterschool.domain.survey.presentation.dto.response.AnswerResponse;
+import kr.pe.afterschool.domain.user.entity.User;
+import kr.pe.afterschool.domain.user.facade.UserFacade;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -14,16 +13,15 @@ import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
-public class SurveyByClassroomQueryService {
+public class MySurveyAnswerQueryService {
 
     private final AnswerRepository answerRepository;
-    private final ClassroomRepository classroomRepository;
+    private final UserFacade userFacade;
 
     @Transactional(readOnly = true)
-    public List<AnswerResponse> execute(Long classroomId) {
-        Classroom classroom = classroomRepository.findById(classroomId)
-                .orElseThrow(() -> ClassroomNotFoundException.EXCEPTION);
-        return answerRepository.findByClassroom(classroom)
+    public List<AnswerResponse> execute() {
+        User user = userFacade.getCurrentUser();
+        return answerRepository.findByStudent(user)
                 .stream().map(AnswerResponse::new).collect(Collectors.toList());
     }
 }

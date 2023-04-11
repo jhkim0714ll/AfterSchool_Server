@@ -17,6 +17,6 @@ public class QuestionResponse {
     public QuestionResponse(Question question) {
         this.questionId = question.getId();
         this.questions = question.getQuestions().split("::");
-        this.school = new SchoolResponse(question.getSchool());
+        this.school = new SchoolResponse(question.getClassroom());
     }
 }
