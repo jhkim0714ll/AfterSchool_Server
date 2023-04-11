@@ -45,7 +45,7 @@ public class SurveyExcelQueryService {
             School school = schoolRepository.findById(schoolId)
                     .orElseThrow(() -> SchoolNotFoundException.EXCEPTION);
 
-            Sheet sheet = excelDownload.createSheet(workbook, "전체 방과후 내역");
+            Sheet sheet = excelDownload.createSheet(workbook, "전체 방과후 내역", 4);
             List<Object> sheetTitle = new ArrayList<>(Arrays.asList("고유 번호", "방과후 이름", "담당 선생님", "요일"));
 
             row = sheet.createRow(sheetRowNum++);
@@ -78,8 +78,8 @@ public class SurveyExcelQueryService {
 
     private void createSurveySheet(int schoolSheetRowNum, Workbook workbook, Classroom classroom) {
         Row row;
-        Sheet classroomSheet = excelDownload.createSheet(workbook, classroom.getName() + " 방광후 설문 조사 결과");
-        List<Object> classroomSheetTitle = new ArrayList<>(Arrays.asList("학년", "반", "번호", "이름", "노력한 정도(1~5)", "학습 기여도(1~5)", "강사의 기술 및 대응능력(1~5)", "강의 내용 난이도(1~5)", "방과후 개선 방안"));
+        Sheet classroomSheet = excelDownload.createSheet(workbook, classroom.getName() + " 방광후 설문 조사 결과", 9);
+        List<Object> classroomSheetTitle = new ArrayList<>(Arrays.asList("학년", "반", "번호", "이름", "방과후에 노력한 정도(1~5)", "방과후에 대한 학습 기여도(1~5)", "강사의 기술 및 대응능력(1~5)", "강의 내용 난이도(1~5)", "방과후 개선 방안"));
 
         row = classroomSheet.createRow(schoolSheetRowNum++);
 

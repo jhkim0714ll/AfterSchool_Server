@@ -39,7 +39,7 @@ public class ApplyExcelQueryService {
         Workbook workbook = excelDownload.createWorkbook();
 
         //전체 방과후 시트
-        Sheet sheet = excelDownload.createSheet(workbook, "전체 방과후 내역");
+        Sheet sheet = excelDownload.createSheet(workbook, "전체 방과후 내역", 5);
         List<Object> sheetTitle = new ArrayList<>(Arrays.asList("고유 번호", "방과후 이름", "담당 선생님", "요일", "신청인원"));
 
         row = sheet.createRow(sheetRowNum++);
@@ -63,7 +63,7 @@ public class ApplyExcelQueryService {
 
             //방과후 신청자 시트
             classroomSheetRowNum = 0;
-            Sheet classroomSheet = excelDownload.createSheet(workbook, classroom.getName() + " 방과후 신청자 내역");
+            Sheet classroomSheet = excelDownload.createSheet(workbook, classroom.getName() + " 방과후 신청자 내역", 5);
             List<Object> classroomSheetTitle = new ArrayList<>(Arrays.asList("고유 번호", "학년", "반", "번호", "이름"));
 
             row = classroomSheet.createRow(classroomSheetRowNum++);
