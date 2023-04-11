@@ -14,7 +14,7 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class ApplyDecisionService {
+public class ApplyClassroomDecisionService {
 
     private final ClassroomRepository classroomRepository;
     private final ApplyRepository applyRepository;

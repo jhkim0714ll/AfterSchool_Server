@@ -9,6 +9,7 @@ import kr.pe.afterschool.global.security.jwt.JwtTokenParser;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
@@ -38,8 +39,8 @@ public class SecurityConfiguration {
                 .authorizeRequests()
                 .antMatchers("/survey/**").hasAnyRole("STUDENT", "TEACHER", "ADMIN")
                 .antMatchers(HttpMethod.GET, "/apply/**").hasAnyRole("STUDENT", "TEACHER", "ADMIN")
-                .antMatchers(HttpMethod.POST, "/school/**", "/classroom/**").hasAnyRole("TEACHER", "ADMIN")
-                .antMatchers(HttpMethod.PATCH, "/school/**", "/classroom/**").hasAnyRole("TEACHER", "ADMIN")
+                .antMatchers(HttpMethod.POST, "/school/**", "/classroom/**", "/apply/decision/**").hasAnyRole("TEACHER", "ADMIN")
+                .antMatchers(HttpMethod.PATCH, "/school/**", "/classroom/**", "/apply/decision/**").hasAnyRole("TEACHER", "ADMIN")
                 .antMatchers(HttpMethod.PUT, "/school/**", "/classroom/**").hasAnyRole("TEACHER", "ADMIN")
                 .antMatchers(HttpMethod.DELETE, "/school/**", "/classroom/**").hasAnyRole("TEACHER", "ADMIN")
                 .antMatchers("/auth/**").permitAll();
