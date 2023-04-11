@@ -22,7 +22,7 @@ public class SchoolDeleteService {
         User user = userFacade.getCurrentUser();
         School school = schoolRepository.findById(schoolId)
                 .orElseThrow(() -> SchoolNotFoundException.EXCEPTION);
-        if (!(user == school.getTeacher())) {
+        if (user != school.getTeacher()) {
             throw SchoolCannotException.EXCEPTION;
         }
         schoolRepository.delete(school);
