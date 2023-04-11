@@ -1,9 +1,12 @@
 package kr.pe.afterschool.domain.survey.presentation;
 
+import kr.pe.afterschool.domain.survey.presentation.dto.request.SurveyCreateRequest;
 import kr.pe.afterschool.domain.survey.presentation.dto.response.SurveyResponse;
 import kr.pe.afterschool.domain.survey.service.MySurveyQueryService;
 import kr.pe.afterschool.domain.survey.service.SurveyByClassroomQueryService;
+import kr.pe.afterschool.domain.survey.service.SurveyCreateService;
 import kr.pe.afterschool.domain.survey.service.SurveyQueryService;
+import kr.pe.afterschool.global.response.Response;
 import kr.pe.afterschool.global.response.ResponseData;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -19,6 +22,7 @@ public class SurveyController {
     private final SurveyByClassroomQueryService surveyByClassroomQueryService;
     private final SurveyQueryService surveyQueryService;
     private final MySurveyQueryService mySurveyQueryService;
+    private final SurveyCreateService surveyCreateService;
 
     @GetMapping
     public ResponseData<List<SurveyResponse>> getSurveyByClassroom(
@@ -51,6 +55,17 @@ public class SurveyController {
                 HttpStatus.OK,
                 "방과후 별 설문조사 조회 성공",
                 response
+        );
+    }
+
+    @PostMapping
+    public Response createSurvey(
+            @RequestBody SurveyCreateRequest request
+    ) {
+        surveyCreateService.execute(request);
+        return new Response(
+                HttpStatus.CREATED,
+                "설문조사 생성 성공"
         );
     }
 }
