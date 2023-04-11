@@ -37,13 +37,13 @@ public class SecurityConfiguration {
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
         http
                 .authorizeRequests()
-                .antMatchers("/survey/**").hasAnyRole("STUDENT", "TEACHER", "ADMIN")
-                .antMatchers(HttpMethod.GET, "/apply/**").hasAnyRole("STUDENT", "TEACHER", "ADMIN")
-                .antMatchers(HttpMethod.POST, "/school/**", "/classroom/**", "/apply/decision/**").hasAnyRole("TEACHER", "ADMIN")
-                .antMatchers(HttpMethod.PATCH, "/school/**", "/classroom/**", "/apply/decision/**").hasAnyRole("TEACHER", "ADMIN")
-                .antMatchers(HttpMethod.PUT, "/school/**", "/classroom/**").hasAnyRole("TEACHER", "ADMIN")
-                .antMatchers(HttpMethod.DELETE, "/school/**", "/classroom/**").hasAnyRole("TEACHER", "ADMIN")
-                .antMatchers("/auth/**").permitAll();
+                .antMatchers("/survey").authenticated()
+                .antMatchers(HttpMethod.GET, "/apply").authenticated()
+                .antMatchers(HttpMethod.POST, "/apply").authenticated()
+                .antMatchers(HttpMethod.POST, "/school", "/classroom", "/apply/decision").hasAnyRole("TEACHER", "ADMIN")
+                .antMatchers(HttpMethod.PATCH, "/school", "/classroom", "/apply/decision").hasAnyRole("TEACHER", "ADMIN")
+                .antMatchers(HttpMethod.DELETE, "/school", "/classroom").hasAnyRole("TEACHER", "ADMIN")
+                .antMatchers("/auth").permitAll();
         http
                 .apply(new FilterConfig(jwtTokenParser, jsonParser));
         http
