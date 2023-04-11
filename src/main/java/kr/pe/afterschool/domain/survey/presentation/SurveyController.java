@@ -3,6 +3,7 @@ package kr.pe.afterschool.domain.survey.presentation;
 import kr.pe.afterschool.domain.survey.presentation.dto.response.SurveyResponse;
 import kr.pe.afterschool.domain.survey.service.MySurveyQueryService;
 import kr.pe.afterschool.domain.survey.service.SurveyByClassroomQueryService;
+import kr.pe.afterschool.domain.survey.service.SurveyQueryService;
 import kr.pe.afterschool.global.response.ResponseData;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -16,6 +17,7 @@ import java.util.List;
 public class SurveyController {
 
     private final SurveyByClassroomQueryService surveyByClassroomQueryService;
+    private final SurveyQueryService surveyQueryService;
     private final MySurveyQueryService mySurveyQueryService;
 
     @GetMapping
@@ -23,6 +25,18 @@ public class SurveyController {
             @RequestParam("classroomId") Long classroomId
     ) {
         List<SurveyResponse> response = surveyByClassroomQueryService.execute(classroomId);
+        return new ResponseData<>(
+                HttpStatus.OK,
+                "방과후 별 설문조사 조회 성공",
+                response
+        );
+    }
+
+    @GetMapping("/{surveyId}")
+    public ResponseData<SurveyResponse> getSurveyById(
+            @PathVariable Long surveyId
+    ) {
+        SurveyResponse response = surveyQueryService.execute(surveyId);
         return new ResponseData<>(
                 HttpStatus.OK,
                 "방과후 별 설문조사 조회 성공",

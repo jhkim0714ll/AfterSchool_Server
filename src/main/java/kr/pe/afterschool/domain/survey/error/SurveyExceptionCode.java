@@ -9,7 +9,7 @@ import lombok.Getter;
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 public enum SurveyExceptionCode implements ErrorProperty {
 
-    ;
+    SURVEY_NOT_FOUND(404, "해당 설문 조사 결과가 존재하지 않음");
 
     private final int status;
     private final String message;
