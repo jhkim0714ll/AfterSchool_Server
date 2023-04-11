@@ -43,7 +43,6 @@ public class SurveyController {
         );
     }
 
-
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping("/question")
     public Response createSurveyQuestion(
@@ -75,7 +74,7 @@ public class SurveyController {
         List<AnswerResponse> response = surveyAnswerByClassroomQueryService.execute(classroomId);
         return new ResponseData<>(
                 HttpStatus.OK,
-                "방과후 별 설문조사 조회 성공",
+                "방과후 별 설문조사 답변 조회 성공",
                 response
         );
     }
@@ -97,7 +96,7 @@ public class SurveyController {
         List<AnswerResponse> response = mySurveyAnswerQueryService.execute();
         return new ResponseData<>(
                 HttpStatus.OK,
-                "방과후 별 설문조사 조회 성공",
+                "내 설문조사 답변 조회 성공",
                 response
         );
     }
@@ -110,7 +109,7 @@ public class SurveyController {
         surveyAnswerCreateService.execute(request);
         return new Response(
                 HttpStatus.CREATED,
-                "설문조사의 대답 생성 성공"
+                "설문조사의 답변 생성 성공"
         );
     }
 
@@ -122,7 +121,7 @@ public class SurveyController {
         surveyAnswerEditService.execute(answerId, request);
         return new Response(
                 HttpStatus.OK,
-                "설문조사의 대답 수정 성공"
+                "설문조사의 답변 수정 성공"
         );
     }
 
