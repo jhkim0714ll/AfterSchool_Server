@@ -4,13 +4,11 @@ import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import javax.validation.constraints.NotNull;
 import java.util.List;
 
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class QuestionCreateRequest {
+public class QuestionEditRequest {
 
-    @NotNull(message = "questions must not null")
     private List<String> questions;
 }

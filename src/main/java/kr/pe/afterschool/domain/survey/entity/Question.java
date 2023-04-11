@@ -27,6 +27,10 @@ public class Question {
     @JoinColumn(name = "fk_school_id")
     private School school;
 
+    public void editQuestion(String questions) {
+        this.questions = questions;
+    }
+
     @Builder
     public Question(String questions, School school) {
         this.questions = questions;

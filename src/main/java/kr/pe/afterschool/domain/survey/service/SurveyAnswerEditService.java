@@ -2,8 +2,8 @@ package kr.pe.afterschool.domain.survey.service;
 
 import kr.pe.afterschool.domain.survey.entity.Answer;
 import kr.pe.afterschool.domain.survey.entity.repository.AnswerRepository;
-import kr.pe.afterschool.domain.survey.exception.SurveyCannotManageException;
-import kr.pe.afterschool.domain.survey.exception.SurveyNotFoundException;
+import kr.pe.afterschool.domain.survey.exception.AnswerCannotManageException;
+import kr.pe.afterschool.domain.survey.exception.AnswerNotFoundException;
 import kr.pe.afterschool.domain.survey.presentation.dto.request.AnswerEditRequest;
 import kr.pe.afterschool.domain.user.entity.User;
 import kr.pe.afterschool.domain.user.facade.UserFacade;
@@ -21,12 +21,12 @@ public class SurveyAnswerEditService {
     private final UserFacade userFacade;
 
     @Transactional
-    public void execute(Long surveyId, AnswerEditRequest request) {
+    public void execute(Long answerId, AnswerEditRequest request) {
         User user = userFacade.getCurrentUser();
-        Answer answer = answerRepository.findById(surveyId)
-                .orElseThrow(() -> SurveyNotFoundException.EXCEPTION);
+        Answer answer = answerRepository.findById(answerId)
+                .orElseThrow(() -> AnswerNotFoundException.EXCEPTION);
         if (user != answer.getStudent()) {
-            throw SurveyCannotManageException.EXCEPTION;
+            throw AnswerCannotManageException.EXCEPTION;
         }
 
         String contents = request.getContent()

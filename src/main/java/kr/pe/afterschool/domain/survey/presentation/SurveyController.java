@@ -3,6 +3,7 @@ package kr.pe.afterschool.domain.survey.presentation;
 import kr.pe.afterschool.domain.survey.presentation.dto.request.AnswerCreateRequest;
 import kr.pe.afterschool.domain.survey.presentation.dto.request.AnswerEditRequest;
 import kr.pe.afterschool.domain.survey.presentation.dto.request.QuestionCreateRequest;
+import kr.pe.afterschool.domain.survey.presentation.dto.request.QuestionEditRequest;
 import kr.pe.afterschool.domain.survey.presentation.dto.response.AnswerResponse;
 import kr.pe.afterschool.domain.survey.service.*;
 import kr.pe.afterschool.global.response.Response;
@@ -23,6 +24,7 @@ public class SurveyController {
     private final SurveyQueryService surveyQueryService;
     private final MySurveyQueryService mySurveyQueryService;
     private final SurveyQuestionCreateService surveyQuestionCreateService;
+    private final SurveyQuestionEditService surveyQuestionEditService;
     private final SurveyAnswerCreateService surveyAnswerCreateService;
     private final SurveyAnswerEditService surveyAnswerEditService;
     private final SurveyAnswerExcelQueryService surveyAnswerExcelQueryService;
@@ -62,7 +64,7 @@ public class SurveyController {
     }
 
     @ResponseStatus(HttpStatus.CREATED)
-    @PostMapping
+    @PostMapping("/question")
     public Response createSurveyQuestion(
             @RequestBody @Valid QuestionCreateRequest request
     ) {
@@ -70,6 +72,18 @@ public class SurveyController {
         return new Response(
                 HttpStatus.CREATED,
                 "설문조사 생성 성공"
+        );
+    }
+
+    @PatchMapping("/question/{questionId}")
+    public Response editSurveyQuestion(
+            @PathVariable Long questionId,
+            @RequestBody QuestionEditRequest request
+    ) {
+        surveyQuestionEditService.execute(questionId, request);
+        return new Response(
+                HttpStatus.OK,
+                "설문조사의 질문 수정 성공"
         );
     }
 
@@ -85,12 +99,12 @@ public class SurveyController {
         );
     }
 
-    @PatchMapping("/{surveyId}")
+    @PatchMapping("/{answerId}")
     public Response editSurveyAnswer(
-            @PathVariable Long surveyId,
+            @PathVariable Long answerId,
             @RequestBody AnswerEditRequest request
     ) {
-        surveyAnswerEditService.execute(surveyId, request);
+        surveyAnswerEditService.execute(answerId, request);
         return new Response(
                 HttpStatus.OK,
                 "설문조사의 대답 수정 성공"

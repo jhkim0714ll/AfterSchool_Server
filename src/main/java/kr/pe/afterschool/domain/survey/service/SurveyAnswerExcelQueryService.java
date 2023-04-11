@@ -8,7 +8,7 @@ import kr.pe.afterschool.domain.school.entity.repository.SchoolRepository;
 import kr.pe.afterschool.domain.school.exception.SchoolNotFoundException;
 import kr.pe.afterschool.domain.survey.entity.Answer;
 import kr.pe.afterschool.domain.survey.entity.repository.AnswerRepository;
-import kr.pe.afterschool.domain.survey.exception.SurveyNotFoundException;
+import kr.pe.afterschool.domain.survey.exception.AnswerNotFoundException;
 import kr.pe.afterschool.global.lib.DateParser;
 import kr.pe.afterschool.global.lib.ExcelDownload;
 import lombok.RequiredArgsConstructor;
@@ -72,7 +72,7 @@ public class SurveyAnswerExcelQueryService {
             createSurveySheet(schoolSheetRowNum, workbook, classroom);
             excelDownload.outStream(workbook, classroom.getName() + " 방과후 설문조사 결과.xlsx");
         } else {
-            throw SurveyNotFoundException.EXCEPTION;
+            throw AnswerNotFoundException.EXCEPTION;
         }
     }
 

@@ -1,7 +1,7 @@
 package kr.pe.afterschool.domain.survey.service;
 
 import kr.pe.afterschool.domain.survey.entity.repository.AnswerRepository;
-import kr.pe.afterschool.domain.survey.exception.SurveyNotFoundException;
+import kr.pe.afterschool.domain.survey.exception.AnswerNotFoundException;
 import kr.pe.afterschool.domain.survey.presentation.dto.response.AnswerResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -17,7 +17,7 @@ public class SurveyQueryService {
     public AnswerResponse execute(Long surveyId) {
         return new AnswerResponse(
                 answerRepository.findById(surveyId)
-                .orElseThrow(() -> SurveyNotFoundException.EXCEPTION)
+                .orElseThrow(() -> AnswerNotFoundException.EXCEPTION)
         );
     }
 }
