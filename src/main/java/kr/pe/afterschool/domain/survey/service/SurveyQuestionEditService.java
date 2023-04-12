@@ -25,7 +25,7 @@ public class SurveyQuestionEditService {
         User user = userFacade.getCurrentUser();
         Question question = questionRepository.findById(questionId)
                 .orElseThrow(() -> QuestionNotFoundException.EXCEPTION);
-        if (user.getSchool() != question.getClassroom()) {
+        if (user.getSchool() != question.getClassroom().getSchool()) {
             throw QuestionCannotManageException.EXCEPTION;
         }
         String questions = request.getQuestions()

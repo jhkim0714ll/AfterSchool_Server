@@ -24,7 +24,7 @@ public class SurveyController {
     private final SurveyQuestionQueryService surveyQuestionQueryService;
     private final SurveyQuestionCreateService surveyQuestionCreateService;
     private final SurveyQuestionEditService surveyQuestionEditService;
-    private final SurveyAnswerByClassroomQueryService surveyAnswerByClassroomQueryService;
+    private final SurveyAnswerByQuestionQueryService surveyAnswerByQuestionQueryService;
     private final SurveyAnswerQueryService surveyAnswerQueryService;
     private final MySurveyAnswerQueryService mySurveyAnswerQueryService;
     private final SurveyAnswerCreateService surveyAnswerCreateService;
@@ -32,10 +32,10 @@ public class SurveyController {
     private final SurveyAnswerExcelQueryService surveyAnswerExcelQueryService;
 
     @GetMapping("/question/{classroomId}")
-    public ResponseData<List<QuestionResponse>> getQuestionByClassroom(
+    public ResponseData<QuestionResponse> getQuestionByClassroom(
             @PathVariable Long classroomId
     ) {
-        List<QuestionResponse> response = surveyQuestionQueryService.execute(classroomId);
+        QuestionResponse response = surveyQuestionQueryService.execute(classroomId);
         return new ResponseData<>(
                 HttpStatus.OK,
                 "해당 설문조사의 질문 조회 성공",
@@ -67,11 +67,11 @@ public class SurveyController {
         );
     }
 
-    @GetMapping
+    @GetMapping("/answer")
     public ResponseData<List<AnswerResponse>> getAnswerByClassroom(
             @RequestParam("classroomId") Long classroomId
     ) {
-        List<AnswerResponse> response = surveyAnswerByClassroomQueryService.execute(classroomId);
+        List<AnswerResponse> response = surveyAnswerByQuestionQueryService.execute(classroomId);
         return new ResponseData<>(
                 HttpStatus.OK,
                 "방과후 별 설문조사 답변 조회 성공",
@@ -79,7 +79,7 @@ public class SurveyController {
         );
     }
 
-    @GetMapping("/{answerId}")
+    @GetMapping("/answer/{answerId}")
     public ResponseData<AnswerResponse> getAnswerById(
             @PathVariable Long answerId
     ) {
@@ -91,7 +91,7 @@ public class SurveyController {
         );
     }
 
-    @GetMapping("/my")
+    @GetMapping("/answer/my")
     public ResponseData<List<AnswerResponse>> getMySurveyAnswer() {
         List<AnswerResponse> response = mySurveyAnswerQueryService.execute();
         return new ResponseData<>(
@@ -102,7 +102,7 @@ public class SurveyController {
     }
 
     @ResponseStatus(HttpStatus.CREATED)
-    @PostMapping
+    @PostMapping("/answer")
     public Response createSurveyAnswer(
             @RequestBody @Valid AnswerCreateRequest request
     ) {
@@ -113,7 +113,7 @@ public class SurveyController {
         );
     }
 
-    @PatchMapping("/{answerId}")
+    @PatchMapping("/answer/{answerId}")
     public Response editSurveyAnswer(
             @PathVariable Long answerId,
             @RequestBody AnswerEditRequest request
@@ -125,7 +125,7 @@ public class SurveyController {
         );
     }
 
-    @GetMapping("/excel")
+    @GetMapping("/answer/excel")
     public void getSurveyByExcel(
             @RequestParam(value = "schoolId", required = false) Long schoolId,
             @RequestParam(value = "classroomId", required = false) Long classroomId

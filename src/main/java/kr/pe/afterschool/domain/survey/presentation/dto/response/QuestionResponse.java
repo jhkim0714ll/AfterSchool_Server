@@ -1,6 +1,6 @@
 package kr.pe.afterschool.domain.survey.presentation.dto.response;
 
-import kr.pe.afterschool.domain.school.presentation.dto.response.SchoolResponse;
+import kr.pe.afterschool.domain.classroom.presentation.dto.response.ClassroomResponse;
 import kr.pe.afterschool.domain.survey.entity.Question;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -12,11 +12,11 @@ public class QuestionResponse {
 
     private Long questionId;
     private String[] questions;
-    private SchoolResponse school;
+    private ClassroomResponse classroomResponse;
 
     public QuestionResponse(Question question) {
         this.questionId = question.getId();
         this.questions = question.getQuestions().split("::");
-        this.school = new SchoolResponse(question.getClassroom());
+        this.classroomResponse = new ClassroomResponse(question.getClassroom());
     }
 }

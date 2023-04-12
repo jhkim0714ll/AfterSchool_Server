@@ -7,8 +7,11 @@ import kr.pe.afterschool.domain.school.entity.School;
 import kr.pe.afterschool.domain.school.entity.repository.SchoolRepository;
 import kr.pe.afterschool.domain.school.exception.SchoolNotFoundException;
 import kr.pe.afterschool.domain.survey.entity.Answer;
+import kr.pe.afterschool.domain.survey.entity.Question;
 import kr.pe.afterschool.domain.survey.entity.repository.AnswerRepository;
+import kr.pe.afterschool.domain.survey.entity.repository.QuestionRepository;
 import kr.pe.afterschool.domain.survey.exception.AnswerNotFoundException;
+import kr.pe.afterschool.domain.survey.exception.QuestionNotFoundException;
 import kr.pe.afterschool.global.lib.DateParser;
 import kr.pe.afterschool.global.lib.ExcelDownload;
 import lombok.RequiredArgsConstructor;
@@ -29,6 +32,7 @@ import java.util.List;
 public class SurveyAnswerExcelQueryService {
 
     private final AnswerRepository answerRepository;
+    private final QuestionRepository questionRepository;
     private final SchoolRepository schoolRepository;
     private final ClassroomRepository classroomRepository;
     private final ExcelDownload excelDownload;
@@ -77,27 +81,27 @@ public class SurveyAnswerExcelQueryService {
     }
 
     private void createSurveySheet(int schoolSheetRowNum, Workbook workbook, Classroom classroom) {
+        Question question = questionRepository.findByClassroom(classroom)
+                .orElseThrow(() -> QuestionNotFoundException.EXCEPTION);
+        String[] questions = question.getQuestions().split("::");
+
         Row row;
-        Sheet classroomSheet = excelDownload.createSheet(workbook, classroom.getName() + " 방광후 설문 조사 결과", 9);
-        List<Object> classroomSheetTitle = new ArrayList<>(Arrays.asList("학년", "반", "번호", "이름", "방과후에 노력한 정도(1~5)", "방과후에 대한 학습 기여도(1~5)", "강사의 기술 및 대응능력(1~5)", "강의 내용 난이도(1~5)", "방과후 개선 방안"));
+        Sheet classroomSheet = excelDownload.createSheet(workbook, classroom.getName() + " 방광후 설문 조사 결과", questions.length);
+        List<Object> classroomSheetTitle = new ArrayList<>(Arrays.asList("학년", "반", "번호", "이름"));
+        classroomSheetTitle.addAll(Arrays.asList(questions));
 
         row = classroomSheet.createRow(schoolSheetRowNum++);
 
         excelDownload.createCell(row, classroomSheetTitle);
-        List<Answer> answerList = answerRepository.findByClassroom(classroom);
+        List<Answer> answerList = answerRepository.findByQuestion(question);
         for (Answer answer : answerList) {
             String[] surveyContent = answer.getAnswer().split("::");
             List<Object> surveyListCell = new ArrayList<>(Arrays.asList(
                     answer.getStudent().getGrade(),
                     answer.getStudent().getRoom(),
                     answer.getStudent().getNumber(),
-                    answer.getStudent().getName(),
-                    surveyContent[0],
-                    surveyContent[1],
-                    surveyContent[2],
-                    surveyContent[3],
-                    surveyContent[4],
-                    surveyContent[5]));
+                    answer.getStudent().getName()));
+            surveyListCell.addAll(Arrays.asList(surveyContent));
             row = classroomSheet.createRow(schoolSheetRowNum++);
             excelDownload.createCell(row, surveyListCell);
         }

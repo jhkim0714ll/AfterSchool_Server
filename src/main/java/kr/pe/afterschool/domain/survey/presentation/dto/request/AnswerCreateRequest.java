@@ -13,6 +13,6 @@ public class AnswerCreateRequest {
 
     @NotNull(message = "content must not null")
     private List<String> answers;
-    @NotNull(message = "classroomId must no null")
-    private Long classroomId;
+    @NotNull(message = "questionId must no null")
+    private Long questionId;
 }

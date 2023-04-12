@@ -1,7 +1,6 @@
 package kr.pe.afterschool.domain.survey.entity;
 
 import kr.pe.afterschool.domain.classroom.entity.Classroom;
-import kr.pe.afterschool.domain.school.entity.School;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
@@ -23,7 +22,7 @@ public class Question {
     @Column(nullable = false)
     private String questions;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "fk_classroom_id")
     private Classroom classroom;
 

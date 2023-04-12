@@ -19,7 +19,7 @@ public class Answer {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "survey_id")
+    @Column(name = "answer_id")
     private Long id;
 
     @Column(nullable = false)
@@ -30,8 +30,8 @@ public class Answer {
     private User student;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "fk_classroom_id")
-    private Classroom classroom;
+    @JoinColumn(name = "fk_question_id")
+    private Question question;
 
     @CreatedDate
     @Column(nullable = false)
@@ -42,10 +42,10 @@ public class Answer {
     }
 
     @Builder
-    public Answer(String answer, User student, Classroom classroom) {
+    public Answer(String answer, User student, Question question) {
         this.answer = answer;
         this.student = student;
-        this.classroom = classroom;
+        this.question = question;
         this.createdDate = LocalDate.now();
     }
 }
