@@ -13,39 +13,39 @@ import java.time.LocalDate;
 
 @Getter
 @Entity
-@Table(name = "survey")
+@Table(name = "answer")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Survey {
+public class Answer {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "survey_id")
+    @Column(name = "answer_id")
     private Long id;
 
     @Column(nullable = false)
-    private String content;
+    private String answer;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "fk_student_id")
     private User student;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "fk_classroom_id")
-    private Classroom classroom;
+    @JoinColumn(name = "fk_question_id")
+    private Question question;
 
     @CreatedDate
     @Column(nullable = false)
     private LocalDate createdDate;
 
     public void editSurvey(String content) {
-        this.content = content;
+        this.answer = content;
     }
 
     @Builder
-    public Survey(String content, User student, Classroom classroom) {
-        this.content = content;
+    public Answer(String answer, User student, Question question) {
+        this.answer = answer;
         this.student = student;
-        this.classroom = classroom;
+        this.question = question;
         this.createdDate = LocalDate.now();
     }
 }
