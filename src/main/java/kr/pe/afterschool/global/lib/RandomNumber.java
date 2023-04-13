@@ -2,7 +2,6 @@ package kr.pe.afterschool.global.lib;
 
 import org.springframework.stereotype.Component;
 
-import java.lang.reflect.Array;
 import java.util.Arrays;
 import java.util.Random;
 

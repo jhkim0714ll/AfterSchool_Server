@@ -1,7 +1,6 @@
 package kr.pe.afterschool.domain.post.presentation.dto.response;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import kr.pe.afterschool.domain.post.entity.Post;
 import kr.pe.afterschool.global.enums.PostType;
 import lombok.AccessLevel;

@@ -1,6 +1,5 @@
 package kr.pe.afterschool.domain.survey.entity;
 
-import kr.pe.afterschool.domain.classroom.entity.Classroom;
 import kr.pe.afterschool.domain.user.entity.User;
 import lombok.AccessLevel;
 import lombok.Builder;

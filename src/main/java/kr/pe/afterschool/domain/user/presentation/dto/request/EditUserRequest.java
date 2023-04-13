@@ -5,7 +5,7 @@ import lombok.NoArgsConstructor;
 
 @Getter
 @NoArgsConstructor
-public class ModifyUserRequest {
+public class EditUserRequest {
 
     private String name;
     private String phone;

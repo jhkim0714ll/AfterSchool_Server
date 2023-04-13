@@ -3,7 +3,7 @@ package kr.pe.afterschool.domain.user.service;
 import kr.pe.afterschool.domain.user.entity.User;
 import kr.pe.afterschool.domain.user.entity.repository.UserRepository;
 import kr.pe.afterschool.domain.user.facade.UserFacade;
-import kr.pe.afterschool.domain.user.presentation.dto.request.ModifyUserRequest;
+import kr.pe.afterschool.domain.user.presentation.dto.request.EditUserRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -16,7 +16,7 @@ public class UserEditService {
     private final UserFacade userFacade;
 
     @Transactional
-    public void execute(ModifyUserRequest request) {
+    public void execute(EditUserRequest request) {
         User user = userFacade.getCurrentUser();
         user.editUserData(
                 request.getName(),

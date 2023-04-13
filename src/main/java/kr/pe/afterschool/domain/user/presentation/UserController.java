@@ -1,6 +1,6 @@
 package kr.pe.afterschool.domain.user.presentation;
 
-import kr.pe.afterschool.domain.user.presentation.dto.request.ModifyUserRequest;
+import kr.pe.afterschool.domain.user.presentation.dto.request.EditUserRequest;
 import kr.pe.afterschool.domain.user.presentation.dto.response.UserResponse;
 import kr.pe.afterschool.domain.user.service.MyUserQueryService;
 import kr.pe.afterschool.domain.user.service.UserByEmailQueryService;
@@ -46,7 +46,7 @@ public class UserController {
 
     @PatchMapping("/update")
     public Response modifyUserData(
-            @RequestBody ModifyUserRequest request
+            @RequestBody EditUserRequest request
     ) {
         userEditService.execute(request);
         return new Response(

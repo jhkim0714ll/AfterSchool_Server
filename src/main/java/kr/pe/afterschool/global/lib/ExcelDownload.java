@@ -40,7 +40,7 @@ public class ExcelDownload {
     }
 
     public void createCell(Row row, List<Object> stringList) {
-        Cell cell = null;
+        Cell cell;
         int cellNum = 0;
 
         for (Object string : stringList) {

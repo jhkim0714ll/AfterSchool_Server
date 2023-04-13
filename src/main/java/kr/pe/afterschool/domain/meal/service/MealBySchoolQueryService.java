@@ -46,7 +46,7 @@ public class MealBySchoolQueryService {
         try {
             JSONArray schoolRow = jsonParser.StringToJSONArrayOfRow(schoolInfo, "schoolInfo");
 
-            NeisSchoolInfoRowResponse schoolResponse = null;
+            NeisSchoolInfoRowResponse schoolResponse;
             JSONArray mealRow = new JSONArray();
             for (int i = 0; i < schoolRow.length(); i++) {
                 schoolResponse = new Gson().fromJson(schoolRow.get(i).toString(), NeisSchoolInfoRowResponse.class);

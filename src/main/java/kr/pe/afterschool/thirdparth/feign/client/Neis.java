@@ -4,16 +4,11 @@ import kr.pe.afterschool.global.config.properties.NeisProperties;
 import kr.pe.afterschool.global.lib.StringParser;
 import kr.pe.afterschool.thirdparth.feign.exception.OtherServerErrorException;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.boot.configurationprocessor.json.JSONArray;
-import org.springframework.boot.configurationprocessor.json.JSONObject;
 import org.springframework.stereotype.Component;
 
 import java.io.*;
-import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLConnection;
-import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 
 @Component
