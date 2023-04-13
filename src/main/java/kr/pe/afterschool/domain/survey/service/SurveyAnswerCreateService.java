@@ -1,8 +1,5 @@
 package kr.pe.afterschool.domain.survey.service;
 
-import kr.pe.afterschool.domain.classroom.entity.Classroom;
-import kr.pe.afterschool.domain.classroom.entity.repository.ClassroomRepository;
-import kr.pe.afterschool.domain.classroom.exception.ClassroomNotFoundException;
 import kr.pe.afterschool.domain.survey.entity.Answer;
 import kr.pe.afterschool.domain.survey.entity.Question;
 import kr.pe.afterschool.domain.survey.entity.repository.AnswerRepository;

@@ -21,7 +21,7 @@ public class User {
     @Column(name = "user_id")
     private String email;
 
-    @Column(nullable = false)
+    @Column(nullable = true)
     private String pw;
 
     @Column(nullable = false)
@@ -63,7 +63,7 @@ public class User {
     }
 
     @Builder
-    public User(String email, String pw, String name, String phone, int grade, int room, int number, UserRole role, String profileImageUrl) {
+    public User(String email, String pw, String name, String phone, int grade, int room, int number, UserRole role, String profileImageUrl, School school) {
         this.email = email;
         this.pw = pw;
         this.name = name;
@@ -74,5 +74,6 @@ public class User {
         this.role = role;
         this.profileImageUrl = profileImageUrl;
         this.joinDate = LocalDate.now();
+        this.school = school;
     }
 }

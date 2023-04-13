@@ -19,14 +19,14 @@ public class Neis {
     private final StringParser stringParser;
 
     public String getSchoolInfo(String schoolName) {
-        String key = neisProperties.getKey();
+        String key = neisProperties.getApiKey();
         String schoolNM = stringParser.encodeKorean(schoolName);
         String url = "https://open.neis.go.kr/hub/schoolInfo?KEY=" + key + "&Type=json&pIndex=1&pSize=10&SCHUL_NM=" + schoolNM;
         return executeUrl(url);
     }
 
     public String getMealInfo(String cityCode, String schoolCode, String ymStr) {
-        String key = neisProperties.getKey();
+        String key = neisProperties.getApiKey();
         String url = String.format(
                 "https://open.neis.go.kr/hub/mealServiceDietInfo?" +
                 "KEY=%s&Type=json&pIndex=1&pSize=100&" +
