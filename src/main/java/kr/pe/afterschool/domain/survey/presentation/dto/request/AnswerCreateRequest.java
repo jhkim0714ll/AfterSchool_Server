@@ -9,10 +9,10 @@ import java.util.List;
 
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class SurveyCreateRequest {
+public class AnswerCreateRequest {
 
     @NotNull(message = "content must not null")
-    private List<String> content;
-    @NotNull(message = "classroomId must no null")
-    private Long classroomId;
+    private List<String> answers;
+    @NotNull(message = "questionId must no null")
+    private Long questionId;
 }

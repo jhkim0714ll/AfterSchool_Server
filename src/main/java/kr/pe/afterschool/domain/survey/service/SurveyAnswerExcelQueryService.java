@@ -6,9 +6,12 @@ import kr.pe.afterschool.domain.classroom.exception.ClassroomNotFoundException;
 import kr.pe.afterschool.domain.school.entity.School;
 import kr.pe.afterschool.domain.school.entity.repository.SchoolRepository;
 import kr.pe.afterschool.domain.school.exception.SchoolNotFoundException;
-import kr.pe.afterschool.domain.survey.entity.Survey;
-import kr.pe.afterschool.domain.survey.entity.repository.SurveyRepository;
-import kr.pe.afterschool.domain.survey.exception.SurveyNotFoundException;
+import kr.pe.afterschool.domain.survey.entity.Answer;
+import kr.pe.afterschool.domain.survey.entity.Question;
+import kr.pe.afterschool.domain.survey.entity.repository.AnswerRepository;
+import kr.pe.afterschool.domain.survey.entity.repository.QuestionRepository;
+import kr.pe.afterschool.domain.survey.exception.AnswerNotFoundException;
+import kr.pe.afterschool.domain.survey.exception.QuestionNotFoundException;
 import kr.pe.afterschool.global.lib.DateParser;
 import kr.pe.afterschool.global.lib.ExcelDownload;
 import lombok.RequiredArgsConstructor;
@@ -26,9 +29,10 @@ import java.util.List;
 @Slf4j
 @Service
 @RequiredArgsConstructor
-public class SurveyExcelQueryService {
+public class SurveyAnswerExcelQueryService {
 
-    private final SurveyRepository surveyRepository;
+    private final AnswerRepository answerRepository;
+    private final QuestionRepository questionRepository;
     private final SchoolRepository schoolRepository;
     private final ClassroomRepository classroomRepository;
     private final ExcelDownload excelDownload;
@@ -72,32 +76,32 @@ public class SurveyExcelQueryService {
             createSurveySheet(schoolSheetRowNum, workbook, classroom);
             excelDownload.outStream(workbook, classroom.getName() + " 방과후 설문조사 결과.xlsx");
         } else {
-            throw SurveyNotFoundException.EXCEPTION;
+            throw AnswerNotFoundException.EXCEPTION;
         }
     }
 
     private void createSurveySheet(int schoolSheetRowNum, Workbook workbook, Classroom classroom) {
+        Question question = questionRepository.findByClassroom(classroom)
+                .orElseThrow(() -> QuestionNotFoundException.EXCEPTION);
+        String[] questions = question.getQuestions().split("::");
+
         Row row;
-        Sheet classroomSheet = excelDownload.createSheet(workbook, classroom.getName() + " 방광후 설문 조사 결과", 9);
-        List<Object> classroomSheetTitle = new ArrayList<>(Arrays.asList("학년", "반", "번호", "이름", "방과후에 노력한 정도(1~5)", "방과후에 대한 학습 기여도(1~5)", "강사의 기술 및 대응능력(1~5)", "강의 내용 난이도(1~5)", "방과후 개선 방안"));
+        Sheet classroomSheet = excelDownload.createSheet(workbook, classroom.getName() + " 방광후 설문 조사 결과", questions.length);
+        List<Object> classroomSheetTitle = new ArrayList<>(Arrays.asList("학년", "반", "번호", "이름"));
+        classroomSheetTitle.addAll(Arrays.asList(questions));
 
         row = classroomSheet.createRow(schoolSheetRowNum++);
 
         excelDownload.createCell(row, classroomSheetTitle);
-        List<Survey> surveyList = surveyRepository.findByClassroom(classroom);
-        for (Survey survey : surveyList) {
-            String[] surveyContent = survey.getContent().split("::");
+        List<Answer> answerList = answerRepository.findByQuestion(question);
+        for (Answer answer : answerList) {
+            String[] surveyContent = answer.getAnswer().split("::");
             List<Object> surveyListCell = new ArrayList<>(Arrays.asList(
-                    survey.getStudent().getGrade(),
-                    survey.getStudent().getRoom(),
-                    survey.getStudent().getNumber(),
-                    survey.getStudent().getName(),
-                    surveyContent[0],
-                    surveyContent[1],
-                    surveyContent[2],
-                    surveyContent[3],
-                    surveyContent[4],
-                    surveyContent[5]));
+                    answer.getStudent().getGrade(),
+                    answer.getStudent().getRoom(),
+                    answer.getStudent().getNumber(),
+                    answer.getStudent().getName()));
+            surveyListCell.addAll(Arrays.asList(surveyContent));
             row = classroomSheet.createRow(schoolSheetRowNum++);
             excelDownload.createCell(row, surveyListCell);
         }
