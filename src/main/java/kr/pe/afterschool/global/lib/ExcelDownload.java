@@ -43,7 +43,6 @@ public class ExcelDownload {
         Cell cell;
         int cellNum = 0;
 
-
         for (Object string : stringList) {
             cell = row.createCell(cellNum++);
             if (string instanceof Integer) {
