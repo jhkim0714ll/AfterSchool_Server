@@ -8,7 +8,7 @@ import javax.validation.constraints.NotBlank;
 
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class KaKaoLoginRequest {
+public class OauthLoginRequest {
 
     @NotBlank(message = "code must not be blank")
     private String code;

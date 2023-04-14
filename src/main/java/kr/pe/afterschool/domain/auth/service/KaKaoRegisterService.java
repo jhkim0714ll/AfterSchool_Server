@@ -4,13 +4,14 @@ import kr.pe.afterschool.domain.auth.exception.AlreadyJoinException;
 import kr.pe.afterschool.domain.auth.presentation.dto.request.OauthRegisterRequest;
 import kr.pe.afterschool.domain.user.entity.User;
 import kr.pe.afterschool.domain.user.entity.repository.UserRepository;
+import kr.pe.afterschool.global.enums.JoinMethod;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
-public class OauthRegisterService {
+public class KaKaoRegisterService {
 
     private final UserRepository userRepository;
 
@@ -28,6 +29,7 @@ public class OauthRegisterService {
                 .role(request.getRole())
                 .profileImageUrl(request.getProfileImageUrl())
                 .phone(request.getPhone())
+                .joinMethod(JoinMethod.KAKAO)
                 .build();
         userRepository.save(user);
     }

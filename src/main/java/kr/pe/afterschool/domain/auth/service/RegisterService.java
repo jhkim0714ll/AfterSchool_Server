@@ -7,6 +7,7 @@ import kr.pe.afterschool.domain.school.entity.repository.SchoolRepository;
 import kr.pe.afterschool.domain.school.exception.SchoolNotFoundException;
 import kr.pe.afterschool.domain.user.entity.User;
 import kr.pe.afterschool.domain.user.entity.repository.UserRepository;
+import kr.pe.afterschool.global.enums.JoinMethod;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -33,6 +34,7 @@ public class RegisterService {
                 .number(request.getNumber())
                 .role(request.getRole())
                 .profileImageUrl(request.getProfileImageUrl())
+                .joinMethod(JoinMethod.LOCAL)
                 .build();
         userRepository.save(user);
     }
