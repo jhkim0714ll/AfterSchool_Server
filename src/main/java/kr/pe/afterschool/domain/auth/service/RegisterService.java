@@ -2,9 +2,6 @@ package kr.pe.afterschool.domain.auth.service;
 
 import kr.pe.afterschool.domain.auth.exception.AlreadyJoinException;
 import kr.pe.afterschool.domain.auth.presentation.dto.request.RegisterRequest;
-import kr.pe.afterschool.domain.school.entity.School;
-import kr.pe.afterschool.domain.school.entity.repository.SchoolRepository;
-import kr.pe.afterschool.domain.school.exception.SchoolNotFoundException;
 import kr.pe.afterschool.domain.user.entity.User;
 import kr.pe.afterschool.domain.user.entity.repository.UserRepository;
 import kr.pe.afterschool.global.enums.JoinMethod;

@@ -6,7 +6,6 @@ import kr.pe.afterschool.domain.auth.presentation.dto.request.OauthRegisterReque
 import kr.pe.afterschool.domain.auth.presentation.dto.request.RegisterRequest;
 import kr.pe.afterschool.domain.auth.presentation.dto.response.LoginResponse;
 import kr.pe.afterschool.domain.auth.service.*;
-import kr.pe.afterschool.global.enums.JoinMethod;
 import kr.pe.afterschool.global.response.Response;
 import kr.pe.afterschool.global.response.ResponseData;
 import lombok.RequiredArgsConstructor;

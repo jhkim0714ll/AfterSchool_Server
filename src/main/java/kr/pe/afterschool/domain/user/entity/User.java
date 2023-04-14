@@ -22,7 +22,7 @@ public class User {
     @Column(name = "user_id")
     private String email;
 
-    @Column(nullable = true)
+    @Column()
     private String pw;
 
     @Column(nullable = false)
@@ -31,13 +31,13 @@ public class User {
     @Column(nullable = false)
     private String phone;
 
-    @Column(nullable = true)
+    @Column()
     private int grade;
 
-    @Column(nullable = true)
+    @Column()
     private int room;
 
-    @Column(nullable = true)
+    @Column()
     private int number;
 
     @Enumerated(EnumType.STRING)
