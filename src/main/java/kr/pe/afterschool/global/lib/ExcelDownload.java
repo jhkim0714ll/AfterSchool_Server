@@ -43,9 +43,14 @@ public class ExcelDownload {
         Cell cell;
         int cellNum = 0;
 
+
         for (Object string : stringList) {
             cell = row.createCell(cellNum++);
-            cell.setCellValue(string.toString());
+            if (string instanceof Integer) {
+                cell.setCellValue(Integer.parseInt(string.toString()));
+            } else {
+                cell.setCellValue(string.toString());
+            }
         }
     }
 }

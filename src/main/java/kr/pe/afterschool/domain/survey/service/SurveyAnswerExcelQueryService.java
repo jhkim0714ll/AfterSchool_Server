@@ -19,12 +19,15 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Slf4j
 @Service
@@ -93,7 +96,12 @@ public class SurveyAnswerExcelQueryService {
         row = classroomSheet.createRow(schoolSheetRowNum++);
 
         excelDownload.createCell(row, classroomSheetTitle);
-        List<Answer> answerList = answerRepository.findByQuestion(question);
+        List<Answer> answerList = answerRepository.findAllByQuestion(
+                question, Sort.by(List.of(
+                        new Sort.Order(Sort.Direction.ASC, "student.grade"),
+                        new Sort.Order(Sort.Direction.ASC, "student.room"),
+                        new Sort.Order(Sort.Direction.ASC, "student.number")
+                        )));
         for (Answer answer : answerList) {
             String[] surveyContent = answer.getAnswer().split("::");
             List<Object> surveyListCell = new ArrayList<>(Arrays.asList(
