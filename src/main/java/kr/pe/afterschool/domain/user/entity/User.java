@@ -1,6 +1,7 @@
 package kr.pe.afterschool.domain.user.entity;
 
 import kr.pe.afterschool.domain.school.entity.School;
+import kr.pe.afterschool.global.enums.JoinMethod;
 import kr.pe.afterschool.global.enums.UserRole;
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -21,7 +22,7 @@ public class User {
     @Column(name = "user_id")
     private String email;
 
-    @Column(nullable = false)
+    @Column()
     private String pw;
 
     @Column(nullable = false)
@@ -30,13 +31,13 @@ public class User {
     @Column(nullable = false)
     private String phone;
 
-    @Column(nullable = true)
+    @Column()
     private int grade;
 
-    @Column(nullable = true)
+    @Column()
     private int room;
 
-    @Column(nullable = true)
+    @Column()
     private int number;
 
     @Enumerated(EnumType.STRING)
@@ -53,6 +54,10 @@ public class User {
     @JoinColumn(name = "fk_school_id")
     private School school;
 
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private JoinMethod joinMethod;
+
     public void editUserData(String name, String phone, int grade, int room, int number, String profileImageUrl) {
         this.name = name;
         this.phone = phone;
@@ -63,7 +68,7 @@ public class User {
     }
 
     @Builder
-    public User(String email, String pw, String name, String phone, int grade, int room, int number, UserRole role, String profileImageUrl) {
+    public User(String email, String pw, String name, String phone, int grade, int room, int number, UserRole role, String profileImageUrl, School school, JoinMethod joinMethod) {
         this.email = email;
         this.pw = pw;
         this.name = name;
@@ -74,5 +79,7 @@ public class User {
         this.role = role;
         this.profileImageUrl = profileImageUrl;
         this.joinDate = LocalDate.now();
+        this.school = school;
+        this.joinMethod = joinMethod;
     }
 }

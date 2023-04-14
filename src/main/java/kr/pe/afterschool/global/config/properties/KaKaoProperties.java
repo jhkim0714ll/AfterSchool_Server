@@ -8,7 +8,12 @@ import org.springframework.context.annotation.Configuration;
 @Getter
 @Setter
 @Configuration
-@ConfigurationProperties("app.thirdparth.neis")
-public class NeisProperties {
-    private String apiKey;
+@ConfigurationProperties("app.thirdparth.kakao")
+public class KaKaoProperties {
+
+    private String adminKey;
+    private String grantType;
+    private String clientId;
+    private String clientSecret;
+    private String redirectUrl;
 }

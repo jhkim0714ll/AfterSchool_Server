@@ -8,10 +8,8 @@ import javax.validation.constraints.NotBlank;
 
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class LoginRequest {
+public class OauthLoginRequest {
 
-    @NotBlank(message = "email must not be blank")
-    private String email;
-    @NotBlank(message = "pw must not be blank")
-    private String pw;
+    @NotBlank(message = "code must not be blank")
+    private String code;
 }

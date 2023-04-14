@@ -5,16 +5,16 @@ import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class PostCreateRequest {
 
-    @NotEmpty(message = "title must not empty")
+    @NotBlank(message = "title must not black")
     private String title;
-    @NotEmpty(message = "content must not empty")
+    @NotBlank(message = "content must not black")
     private String content;
     @NotNull(message = "type must not null")
     private PostType type;
