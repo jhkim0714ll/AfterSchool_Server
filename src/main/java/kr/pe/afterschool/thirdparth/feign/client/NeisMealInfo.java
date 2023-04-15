@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 @FeignClient(value = "NeisMealInfo", url = "https://open.neis.go.kr")
 public interface NeisMealInfo {
 
-    @GetMapping(value = "/hub/mealServiceDietInfo")
+    @GetMapping(value = "/hub/mealServiceDietInfo", produces = "text/html")
     String getMealInfo(
             @RequestParam(name = "KEY") String key,
             @RequestParam(name = "Type") String type,
