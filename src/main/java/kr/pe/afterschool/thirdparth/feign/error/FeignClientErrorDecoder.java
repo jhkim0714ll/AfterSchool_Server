@@ -11,7 +11,6 @@ public class FeignClientErrorDecoder implements ErrorDecoder {
 
     @Override
     public Exception decode(String methodKey, Response response) throws FeignException {
-        log.error("{}", response);
         if(response.status() >= 400) {
             switch (response.status()){
                 case 400:
