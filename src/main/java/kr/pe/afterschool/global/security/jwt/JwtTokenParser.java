@@ -3,6 +3,7 @@ package kr.pe.afterschool.global.security.jwt;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import kr.pe.afterschool.global.config.properties.JwtProperties;
+import kr.pe.afterschool.global.enums.JWT;
 import kr.pe.afterschool.global.security.principle.AuthDetailsService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -31,13 +32,18 @@ public class JwtTokenParser {
 
     public Authentication authentication(String token) {
         UserDetails userDetails = authDetailsService
-                .loadUserByUsername(getTokenBody(token).getSubject());
+                .loadUserByUsername(getTokenBody(token, JWT.ACCESS).getSubject());
 
         return new UsernamePasswordAuthenticationToken(userDetails, "", userDetails.getAuthorities());
     }
 
-    private Claims getTokenBody(String token) {
-        return Jwts.parser().setSigningKey(jwtProperties.getSecretKey())
+    public String getKeyByJwt(JWT jwt) {
+        return jwt.equals(JWT.ACCESS) ? jwtProperties.getAccessKey() : jwtProperties.getRefreshKey();
+    }
+
+    public Claims getTokenBody(String token, JWT jwt) {
+        String key = getKeyByJwt(jwt);
+        return Jwts.parser().setSigningKey(key)
                 .parseClaimsJws(token).getBody();
     }
 }

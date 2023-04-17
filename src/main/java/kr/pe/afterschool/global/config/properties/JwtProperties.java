@@ -13,6 +13,7 @@ public class JwtProperties {
 
     private String prefix;
     private String header;
-    private String secretKey;
+    private String accessKey;
+    private String refreshKey;
     private Long accessExp;
 }

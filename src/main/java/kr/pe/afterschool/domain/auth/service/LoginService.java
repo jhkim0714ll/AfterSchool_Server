@@ -9,6 +9,7 @@ import kr.pe.afterschool.domain.user.entity.User;
 import kr.pe.afterschool.domain.user.entity.repository.UserRepository;
 import kr.pe.afterschool.domain.user.exception.UserNotFoundException;
 import kr.pe.afterschool.domain.user.presentation.dto.response.UserResponse;
+import kr.pe.afterschool.global.enums.JWT;
 import kr.pe.afterschool.global.enums.JoinMethod;
 import kr.pe.afterschool.global.security.jwt.JwtTokenProvider;
 import lombok.RequiredArgsConstructor;
@@ -37,10 +38,12 @@ public class LoginService {
             }
             throw PasswordNotMatchException.EXCEPTION;
         }
-        String token = jwtTokenProvider.generateAccessToken(user.getEmail());
+        String accessToken = jwtTokenProvider.generateToken(user.getEmail(), JWT.ACCESS);
+        String refreshToken = jwtTokenProvider.generateToken(user.getEmail(), JWT.REFRESH);
         return LoginResponse.builder()
                 .user(new UserResponse(user))
-                .token(token)
+                .accessToken(accessToken)
+                .refreshToken(refreshToken)
                 .build();
     }
 }
