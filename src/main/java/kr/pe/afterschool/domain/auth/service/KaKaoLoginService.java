@@ -7,6 +7,7 @@ import kr.pe.afterschool.domain.user.entity.repository.UserRepository;
 import kr.pe.afterschool.domain.user.exception.UserNotFoundException;
 import kr.pe.afterschool.domain.user.presentation.dto.response.UserResponse;
 import kr.pe.afterschool.global.config.properties.KaKaoProperties;
+import kr.pe.afterschool.global.enums.JWT;
 import kr.pe.afterschool.global.security.jwt.JwtTokenProvider;
 import kr.pe.afterschool.thirdparth.feign.client.KaKaoAuth;
 import kr.pe.afterschool.thirdparth.feign.client.KaKaoUserInfo;
@@ -43,10 +44,12 @@ public class KaKaoLoginService {
 
         User user = userRepository.findById(userInfo.getKakao_account().getEmail())
                 .orElseThrow(() -> UserNotFoundException.EXCEPTION);
-        String token = jwtTokenProvider.generateAccessToken(user.getEmail());
+        String accessToken = jwtTokenProvider.generateToken(user.getEmail(), JWT.ACCESS);
+        String refreshToken = jwtTokenProvider.generateToken(user.getEmail(), JWT.ACCESS);
         return LoginResponse.builder()
                 .user(new UserResponse(user))
-                .token(token)
+                .accessToken(accessToken)
+                .refreshToken(refreshToken)
                 .build();
     }
 }
