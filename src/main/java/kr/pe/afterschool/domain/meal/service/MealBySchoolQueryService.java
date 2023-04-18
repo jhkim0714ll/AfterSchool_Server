@@ -15,7 +15,6 @@ import kr.pe.afterschool.thirdparth.feign.client.NeisMealInfo;
 import kr.pe.afterschool.thirdparth.feign.client.NeisSchoolInfo;
 import kr.pe.afterschool.thirdparth.feign.exception.OtherServerErrorException;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.configurationprocessor.json.JSONArray;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -25,7 +24,6 @@ import java.time.YearMonth;
 import java.util.ArrayList;
 import java.util.List;
 
-@Slf4j
 @Service
 @RequiredArgsConstructor
 public class MealBySchoolQueryService {

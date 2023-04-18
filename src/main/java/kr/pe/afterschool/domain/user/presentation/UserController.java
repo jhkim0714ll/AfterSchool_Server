@@ -1,11 +1,9 @@
 package kr.pe.afterschool.domain.user.presentation;
 
-import kr.pe.afterschool.domain.user.presentation.dto.request.EditUserRequest;
+import kr.pe.afterschool.domain.user.presentation.dto.request.UserEditRequest;
+import kr.pe.afterschool.domain.user.presentation.dto.request.UserEditSchoolRequest;
 import kr.pe.afterschool.domain.user.presentation.dto.response.UserResponse;
-import kr.pe.afterschool.domain.user.service.MyUserQueryService;
-import kr.pe.afterschool.domain.user.service.UserByEmailQueryService;
-import kr.pe.afterschool.domain.user.service.UserEditService;
-import kr.pe.afterschool.domain.user.service.UserQuitService;
+import kr.pe.afterschool.domain.user.service.*;
 import kr.pe.afterschool.global.response.Response;
 import kr.pe.afterschool.global.response.ResponseData;
 import lombok.RequiredArgsConstructor;
@@ -20,6 +18,7 @@ public class UserController {
     private final UserByEmailQueryService userByEmailQueryService;
     private final MyUserQueryService myUserQueryService;
     private final UserEditService userEditService;
+    private final UserEditSchoolService userEditSchoolService;
     private final UserQuitService userQuitService;
 
     @GetMapping("/{email}")
@@ -45,13 +44,24 @@ public class UserController {
     }
 
     @PatchMapping("/update")
-    public Response modifyUserData(
-            @RequestBody EditUserRequest request
+    public Response editUserData(
+            @RequestBody UserEditRequest request
     ) {
         userEditService.execute(request);
         return new Response(
                 HttpStatus.OK,
                 "유저 정보 수정 성공"
+        );
+    }
+
+    @PatchMapping("/update/school")
+    public Response editUserSchool(
+            @RequestBody UserEditSchoolRequest request
+    ) {
+        userEditSchoolService.execute(request);
+        return new Response(
+                HttpStatus.OK,
+                "학교 설정 성공"
         );
     }
 

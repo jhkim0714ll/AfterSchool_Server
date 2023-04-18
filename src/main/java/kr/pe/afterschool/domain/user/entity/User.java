@@ -58,6 +58,10 @@ public class User {
     @Column(nullable = false)
     private JoinMethod joinMethod;
 
+    public void editSchool(School school) {
+        this.school = school;
+    }
+
     public void editUserData(String name, String phone, int grade, int room, int number, String profileImageUrl) {
         this.name = name;
         this.phone = phone;

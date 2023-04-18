@@ -18,11 +18,22 @@ import java.util.List;
 @RequiredArgsConstructor
 public class SchoolController {
 
+    private final MySchoolQueryService mySchoolQueryService;
     private final SchoolQueryService schoolQueryService;
-    private final SchoolByAddressQueryService schoolByAddressQueryService;
+    private final SchoolSearchQueryService schoolSearchQueryService;
     private final SchoolCreateService schoolCreateService;
     private final SchoolEditService schoolEditService;
     private final SchoolDeleteService schoolDeleteService;
+
+    @GetMapping("/my")
+    public ResponseData<SchoolResponse> getSchoolByUser() {
+        SchoolResponse response = mySchoolQueryService.execute();
+        return new ResponseData<>(
+                HttpStatus.OK,
+                "내 학교 조회 성공",
+                response
+        );
+    }
 
     @GetMapping("/{schoolId}")
     public ResponseData<SchoolResponse> getSchoolById(
@@ -36,11 +47,12 @@ public class SchoolController {
         );
     }
 
-    @GetMapping("/address")
-    public ResponseData<List<SchoolResponse>> getSchoolByCity(
-            @RequestParam(name = "address") String address
+    @GetMapping("/search")
+    public ResponseData<List<SchoolResponse>> getSchoolBySearch(
+            @RequestParam(name = "address", required = false) String address,
+            @RequestParam(value = "name", required = false) String name
     ) {
-        List<SchoolResponse> response = schoolByAddressQueryService.execute(address);
+        List<SchoolResponse> response = schoolSearchQueryService.execute(address, name);
         return new ResponseData<>(
                 HttpStatus.OK,
                 "해당 도시의 학교 조회 성공",

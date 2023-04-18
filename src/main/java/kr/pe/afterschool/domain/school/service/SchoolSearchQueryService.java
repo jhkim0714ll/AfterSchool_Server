@@ -1,5 +1,6 @@
 package kr.pe.afterschool.domain.school.service;
 
+import kr.pe.afterschool.domain.school.entity.School;
 import kr.pe.afterschool.domain.school.entity.repository.SchoolRepository;
 import kr.pe.afterschool.domain.school.presentation.dto.response.SchoolResponse;
 import lombok.RequiredArgsConstructor;
@@ -11,13 +12,15 @@ import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
-public class SchoolByAddressQueryService {
+public class SchoolSearchQueryService {
 
     private final SchoolRepository schoolRepository;
 
     @Transactional(readOnly = true)
-    public List<SchoolResponse> execute(String address) {
-        return schoolRepository.findByAddressContaining(address)
-                .stream().map(SchoolResponse::new).collect(Collectors.toList());
+    public List<SchoolResponse> execute(String address, String name) {
+        List<School> school = !address.equals("") ?
+                schoolRepository.findByAddressContaining(address) :
+                schoolRepository.findByNameContaining(name);
+        return school.stream().map(SchoolResponse::new).collect(Collectors.toList());
     }
 }
