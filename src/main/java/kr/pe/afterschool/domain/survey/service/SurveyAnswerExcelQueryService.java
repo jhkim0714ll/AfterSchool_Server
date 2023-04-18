@@ -15,7 +15,6 @@ import kr.pe.afterschool.domain.survey.exception.QuestionNotFoundException;
 import kr.pe.afterschool.global.lib.DateParser;
 import kr.pe.afterschool.global.lib.ExcelDownload;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
@@ -27,7 +26,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-@Slf4j
 @Service
 @RequiredArgsConstructor
 public class SurveyAnswerExcelQueryService {

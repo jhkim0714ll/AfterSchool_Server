@@ -4,9 +4,7 @@ import feign.FeignException;
 import feign.Response;
 import feign.codec.ErrorDecoder;
 import kr.pe.afterschool.thirdparth.feign.exception.*;
-import lombok.extern.slf4j.Slf4j;
 
-@Slf4j
 public class FeignClientErrorDecoder implements ErrorDecoder {
 
     @Override

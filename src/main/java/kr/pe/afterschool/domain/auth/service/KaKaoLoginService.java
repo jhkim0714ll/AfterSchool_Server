@@ -14,11 +14,9 @@ import kr.pe.afterschool.thirdparth.feign.client.KaKaoUserInfo;
 import kr.pe.afterschool.thirdparth.feign.dto.response.KaKaoTokenResponse;
 import kr.pe.afterschool.thirdparth.feign.dto.response.KaKaoUserInfoResponse;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-@Slf4j
 @Service
 @RequiredArgsConstructor
 public class KaKaoLoginService {

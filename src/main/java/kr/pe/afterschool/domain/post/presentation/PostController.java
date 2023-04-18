@@ -19,11 +19,22 @@ import java.util.List;
 @RequiredArgsConstructor
 public class PostController {
 
+    private final MyPostQueryService myPostQueryService;
     private final PostQueryService postQueryService;
     private final PostByTypeQueryService postByTypeQueryService;
     private final PostCreateService postCreateService;
     private final PostEditService postEditService;
     private final PostDeleteService postDeleteService;
+
+    @GetMapping("/my")
+    public ResponseData<List<PostResponse>> getMyPost() {
+        List<PostResponse> response = myPostQueryService.execute();
+        return new ResponseData<>(
+                HttpStatus.OK,
+                "내 게시물 조회 성공",
+                response
+        );
+    }
 
     @GetMapping("/{postId}")
     public ResponseData<PostResponse> getPostById(

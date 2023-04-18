@@ -1,6 +1,5 @@
 package kr.pe.afterschool.domain.school.service;
 
-import kr.pe.afterschool.domain.school.entity.repository.SchoolRepository;
 import kr.pe.afterschool.domain.school.presentation.dto.response.SchoolResponse;
 import kr.pe.afterschool.domain.user.entity.User;
 import kr.pe.afterschool.domain.user.facade.UserFacade;
