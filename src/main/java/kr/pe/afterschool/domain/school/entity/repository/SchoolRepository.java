@@ -9,5 +9,6 @@ import java.util.List;
 @Repository
 public interface SchoolRepository extends JpaRepository<School, Long> {
     List<School> findByAddressContaining(String address);
+    List<School> findByNameContaining(String name);
     boolean existsByNameAndAddress(String name, String address);
 }
