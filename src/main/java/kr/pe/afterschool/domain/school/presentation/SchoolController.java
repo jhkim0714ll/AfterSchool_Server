@@ -18,11 +18,22 @@ import java.util.List;
 @RequiredArgsConstructor
 public class SchoolController {
 
+    private final MySchoolQueryService mySchoolQueryService;
     private final SchoolQueryService schoolQueryService;
     private final SchoolByAddressQueryService schoolByAddressQueryService;
     private final SchoolCreateService schoolCreateService;
     private final SchoolEditService schoolEditService;
     private final SchoolDeleteService schoolDeleteService;
+
+    @GetMapping("/my")
+    public ResponseData<SchoolResponse> getSchoolByUser() {
+        SchoolResponse response = mySchoolQueryService.execute();
+        return new ResponseData<>(
+                HttpStatus.OK,
+                "내 학교 조회 성공",
+                response
+        );
+    }
 
     @GetMapping("/{schoolId}")
     public ResponseData<SchoolResponse> getSchoolById(
