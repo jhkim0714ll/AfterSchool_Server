@@ -1,8 +1,8 @@
-package kr.pe.afterschool.domain.token.presentation.dto;
+package kr.pe.afterschool.domain.token.presentation;
 
 import kr.pe.afterschool.domain.token.presentation.dto.request.RefreshTokenRequest;
 import kr.pe.afterschool.domain.token.presentation.dto.response.RefreshTokenResponse;
-import kr.pe.afterschool.domain.token.presentation.service.RefreshTokenService;
+import kr.pe.afterschool.domain.token.service.RefreshTokenService;
 import kr.pe.afterschool.global.response.ResponseData;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;

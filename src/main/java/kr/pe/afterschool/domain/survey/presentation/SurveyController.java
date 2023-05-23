@@ -17,7 +17,7 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-@RequestMapping("/survey")
+@RequestMapping("/surveys")
 @RequiredArgsConstructor
 public class SurveyController {
 

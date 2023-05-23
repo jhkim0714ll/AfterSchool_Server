@@ -20,7 +20,7 @@ public class Attendance {
     @Column(name = "attendance_id")
     private Long id;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "fk_classroom_id")
     private Classroom classroom;
 
