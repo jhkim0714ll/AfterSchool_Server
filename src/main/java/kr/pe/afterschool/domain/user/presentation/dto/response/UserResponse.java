@@ -21,6 +21,7 @@ public class UserResponse {
     private UserRole role;
     @JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDate joinDate;
+    private Long schoolId;
 
     public UserResponse(User user) {
         this.email = user.getEmail();
@@ -31,5 +32,6 @@ public class UserResponse {
         this.number = user.getNumber();
         this.role = user.getRole();
         this.joinDate = user.getJoinDate();
+        this.schoolId = user.getSchool() == null ? null : user.getSchool().getId();
     }
 }
