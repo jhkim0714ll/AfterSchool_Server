@@ -2,6 +2,7 @@ package kr.pe.afterschool.global.lib;
 
 import kr.pe.afterschool.global.error.exception.InternalServerException;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.stereotype.Component;
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Component;
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
+@Slf4j
 @Component
 @RequiredArgsConstructor
 public class ExcelDownload {
@@ -47,6 +49,8 @@ public class ExcelDownload {
             cell = row.createCell(cellNum++);
             if (string instanceof Integer) {
                 cell.setCellValue(Integer.parseInt(string.toString()));
+            } else if (string instanceof Long) {
+                cell.setCellValue(Long.parseLong(string.toString()));
             } else {
                 cell.setCellValue(string.toString());
             }

@@ -71,20 +71,19 @@ public class ApplyExcelQueryService {
             excelDownload.createCell(row, classroomSheetTitle); //방과후 신청자 시트의 제목 셀을 만듬
             for (Apply apply : applyList) {
                 List<Object> contentOfApplierList = new ArrayList<>(Arrays.asList(
-                        String.valueOf(apply.getId()),
-                        String.valueOf(apply.getStudent().getGrade()),
-                        String.valueOf(apply.getStudent().getRoom()),
-                        String.valueOf(apply.getStudent().getNumber()),
+                        apply.getId(),
+                        apply.getStudent().getGrade(),
+                        apply.getStudent().getRoom(),
+                        apply.getStudent().getNumber(),
                         apply.getStudent().getName()));
                 row = classroomSheet.createRow(classroomSheetRowNum++);
                 excelDownload.createCell(row, contentOfApplierList); //방과후 신청자 시트의 모든 신청자 셀을 만듬
-
-                List<Object> applyListCell = new ArrayList<>(Arrays.asList(
-                        "총 인원" ,
-                        applyList.size()));
-                row = classroomSheet.createRow(classroomSheetRowNum+=2);
-                excelDownload.createCell(row, applyListCell);
             }
+            List<Object> applyListCell = new ArrayList<>(Arrays.asList(
+                    "총 인원" ,
+                    applyList.size()));
+            row = classroomSheet.createRow(classroomSheetRowNum);
+            excelDownload.createCell(row, applyListCell);
         }
         excelDownload.outStream(workbook, school.getName() + "학교 방과후 신청자 리스트.xlsx");
     }
