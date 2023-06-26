@@ -22,6 +22,7 @@ public class PostController {
     private final MyPostQueryService myPostQueryService;
     private final PostQueryService postQueryService;
     private final PostByTypeQueryService postByTypeQueryService;
+    private final PostBySchoolQueryService postBySchoolQueryService;
     private final PostCreateService postCreateService;
     private final PostEditService postEditService;
     private final PostDeleteService postDeleteService;
@@ -52,7 +53,21 @@ public class PostController {
     public ResponseData<List<PostResponse>> getPostByType(
             @RequestParam("type") PostType type
     ) {
+        System.out.println("type");
         List<PostResponse> response = postByTypeQueryService.execute(type);
+        return new ResponseData<>(
+                HttpStatus.OK,
+                "타입별 게시물 조회 성공",
+                response
+        );
+    }
+
+    @GetMapping("/school/{schoolId}")
+    public ResponseData<List<PostResponse>> getPostsBySchool(
+            @PathVariable Long schoolId
+    ) {
+        System.out.println("school");
+        List<PostResponse> response = postBySchoolQueryService.execute(schoolId);
         return new ResponseData<>(
                 HttpStatus.OK,
                 "타입별 게시물 조회 성공",

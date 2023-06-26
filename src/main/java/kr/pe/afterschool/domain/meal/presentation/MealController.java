@@ -13,14 +13,14 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("/meals")
+@RequestMapping("/meal")
 @RequiredArgsConstructor
 public class MealController {
 
     private final MealBySchoolQueryService mealBySchoolQueryService;
 
     @GetMapping("/{schoolId}")
-    public ResponseData<List<MealResponse> > getMealBySchool(
+    public ResponseData<List<MealResponse>> getMealBySchool(
             @PathVariable Long schoolId
     ) {
         List<MealResponse> response = mealBySchoolQueryService.execute(schoolId);

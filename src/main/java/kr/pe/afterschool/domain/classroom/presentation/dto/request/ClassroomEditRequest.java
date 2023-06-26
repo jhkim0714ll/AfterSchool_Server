@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 public class ClassroomEditRequest {
     private String teacherName;
     private String name;
+    private String description;
     private String week;
     private String startDate;
     private String endDate;

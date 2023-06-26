@@ -1,6 +1,7 @@
 package kr.pe.afterschool.domain.classroom.entity;
 
 import kr.pe.afterschool.domain.school.entity.School;
+import kr.pe.afterschool.domain.user.entity.User;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
@@ -27,6 +28,10 @@ public class Classroom {
 
     @Column(nullable = false)
     private String name;
+
+    @Column(nullable = false)
+    private String description;
+
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private DayOfWeek week;
@@ -36,16 +41,24 @@ public class Classroom {
     private School school;
 
     private LocalDate startDate;
+
     private LocalDate endDate;
+
     private int peopleLimit;
+
+
+    @ManyToOne
+    @JoinColumn(name = "fk_teacher_id")
+    private User teacher;
 
     @CreatedDate
     @Column(nullable = false)
     private LocalDate createdAt;
 
-    public void editClassroomData(String teacherName, String name, DayOfWeek week, LocalDate startDate, LocalDate endDate, int peopleLimit) {
+    public void editClassroomData(String teacherName, String name, String description, DayOfWeek week, LocalDate startDate, LocalDate endDate, int peopleLimit) {
         this.teacherName = teacherName;
         this.name = name;
+        this.description = description;
         this.week = week;
         this.startDate = startDate;
         this.endDate = endDate;
@@ -53,14 +66,16 @@ public class Classroom {
     }
 
     @Builder
-    public Classroom(String teacherName, String name, DayOfWeek week, School school, LocalDate startDate, LocalDate endDate, int peopleLimit) {
+    public Classroom(String teacherName, String name, String description, DayOfWeek week, School school, LocalDate startDate, LocalDate endDate, int peopleLimit, User teacher) {
         this.teacherName = teacherName;
         this.name = name;
+        this.description = description;
         this.week = week;
         this.school = school;
         this.startDate = startDate;
         this.endDate = endDate;
         this.peopleLimit = peopleLimit;
         this.createdAt = LocalDate.now();
+        this.teacher = teacher;
     }
 }

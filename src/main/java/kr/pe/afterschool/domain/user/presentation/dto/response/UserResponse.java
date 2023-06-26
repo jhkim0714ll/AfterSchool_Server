@@ -2,6 +2,7 @@ package kr.pe.afterschool.domain.user.presentation.dto.response;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import kr.pe.afterschool.domain.user.entity.User;
+import kr.pe.afterschool.global.enums.JoinMethod;
 import kr.pe.afterschool.global.enums.UserRole;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -21,6 +22,7 @@ public class UserResponse {
     private UserRole role;
     @JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDate joinDate;
+    private JoinMethod joinMethod;
     private Long schoolId;
 
     public UserResponse(User user) {
@@ -30,6 +32,7 @@ public class UserResponse {
         this.grade = user.getGrade();
         this.room = user.getRoom();
         this.number = user.getNumber();
+        this.joinMethod = user.getJoinMethod();
         this.role = user.getRole();
         this.joinDate = user.getJoinDate();
         this.schoolId = user.getSchool() == null ? null : user.getSchool().getId();

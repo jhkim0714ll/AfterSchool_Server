@@ -31,6 +31,7 @@ public class ClassroomCreateService {
                 .endDate(dateParser.parseStringToDate(request.getEndDate()))
                 .school(user.getSchool())
                 .peopleLimit(request.getPeopleLimit() == 0 ? 10000 : request.getPeopleLimit())
+                .teacher(user)
                 .build();
         classroomRepository.save(classroom);
     }

@@ -33,6 +33,7 @@ public class ClassroomEditService {
         classroom.editClassroomData(
                 request.getTeacherName() == null ? classroom.getTeacherName() : request.getTeacherName(),
                 request.getName() == null ? classroom.getName() : request.getName(),
+                request.getDescription() == null ? classroom.getDescription() : request.getDescription(),
                 request.getWeek() == null ? classroom.getWeek() : DayOfWeek.valueOf(request.getWeek()),
                 request.getStartDate() == null ? classroom.getStartDate() : dateParser.parseStringToDate(request.getStartDate()),
                 request.getEndDate() == null ? classroom.getEndDate() :dateParser.parseStringToDate(request.getEndDate()),
