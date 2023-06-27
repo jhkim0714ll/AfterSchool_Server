@@ -1,5 +1,6 @@
 package kr.pe.afterschool.domain.apply.service;
 
+import kr.pe.afterschool.domain.apply.exception.AlreadyApplyException;
 import kr.pe.afterschool.domain.apply.exception.TimeOverException;
 import kr.pe.afterschool.domain.classroom.entity.Classroom;
 import kr.pe.afterschool.domain.apply.entity.Apply;
@@ -30,13 +31,17 @@ public class ApplyCreateService {
         Classroom classroom = classroomRepository.findById(request.getClassroomId())
                 .orElseThrow(() -> ClassroomNotFoundException.EXCEPTION);
 
-        if (classroom.getEndDate().isAfter(LocalDate.now())) {
+        if (classroom.getEndDate().isBefore(LocalDate.now())) {
             throw TimeOverException.EXCEPTION;
         }
 
         int applyNumber = applyRepository.findByClassroom(classroom).size();
         if (classroom.getPeopleLimit() <= applyNumber) {
             throw PeopleOverException.EXCEPTION;
+        }
+
+        if (applyRepository.existsByClassroomAndStudent(classroom, user)) {
+            throw AlreadyApplyException.EXCEPTION;
         }
 
         Apply apply = Apply.builder()

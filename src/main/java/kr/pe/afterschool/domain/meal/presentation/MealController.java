@@ -20,7 +20,7 @@ public class MealController {
     private final MealBySchoolQueryService mealBySchoolQueryService;
 
     @GetMapping("/{schoolId}")
-    public ResponseData<List<MealResponse> > getMealBySchool(
+    public ResponseData<List<MealResponse>> getMealBySchool(
             @PathVariable Long schoolId
     ) {
         List<MealResponse> response = mealBySchoolQueryService.execute(schoolId);

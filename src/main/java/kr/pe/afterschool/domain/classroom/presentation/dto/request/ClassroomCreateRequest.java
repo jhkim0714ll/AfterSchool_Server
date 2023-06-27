@@ -15,6 +15,8 @@ public class ClassroomCreateRequest {
     private String teacherName;
     @NotEmpty(message = "name must not empty")
     private String name;
+    @NotEmpty(message = "description must not empty")
+    private String description;
     @NotEmpty(message = "week must not empty")
     private String week;
     private String startDate;

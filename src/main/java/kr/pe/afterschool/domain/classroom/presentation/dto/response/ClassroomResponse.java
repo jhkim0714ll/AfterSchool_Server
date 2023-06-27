@@ -3,6 +3,8 @@ package kr.pe.afterschool.domain.classroom.presentation.dto.response;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import kr.pe.afterschool.domain.classroom.entity.Classroom;
 import kr.pe.afterschool.domain.school.presentation.dto.response.SchoolResponse;
+import kr.pe.afterschool.domain.user.entity.User;
+import kr.pe.afterschool.domain.user.presentation.dto.response.UserResponse;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -22,6 +24,8 @@ public class ClassroomResponse {
     @JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDate endDate;
     private int peopleLimit;
+    private String description;
+    private UserResponse teacher;
 
     public ClassroomResponse(Classroom classroom) {
         this.classroomId = classroom.getId();
@@ -31,5 +35,7 @@ public class ClassroomResponse {
         this.startDate = classroom.getStartDate();
         this.endDate = classroom.getEndDate();
         this.peopleLimit = classroom.getPeopleLimit();
+        this.description = classroom.getDescription();
+        this.teacher = new UserResponse(classroom.getTeacher());
     }
 }

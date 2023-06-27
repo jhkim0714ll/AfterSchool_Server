@@ -14,12 +14,14 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-@RequestMapping("/classroom")
+@RequestMapping("/classrooms")
 @RequiredArgsConstructor
 public class ClassroomController {
 
     private final ClassroomIdQueryService classroomIdQueryService;
+    private final MyClassroomQueryService myClassroomQueryService;
     private final ClassroomDateQueryService classroomDateQueryService;
+    private final ClassroomSchoolQueryService classroomSchoolQueryService;
     private final ClassroomCreateService classroomCreateService;
     private final ClassroomEditService classroomEditService;
     private final ClassroomDeleteService classroomDeleteService;
@@ -29,6 +31,28 @@ public class ClassroomController {
             @PathVariable Long id
     ) {
         ClassroomResponse response = classroomIdQueryService.execute(id);
+        return new ResponseData<>(
+                HttpStatus.OK,
+                "해당 아이디의 방과후 조회 성공",
+                response
+        );
+    }
+
+    @GetMapping("/my")
+    public ResponseData<List<ClassroomResponse>> getMyClassroom() {
+        List<ClassroomResponse> response = myClassroomQueryService.execute();
+        return new ResponseData<>(
+                HttpStatus.OK,
+                "내가 만든 방과후 조회 성공",
+                response
+        );
+    }
+
+    @GetMapping
+    public ResponseData<List<ClassroomResponse>> getClassroomBySchoolId(
+            @RequestParam(name = "school") Long schoolId
+    ) {
+        List<ClassroomResponse> response = classroomSchoolQueryService.execute(schoolId);
         return new ResponseData<>(
                 HttpStatus.OK,
                 "해당 아이디의 방과후 조회 성공",

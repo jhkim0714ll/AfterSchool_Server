@@ -14,16 +14,27 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-@RequestMapping("/school")
+@RequestMapping("/schools")
 @RequiredArgsConstructor
 public class SchoolController {
 
+    private final SchoolAllQueryService schoolAllQueryService;
     private final MySchoolQueryService mySchoolQueryService;
     private final SchoolQueryService schoolQueryService;
     private final SchoolSearchQueryService schoolSearchQueryService;
     private final SchoolCreateService schoolCreateService;
     private final SchoolEditService schoolEditService;
     private final SchoolDeleteService schoolDeleteService;
+
+    @GetMapping("/all")
+    public ResponseData<List<SchoolResponse>> getAllSchool() {
+        List<SchoolResponse> response = schoolAllQueryService.execute();
+        return new ResponseData<>(
+                HttpStatus.OK,
+                "모든 학교 조회 성공",
+                response
+        );
+    }
 
     @GetMapping("/my")
     public ResponseData<SchoolResponse> getSchoolByUser() {

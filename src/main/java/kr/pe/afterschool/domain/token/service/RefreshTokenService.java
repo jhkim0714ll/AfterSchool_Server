@@ -1,4 +1,4 @@
-package kr.pe.afterschool.domain.token.presentation.service;
+package kr.pe.afterschool.domain.token.service;
 
 import kr.pe.afterschool.domain.token.exception.TokenBadRequestException;
 import kr.pe.afterschool.domain.token.presentation.dto.request.RefreshTokenRequest;

@@ -11,12 +11,12 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class ApplyResponse {
 
-    private Long classroomUserId;
+    private Long applyId;
     private UserResponse student;
     private ClassroomResponse classroom;
 
     public ApplyResponse(Apply apply) {
-        this.classroomUserId = apply.getId();
+        this.applyId = apply.getId();
         this.student = new UserResponse(apply.getStudent());
         this.classroom = new ClassroomResponse(apply.getClassroom());
     }
